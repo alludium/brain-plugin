@@ -311,3 +311,28 @@ how often it has applied.
 - **Undoing one.** "Stop reading 'Yusuf' as Yusuf Adeyemi": find the lesson in `lessons.active`
   and pass `"retire"`, with the partner's reason as `note`; what it did is taken back. `"restore"`
   brings back a retired or disputed one.
+
+## Learning runs: what the firm's decisions teach
+
+Once the firm has a history of decisions (an imported CRM, or months of use), a partner can ask the
+brain what those decisions, taken together, teach: "why do we pass on consumer subscription
+companies?", "what has changed since the new fund?". This is a **learning run**.
+
+1. The firm needs a `decision_reason` tag vocabulary: the kinds of reason it records (for a venture
+   firm: retention, acquisition economics, team, market size, valuation, stage or cheque fit,
+   competition, traction, product risk), each with a description and synonyms in the firm's words.
+   Set it up with `tag_vocabularies` like any other vocabulary, from the partner's words.
+2. Define and start a run with `configure`: `learning_runs: [{"name": "Consumer passes",
+   "kind": "decision_reasons", "outcome": "pass", "cohort": {"tags": ["sector:Consumer"]},
+   "run": true}]`. A cohort can also take `decided_from` and `decided_to` (for example since a
+   mandate change). `scope: "me"` reads only what the partner can see and keeps the results theirs;
+   the default reads what the whole firm can see. Runs cost a little (a few cents; the firm's
+   per-run budget) and take a minute or two; `configure` shows each run's status.
+3. Read what it found with `search` and `view: "insights"`. Show each insight's statement, its cases
+   with their quoted reasons, the cases that went the other way, its questions and its limits.
+   Say plainly that an insight describes past decisions: it is not a rule and it never rejects a
+   company.
+4. Ask the partner, for each insight, whether it fairly describes the firm's past decisions. On a
+   yes, `configure` with `insights: [{"id": "ins_…", "decision": "observe"}]`; on a no, `"reject"`
+   with their reason as `note`. Never decide for them. A run that finds nothing says so: "not enough
+   evidence" is an answer.
