@@ -92,6 +92,12 @@ then label it as not from the brain.
      `view: "pipeline"` and an empty `query`, adding `stage` (a stage's name) for one stage. It
      lists each company at the stage with since when and its checklist progress, and hosts that
      show views draw it as a list by stage.
+   - **A list** ("what's on the LP list?", "who's warm on the Fund III raise?", "my watchlist"):
+     one `search` with `list` (its key or name) and an empty `query`, adding `stage` for one
+     stage. It gives each entry's stage and values, the list's totals and last contact.
+     `search` with `view: "lists"` lists the lists the user can see; `portfolio` and `pipeline`
+     are built-in lists. A brief's `lists` says which of them an entity is on. A private list
+     is the user's own: never mention it in anything meant for someone else.
    - **By sector, theme or geography** ("climate companies we've met this quarter", "what do
      we know about our fintech deals"): one `search` with `tags` from the firm's vocabularies
      (`capture`'s description lists them; `configure` gives them in full), for example

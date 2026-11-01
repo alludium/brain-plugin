@@ -78,6 +78,18 @@ starts from the stored configuration and proposes changes to it.
   preferences ("I like short briefs") go to the `profile` skill; the team entry (role, focus
   areas) stays here and shows in their profile.
 - `tag_vocabularies` and `dismiss_tags`: see "Tag vocabularies" below.
+- `lists` creates or edits lists, matched by key or name: the sets the firm or a member works
+  through that are not the deal process, such as an LP raise, co-investors, a sourcing theme,
+  talent or a personal watchlist. Each has a `name`, what it holds (`item_type`:
+  `organization`, `person`, `deal` or `fund`; required to create one), `scope` (`private`, the
+  default, or `firm`), optional `stages` in order (`[{"name": "Target"}, …]`; keep a stage's
+  `key` when renaming it) and `fields` (`label`, `kind` `text`, `number`, `date`, `choice` with
+  `choices`, `member` or `url`; `total: true` on a number adds up the list). `stages` and
+  `fields` replace the list's. `archived: true` archives a list. A list's stages and values are
+  the list's, never the company's. Entities go on a list through `capture` (the `note` skill).
+  To share a private list with the firm, call `share` with `list`. `portfolio` and `pipeline`
+  are built in: never create lists with those names. Lists are rows, not part of the
+  configuration: each member sees only the firm's lists and their own.
 - `email_scope` is who sees email, and meetings the nightly task files, without a scope:
   `pipeline`, the default, shares it with the firm when it involves a company or person in the
   pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it

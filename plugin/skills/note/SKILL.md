@@ -67,11 +67,21 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    to add, `["-sector:Fintech"]` to take one away. Use only labels in the list; if the user's
    word is not there, pass it with its vocabulary (`sector:Quantum`) and tell them it was
    suggested to the firm, not added. Never tag people. A private note's tags are private too.
+   **Lists.** When the user puts something on a list, moves it or takes it off ("add Acme to our
+   climate sourcing list", "move Elmshore to committed on the Fund III raise, £5m", "take Kestrel
+   off my watchlist"), add `lists` on that entity: `[{"list": "climate_sourcing"}]`, with
+   `stage` and `values` (by the list's field keys) when the user gave them, or `"remove": true`.
+   `capture`'s description lists the lists the user can add to; `configure` gives them in full.
+   The note's text is the reason, in the user's words. A private list needs a private note;
+   leave `scope` out. A tag says what a company is; a list says what the firm is doing about it.
+   If the list does not exist, ask before creating it (see the `onboard` skill's lists), and
+   never invent a stage or value the user did not give.
    **Lessons.** When the user tells the brain to remember how to read something, or corrects how
    it linked or filed something, add `lessons` (see "Teaching the brain" below).
 4. Check the result. If it created an entity you expected to be linked, tell the user that a
    new entity was created and name it. If it reports a tag as suggested, or warns about one,
-   say so in a few words. If it returned a note that was already stored (the same
+   say so in a few words. Say what happened on each list in one line ("Added Acme to Climate
+   sourcing"). If it returned a note that was already stored (the same
    text from the same author), say it was already saved; it was not stored twice.
 5. Reply in one or two lines: what it was linked to, the source ID, and the scope. If it is
    private, offer to share it in the same reply, for example: "Saved to Acme AI Ltd

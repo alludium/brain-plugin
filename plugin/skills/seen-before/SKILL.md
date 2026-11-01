@@ -60,7 +60,12 @@ Look the whole list up in Alludium Brain with one batch `search`, then give each
 6. **Who knows them**: the members in `met_by` (they were in its meetings), then those in
    `in_touch_by` (on its emails only: say "in touch by email"), then the authors of its notes.
    If `met_by` is empty but there are meetings, add "attendees not recorded".
-7. **Tags**: a match's `tags` (sector, theme, geography from the firm's vocabularies) go in a
+7. **Lists**: to check against one of the firm's lists instead of a pasted one ("which of the
+   climate sourcing list have we met?"), read it with `search` and `list`, then go on from
+   step 3 with its entries. When the user asks to save the new ones to a list, capture one
+   short note naming them, with `lists` on each (`note` skill), and a private note for a private
+   list.
+8. **Tags**: a match's `tags` (sector, theme, geography from the firm's vocabularies) go in a
    Tags column, shortest form (`sector: Climate > Carbon removal`). Leave the column out when no
    match has any. Never guess tags for a `new` company; the brain only reports what its sources
    say.
