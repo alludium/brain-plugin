@@ -20,6 +20,14 @@ decision about anything, with its reasons, deciders, date and sources, and moves
 - **The firm's stages.** Name the stage as the firm's process does (from `configure` with no
   arguments, or the brief's stage bar). Never invent a stage. The ways out are Passed, Lost
   (the firm wanted in and did not win it) and On hold.
+- **Several pipelines.** A firm may run more than one deal pipeline: its own process (the
+  default) and pipeline lists such as a fund's (`configure` lists them; `fund_ii` and so on).
+  When the user names one ("move Acme to diligence on the Fund II pipeline"), pass `list` with its
+  key and name its stages. A company on more than one needs `list`; `log_decision` refuses
+  without it and names them: ask the user which. Each pipeline keeps its own stage, checklist and
+  history; the company's status is the highest across them (a portfolio company that another
+  fund passes on stays portfolio), so say the status it ends with. A private pipeline's
+  decisions are private.
 - **The right entity.** Resolve the name with `search` and pass the entity's ID (`org_…` or
   `deal_…`), never a short or shared name. A lookalike with a similar name is a different
   company.

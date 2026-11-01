@@ -108,7 +108,9 @@ then label it as not from the brain.
    - **The pipeline** ("what's in diligence?", "show me the pipeline"): one `search` with
      `view: "pipeline"` and an empty `query`, adding `stage` (a stage's name) for one stage. It
      lists each company at the stage with since when and its checklist progress, and hosts that
-     show views draw it as a list by stage.
+     show views draw it as a list by stage. A firm with several pipelines: `search` with `list`
+     (a pipeline list's key, e.g. `fund_ii`) gives that pipeline's board, and a brief's
+     `pipelines` gives the company's stage on each pipeline besides the firm's own (`process`).
    - **A list** ("what's on the LP list?", "who's warm on the Fund III raise?", "my watchlist"):
      one `search` with `list` (its key or name) and an empty `query`, adding `stage` for one
      stage. It gives each entry's stage and values, the list's totals and last contact.

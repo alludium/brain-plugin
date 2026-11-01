@@ -110,6 +110,12 @@ starts from the stored configuration and proposes changes to it.
   To share a private list with the firm, call `share` with `list`. `portfolio` and `pipeline`
   are built in: never create lists with those names. Lists are rows, not part of the
   configuration: each member sees only the firm's lists and their own.
+- A list with `type: "pipeline"` is another deal pipeline beside the firm's process, for a
+  firm that runs one per fund or strategy ("Fund II has its own pipeline"). Ask whether the firm
+  runs one pipeline or several before making any. It takes `template` (as `process` does) or
+  `stages` in the process's shape (`name`, `kind`, `description`, `checklist`, `documents`), and
+  optionally `fund`. Decisions move companies on it (`log_decision` with `list`); capture only
+  records a CRM record's stage there. The firm's own `process` stays its default pipeline.
 - `email_scope` is who sees email, and meetings the nightly task files, without a scope:
   `pipeline`, the default, shares it with the firm when it involves a company or person in the
   pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it
