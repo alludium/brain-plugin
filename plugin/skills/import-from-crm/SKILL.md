@@ -35,6 +35,25 @@ For Attio and HubSpot, say once at the start that this skill has not been tested
 CRM yet, and treat any tool name or field that does not match the reference as a reason to
 stop and report it rather than guess.
 
+## Server backfill or this conversation
+
+Alludium Brain can fetch a record's notes, meetings and people itself, on the server, when the
+user has connected the CRM to the brain (the viewer's Settings, Connections). That keeps the
+notes out of this conversation, keeps each note's real author and date, and has no size limit
+here. Affinity only for now.
+
+- Capture each chosen record as in step 5.1 and add `crm_backfill: {}` (or
+  `{"meeting_days": N}` for a meeting window other than the last 365 days). The reply names a job;
+  do not fetch that record's notes, meetings or people yourself.
+- If the reply says the user has not connected the CRM, ask once whether they want to connect it
+  in the viewer (Settings, Connections) and ask again afterwards, or carry on here with steps 5.2
+  to 5.4 under the size limit.
+- Follow the jobs with `job_status` (up to 50 at a time). Each job reports notes, meetings and
+  people fetched, and says when it has paused for the firm's daily model limit; it carries on by
+  itself.
+- The dry run, the stage mapping and the "check" answers stay here, as below. A server backfill
+  never sets a stage.
+
 ## Rules
 
 - **Dry run first.** Unless the user has just approved a dry run's plan in this conversation,
@@ -144,7 +163,8 @@ stop and report it rather than guess.
    like call write-ups from a notes tool (they name it): Alludium Brain links them to the notes
    tool's copy of that meeting, so they are not counted twice. Ask "Import these?" and wait for a
    clear yes, with answers to any "check".
-5. **Import**, one record at a time, in the dry run's order. The text formats below are the
+5. **Import**, one record at a time, in the dry run's order. With a server backfill (above), only
+   5.1 runs here, with `crm_backfill`, and 5.5 reports the jobs instead. The text formats below are the
    default; where the reference adds or drops a line, follow the reference.
    1. **The record.** `capture` with `kind: "external_record"`, `title`: the name exactly as
       in the CRM, `external_id: "company:<id>"` (or the deal object's prefix), `url`: its
@@ -234,8 +254,9 @@ list, and never unless the user said yes.
   step 4, over its whole history. Say "<name>: N notes, N meetings, N people: import them?" and
   wait for a yes. If that is more than 60 captures, offer the newest 60 (notes and meetings in
   the last 12 months first) and say what would be left.
-- **Import** as in step 5: the record again (unchanged comes back "Already captured"), then
-  its notes, meetings and people. Finish with one progress line, not the table.
+- **Import** as in step 5: the record again (unchanged comes back "Already captured") with
+  `crm_backfill` when the server can fetch the rest, else its notes, meetings and people here.
+  Finish with one progress line, not the table.
 - Then hand back to the skill that asked, which answers from the brain.
 
 If a `capture` fails, count it, carry on with the next item and name the failures at the end.
