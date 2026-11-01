@@ -57,7 +57,7 @@ then label it as not from the brain.
      unless their words already name a detail of one of them.
    - None match: say the firm has nothing on it. Offer `note` if the user wants to start a record.
 2. Call `entity_brief` with `entity` set to the entity's ID (`org_…`), and for a company
-   `fit_check: true` (`thesis_check` is its older name). If its `coverage` is "crm_only" (CRM record only), offer the backfill
+   `fit_check: true` and `insights: true` (`thesis_check` is fit_check's older name). If its `coverage` is "crm_only" (CRM record only), offer the backfill
    below before answering.
    - **Against our thesis.** `fit_check` judges each part of the firm's thesis (stage, sector,
      region, cheque, each criterion) as met, not met or unknown, each with exact quotes, and gives
@@ -66,6 +66,10 @@ then label it as not from the brain.
      unknown into met or not met from your own knowledge, and say what would settle it. With
      `status` "no_thesis", say the firm has not set a thesis and suggest `onboard`. The result is
      `fit_check` (also `thesis_check`, for now); its `label` is the word to use ("Thesis").
+   - **Past cases like this.** `insights` lists what the firm's learning runs found in past
+     decisions on companies with the same tags: each with its counts, its cases and the ones that
+     went the other way. Give them as the firm's past decisions, cited, marked reviewed or not;
+     never as a rule or a reason to pass.
    - **Current values.** Each fact is the current value with its date and `authority` (the
      company's own figure, the firm's, a third party's, an estimate). On the firm's own side (its
      cheque, its stake, a holding's cost or value, an LP's commitment) `own` is the firm's own

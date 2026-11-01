@@ -103,6 +103,9 @@ file and follow it instead of the steps below.
      `statement`, who taught it (`by`) or that it was learned from a fix, and its id. If
      `lessons_proposed` is more than 0, add one line that the brain has proposals waiting and the
      `onboard` skill reviews them. Never accept a proposal from the digest.
+   - If the result has `insights`, add **What the firm's decisions suggest**: each new or changed
+     insight in one line, from its statement, and whether it waits for review (`candidate`). The
+     `onboard` skill reviews them; never mark one from the digest.
 7. **Offer the nightly task**, once, at the end of a firm-wide digest: "Want the brain fed
    every night? I can set up a scheduled task that files each day's meetings and deal email."
    Skip the offer if a scheduled task named "Alludium Brain: file my day" already exists (check if
