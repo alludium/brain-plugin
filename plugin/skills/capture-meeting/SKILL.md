@@ -83,6 +83,12 @@ it states.
    say it was already in the brain; if it lists a related source (`same event`, `notes of`,
    `duplicate of`), say the meeting was already in the brain from another tool and is now
    linked to it.
+10. **Offer to ask, never ask by yourself.** When a follow-up you recorded gives a colleague an
+    action (its `owner` is another firm member, not the user), the colleague has it as a private
+    follow-up already. Offer once, in one line, to turn it into a request from the user: "Ask
+    Tomas to send the term sheet by Friday as an Alludium Brain task?" Only on a yes, follow the `tasks`
+    skill's **Ask a colleague** steps (or call `follow_ups` with `ask`), with the meeting as
+    `context`. Never create a request without that yes.
 
 ## Follow-ups
 

@@ -81,6 +81,11 @@ then label it as not from the brain.
      (and what others promised them, `waiting_on`). When there are any, end the answer with them,
      overdue first, each with its ID. They are the user's alone: never put them in anything meant
      for someone else.
+   - **Tasks.** `tasks` lists the tasks about this entity the user can see: open ones (who it is
+     for, who asked, the due date, its ref) and recently done ones with their outcome and the
+     notes and documents shared back (`outcomes`), which are cited like any source. Mention open
+     ones in a line ("Priya is calling Acme AI's references for Clara, due Thu [T-42]"). A task
+     is seen only by whoever asked and whoever was asked: keep it out of anything meant for others.
    - **Across companies** ("runway of every portfolio company"): one `search` with `key` and
      `status` (for example `key: runway_months`, `status: portfolio`) and an empty `query`.
    - **The pipeline** ("what's in diligence?", "show me the pipeline"): one `search` with

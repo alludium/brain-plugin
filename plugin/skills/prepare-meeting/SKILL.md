@@ -73,6 +73,9 @@ Combine the calendar connector (who and when) with Alludium Brain's `search` and
    - **Open questions**: what the firm asked for and has not received. [src]
    - **Your follow-ups**: the user's own open ones from `entity_brief`'s `follow_ups` (what they
      owe and what they are waiting on), overdue first. Only theirs; leave out when there are none.
+   - **Open tasks**: from `entity_brief`'s `tasks`, the open tasks about the company (who is doing
+     what for whom, due when, with the ref), and any done one whose outcome bears on the meeting,
+     citing its shared notes [src]. Leave out when there are none.
    - **Relevant history**: similar companies, past passes and their reasons, and why they are
      relevant here. [src]
    - **Questions to ask** (suggested): three to five, each tied to a gap above or a thesis part

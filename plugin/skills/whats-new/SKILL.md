@@ -76,6 +76,13 @@ file and follow it instead of the steps below.
      `external_record` sources about the team) go under **Firm setup**, one line.
    - If nothing changed: "Nothing new that you can see since …". If the result says more
      changes exist, say the digest is partial and offer one company at a time or a shorter window.
+   - **Asked of you**, from `tasks_new`: tasks colleagues asked of the user in the window, one line
+     each with who asked, the action, the due date and the ref ("Clara asked: call Acme AI's
+     references, due Thu 5 Nov [T-42]"). Offer to work on one ("work on Alludium Brain task T-42").
+   - **Your requests**, from `requests_changed`: the user's requests that were done, declined or
+     cancelled, one line each with who, the outcome text in their words (or the reason for a
+     decline) and the ref; cite each shared note or document in `outcomes` by its ID. Leave out
+     either section when it is empty.
    - **Your follow-ups** last, from `follow_ups` in the result (the user's own, open): overdue
      ones first with how late they are, then those due soonest, at most eight lines, each cited
      with its follow-up ID and source ID. Say "(waiting on …)" for `waiting_on`. Leave the

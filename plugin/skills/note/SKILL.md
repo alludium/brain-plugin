@@ -17,7 +17,10 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
 - **Link to the right entity.** Never pass a short or shared name such as "Acme" to `capture`:
   it can link to the wrong company or create a duplicate. Resolve it with `search` first.
 - **Private by default.** Use `scope: "private"` unless the user asked to share it ("for the
-  team", "share with the firm", "firm note"), then use `scope: "firm"`.
+  team", "share with the firm", "firm note"), then use `scope: "firm"`. Narrower is fine too:
+  "just for Priya and Tomas" is `scope: "people"` with `people` (members by name or email; you
+  are always included), and "for the partners" is `scope: "group"` with `group` (a group you are
+  in, as `configure` lists under `sharing`).
 - **Source IDs.** If the note came from another system (a Slack message, an email, a CRM note),
   pass that record's `system`, `external_id` and `url` exactly as the connector gave them. A note
   typed in this chat has none; leave them out. Never invent an ID or link.
@@ -74,9 +77,11 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    private, offer to share it in the same reply, for example: "Saved to Acme AI Ltd
    (src_…), private to you. Share it with the firm?"
 6. If the user says yes, call `share` with the source ID and `scope: "firm"`, and reply in one
-   line: "Shared with the firm (src_…)." Do not capture it a second time as a firm note. To make
-   a note private again, call `share` with `scope: "private"`. Only the note's author can
-   change its scope; if `share` says so, tell the user.
+   line: "Shared with the firm (src_…)." For some people or a group, pass `scope: "people"` with
+   `people`, or `scope: "group"` with `group`, and say who now sees it as `share` words it ("you
+   and Priya Raman"). Do not capture it a second time. To make a note private again, call `share`
+   with `scope: "private"`. Only the note's author can change its scope; if `share` says so, tell
+   the user.
 
 ## Teaching the brain
 
