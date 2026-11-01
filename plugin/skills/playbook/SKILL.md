@@ -1,9 +1,46 @@
 ---
 name: playbook
-description: Create, share and review the firm's own skills in VC Brain - turn how the user does something into a reusable skill, import a skill the firm already has, propose it to the firm, approve or reject colleagues' proposals, restore or retire one. Use when the user says "turn this into a skill", "make a skill for our portfolio review", "import our LP update skill", "share my deal-triage skill with the firm", "what skills does the firm have?", "review the pending skills", "approve lp-update", "roll back lp-update" or "retire that skill". To run a firm skill, load it with configure(skill=...) instead.
+description: Capture how the firm works in VC Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach VC Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update" or "roll back lp-update". To run a firm skill, load it with configure(skill=...) instead.
 ---
 
-# The firm's own skills
+# How the firm works, and its own skills
+
+Two halves. **How the firm works** is firm configuration everyone's assistant reads: `templates`
+(its document formats), `routines` (its recurring processes) and each member's `responsibilities`.
+**Firm skills** are instructions that use it. Use the connector's `configure` tool throughout.
+
+## How the firm works
+
+- **Templates**: `configure(templates=[…])`, the whole list (it replaces). Each has a `key`
+  (`lp_update`, `one_pager`, `ic_agenda`; `ic_memo` is the IC memo, the same as
+  `memo_headings` and `house_style`), a `name`, a `kind` (memo, letter, one_pager, agenda, report,
+  other), `headings` in order, each with one line of `guidance`, a `style` note, and `examples`:
+  firm source IDs of past documents that show the format.
+- **Routines**: `configure(routines=[…])`, the whole list: `key` (`ic_meeting`,
+  `portfolio_review`, `lp_reporting`, `sourcing`), `name`, `when`, `owners` (members' emails),
+  `attendees`, `steps`, the `templates` it produces and the firm `skills` that do its work.
+- **Who owns what**: `responsibilities` on each member in `members` (pass the whole team, as
+  `onboard` does). It shows on their person page ("At the firm: responsible for IC prep").
+- Read what is there first (`configure`) and change only what the user asks; never drop a
+  template or routine they did not mention.
+
+Three ways in, all ending in the same step: show the proposal, save on a yes.
+
+1. **From examples** ("here are our last three IC memos"): find the filed documents (`search`;
+   ask the user to drop files first if they are not in the brain), read them, and propose the
+   template: the headings they share, in order, a line of guidance for each from what the
+   examples put there, and the style they share (length, tone, units). Cite each example in
+   `examples`; with `cites`, quote the words a heading or the style rests on
+   (`{"field": "templates[lp_update]", "source_id": …, "quote": …}`). Only what the examples show.
+2. **From a document** ("our IC charter"): the same, for a routine: when, who, the steps, in the
+   document's words, cited.
+3. **By interview** ("teach VC Brain how we do the portfolio review"): at most six short
+   questions, one at a time: when and how often; who owns it and who attends; what goes in; the
+   steps; what comes out and in what format; what good looks like or what to avoid. Reflect each
+   answer back in a line, then propose the routine (and a template for its output). Then offer:
+   "Shall I make a skill that runs it?" (below).
+
+## The firm's own skills
 
 A firm skill is a SKILL.md the firm keeps in VC Brain. Every member's assistant (Claude, ChatGPT,
 Codex) sees the ones they can run listed in the connector's `configure` description, loads one

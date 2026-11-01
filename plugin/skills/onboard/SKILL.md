@@ -30,7 +30,7 @@ starts from the stored configuration and proposes changes to it.
 - `funds` is the firm's funds (name, vintage, size, currency, strategy); it replaces the list,
   and each fund becomes a Fund in the brain.
 - Each section you pass (`thesis`, `process`, `funds`, `custom_fields`, `members`,
-  `memo_headings`, `house_style`) **replaces** the stored one. To add one criterion or one
+  `memo_headings`, `house_style`, `templates`, `routines`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
 - `thesis` is an object: `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
@@ -39,7 +39,10 @@ starts from the stored configuration and proposes changes to it.
   what the partner did not give. Put criteria inside `thesis`; the separate `criteria` argument
   is only for older plugins. VC Brain checks companies against each part (`entity_brief` with
   `thesis_check`), so keep each part short and specific.
-- `members` is the whole team. `configure` refuses a list that leaves out a current member
+- `members` is the whole team: name, email, role, `focus_areas`, `responsibilities` (what each
+  person owns at the firm, in the partner's words: "IC prep", "LP reporting") and
+  `approves_skills` (who may approve the firm's own skills; see the `playbook` skill). Focus and
+  responsibilities show on each person's page. `configure` refuses a list that leaves out a current member
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
@@ -62,6 +65,9 @@ starts from the stored configuration and proposes changes to it.
   The `ic-prep` skill drafts under these; `[]` goes back to its default headings.
   `house_style` is a short note on how the firm writes memos (spelling, units, length, tone);
   `""` clears it. Both are a list and a note, not a template: no formatting, fields or logic.
+- `templates` and `routines` are the rest of how the firm works (its other document formats and
+  recurring processes); the `playbook` skill captures them. `templates` with key `ic_memo` is the
+  same as `memo_headings` and `house_style`: set one or the other.
 - `me` is a member's private profile, not firm configuration: never pass it here. A member's own
   preferences ("I like short briefs") go to the `profile` skill; the team entry (role, focus
   areas) stays here and shows in their profile.
@@ -190,6 +196,11 @@ Ask once, with what you have ticked: "Which does the firm use? Email: Google · 
 · CRM: Affinity · Drive: Google Drive · Meeting notes: Granola, Zoom. Right?" Save it as
 `systems`. Then say the visibility line (Rules) and save the user's own `connections`.
 
+Then one question on how the firm works: "Does the firm already have its own Claude skills,
+templates for memos or LP letters, or a document on how IC works?" Skills: the `playbook` skill
+imports them. Templates and process documents: drop them, or let the `playbook` skill read past
+examples and propose the templates; otherwise note "how we run IC" as a next step.
+
 ### 2f. Next steps
 
 End with an ordered list built from the report's `gaps` (call it again), each with what it
@@ -204,7 +215,9 @@ buys and the words to say:
    only today.
 3. **Drives**: "Ask Alludium to connect your Google Drive" (hello@alludium.ai).
 4. **Email-in**: the firm's address from `configure`, if it has one.
-5. **The team**: a short message the partner can send colleagues: in Claude, install the VC Brain
+5. **How the firm works**, if not done: "Teach VC Brain how we run IC" or "Make our LP update a
+   skill" (the `playbook` skill): "so everyone's assistant drafts in the firm's format".
+6. **The team**: a short message the partner can send colleagues: in Claude, install the VC Brain
    plugin (Customize → Plugins → Add → Add marketplace → `alludium/vc-brain-plugin`, unless the
    firm already installed it for everyone), connect its connector on the plugin's Connectors tab
    and sign in with their work email, then say "onboard me to VC Brain"; other assistants use
@@ -231,6 +244,7 @@ Ten minutes. In order, skipping what the report already has:
    their own email scope choice.
 5. **The tour.** Call `whats_changed` with `mine: true` and `since` 30 days ago, and show:
    - the firm in three lines: thesis, deal process, team, funds (from the report);
+   - the firm's own skills, if it has any (the "Firm skills" in `configure`), one line each;
    - the pipeline by stage with counts and the latest names (`data.pipeline`);
    - **your deals** (`you.deals`): company, status, last met;
    - your next meetings (`upcoming`), with an offer to prep the first (`prepare-meeting`);
