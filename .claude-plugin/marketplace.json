@@ -1,0 +1,14 @@
+{
+  "name": "alludium",
+  "owner": {
+    "name": "Alludium"
+  },
+  "description": "VC Brain: the firm's shared memory, used through Claude.",
+  "plugins": [
+    {
+      "name": "vc-brain",
+      "source": "./plugin",
+      "description": "Skills for feeding and asking the firm's VC Brain, plus its remote MCP connector."
+    }
+  ]
+}

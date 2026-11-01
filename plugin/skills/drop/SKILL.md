@@ -1,0 +1,115 @@
+---
+name: drop
+description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's VC Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
+---
+
+# Drop files into VC Brain
+
+The files go straight from this machine or sandbox to VC Brain storage through upload URLs.
+VC Brain extracts and indexes them afterwards, so you never need their content.
+
+## Rules
+
+- **Do not read the files.** Do not open, view, preview, `cat`, extract text from or summarise
+  them, and do not use a file-reading tool on them. Work only with the script's output: names,
+  types, sizes and hashes.
+- **Offer, don't file silently.** If the user shared a file without asking to file it, offer
+  once in one line ("Drop this deck into VC Brain, private to you?") and upload only after a
+  yes. Offer once per file; if they decline, drop it. Never offer for a file that came from the
+  brain or that `request_upload` says the brain already has.
+- Upload only what the user asked for. If it is unclear which files they mean, list them and ask.
+- **Source IDs.** If a file came from another system (a Gmail attachment, a Drive or SharePoint
+  file), pass that system's `system`, `external_id` and `url` to `request_upload`: `gdrive` for a
+  Google Drive file, `sharepoint_file` for SharePoint or OneDrive, `gmail` for an attachment.
+  Never pass `google_drive` or `sharepoint`: those belong to drives the firm connects to the brain
+  and are refused. Files attached to this chat or on local disk have none; leave them out. Never
+  invent them.
+- Do not print upload URLs back to the user.
+
+The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not filled in, it is
+`scripts/upload.py` next to this SKILL.md. It uses only the Python standard library.
+
+## Steps
+
+1. If the user did not give paths, list the attached files (names and sizes only):
+
+   ```bash
+   python3 "${CLAUDE_SKILL_DIR}/scripts/upload.py" --list
+   ```
+
+   Pass a directory to look elsewhere: `--list /path/to/dir`.
+2. Hash and type the files (a file or a directory; prints one JSON line per file):
+
+   ```bash
+   python3 "${CLAUDE_SKILL_DIR}/scripts/upload.py" --prepare <file or directory> ...
+   ```
+
+   Tell the user about any `SKIP` lines (unsupported types such as images).
+3. Call the VC Brain connector's `request_upload` once, with `files`: one entry per file,
+   with `filename`, `content_type` and `sha256` copied exactly from its line (up to 50 files a
+   call). Add `entities` to an entry if the user said who that file is about. Resolve all the
+   names first in one `search` call with `query: ""` and `queries` (one `{"name": …}` row per
+   company), then pass `{"type": "organization", "name": "<exact name>", "id": "<org_…>"}`.
+   Add `doc_type` to an entry when the user said what the file is ("our LPA" → `lpa`, "the IC
+   charter" → `investment_process`, "Acme's term sheet" → `term_sheet`), and `hints` with the
+   folder path when the files come from a folder. Otherwise the brain works out the type.
+   Add `scope: "private"` (for the whole call) if the user asked, or if you offered the drop
+   yourself; then offer to share the files in your report (`share` with each source ID). Without
+   a scope, fund documents (LPA, side letter, subscription booklet, administrator's statement)
+   stay private to the user, and every file is private until the brain has read what it is; tell
+   them, and that `share` shows one to the firm. Each upload in the
+   result has an `upload_url`, `upload_headers` and a `job_id`; if it says no upload is needed,
+   the brain already has that file.
+4. Check that this machine can reach the upload host, using any one `upload_url`:
+
+   ```bash
+   python3 "${CLAUDE_SKILL_DIR}/scripts/upload.py" --check "<upload_url>"
+   ```
+
+   If it prints `EGRESS FAIL`, stop and offer the fallback (below), quoting the `EGRESS FAIL`
+   line.
+5. Write the upload plan to a file named `vcbrain-upload-plan.json`, in a scratch or temporary
+   directory if you have one, else the working directory. Use your file-writing tool, not a
+   shell heredoc (Claude Code's shell check rejects JSON heredocs). One entry per file that
+   needs uploading:
+
+   ```json
+   [{"path": "<path from step 2>", "upload_url": "<upload_url>", "upload_headers": {"Content-Type": "<type>"}}]
+   ```
+
+   Then upload them all in one call. The script deletes the plan when it finishes:
+
+   ```bash
+   python3 "${CLAUDE_SKILL_DIR}/scripts/upload.py" --put <path to vcbrain-upload-plan.json>
+   ```
+
+   Copy each `upload_url` exactly; they are signed and expire after about 15 minutes. If the
+   script reports `FAIL … expired`, call `request_upload` again for those files. If files fail
+   for another reason (the host cannot be reached, a proxy or network refusal), offer the
+   fallback for those files, quoting one `FAIL` line.
+6. Call `job_status` with the job IDs. If any job is still `waiting_for_upload` or
+   `processing`, wait about ten seconds and check again, up to four times. Then stop waiting.
+7. Report, from the script's summary and `job_status`: how many files were uploaded, which jobs
+   are done, each file's type (its `Type:` line), any failures or warnings (for example "no
+   text layer, OCR needed", or one kept private), and the source IDs. Do not describe what the
+   files contain: you have not read them.
+8. If a job's `Type:` line says the brain is not sure, ask the user what that file is, using the
+   types it suggests. When they answer, call `request_upload` with only that file's `source_id`
+   and the `doc_type` they gave; nothing is uploaded or created.
+
+## Fallback when the upload cannot get through
+
+This sandbox cannot reach VC Brain's storage, so the files never left. Offer two ways, in this
+order:
+
+1. **Email them in.** Call `configure` with no arguments. If it gives an email-in address, tell
+   the user they can send or forward the files as attachments from their own firm address to
+   it (to file them under a deal, the `+<deal-name>` form it shows). Say that anything sent
+   there is shared with the whole firm, so it is not a way to file something privately. If
+   `configure` gives no address, say the firm has none set up yet and go to 2.
+2. **Allow the upload host.** An org owner can allow the host from the `EGRESS FAIL` or `FAIL`
+   line under Organization settings → Capabilities → Code execution → network egress. Then run
+   the drop again.
+
+The jobs from `request_upload` wait for the files for about an hour, then fail; nothing else
+needs undoing.
