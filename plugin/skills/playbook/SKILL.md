@@ -1,6 +1,6 @@
 ---
 name: playbook
-description: Capture how the firm works in Alludium Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach Alludium Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update" or "roll back lp-update". To run a firm skill, load it with configure(skill=...) instead.
+description: Capture how the firm works in Alludium Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach Alludium Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update", "roll back lp-update" or "I want my own version of ic-prep". To run a firm skill, load it with configure(skill=...) instead.
 ---
 
 # How the firm works, and its own skills
@@ -122,15 +122,34 @@ reviews it, that they will see it in Alludium Brain's Skills page, and that the 
    `{"op": "reject", "name": …, "note": "the reason"}` (a note is required; the author sees it).
    The viewer's Skills page does the same with a side-by-side diff.
 
-## A copy of an Alludium Brain skill
+## Alludium's starter skills, and copies of Alludium Brain skills
 
-A firm skill saved with `derived_from: "brain:<skill>"` is a copy of one of Alludium Brain's own
-skills. The brain keeps the version it was copied from. When that skill changes, `configure` and
-`whats_changed` say so ("The Alludium Brain skill `brief` has changed since `our-brief` was copied from
-it"), and `configure`'s listing has the changed lines (`base.diff`). When the user asks to bring a
-copy up to date, show those changes, propose how to fold them into the firm's version (keeping
-what the firm changed), and on a yes save it with the same `derived_from`: that records the current
-Alludium Brain version as its new base. A firm skill is proposed for review as usual.
+Every firm starts with Alludium's starter skills, such as `ic-prep`: firm skills owned by
+"Alludium" (`derived_from: "alludium:<skill>@<version>"`), which the firm changes like any of its
+skills. A firm skill saved with `derived_from: "brain:<skill>"` is a copy of one of Alludium Brain's
+own skills. Either way the brain keeps the text it is based on, and when Alludium or Alludium Brain
+publishes a newer one, `configure` and `whats_changed` say so ("Alludium's starter skill `ic-prep`
+has a newer version"), and `configure`'s listing has the changed lines (`base.diff`). Nothing
+changes until the firm takes it:
+
+- **The firm never changed it** (`base.edited` false): on an approver's yes,
+  `{"op": "update_from_base", "name": …}` proposes the newer text for review.
+- **The firm changed it**: show the newer lines, propose how to fold them into the firm's version
+  (keeping what the firm changed), and on a yes save it with the same `derived_from`: that records
+  the newer text as its new base. A firm skill is proposed for review as usual.
+
+## Your own version of a firm skill
+
+When one person wants a firm skill to work differently for them only ("my IC memos lead with the
+risks, and I skip the comparables"), and a line of guidance is not enough (that is the `profile`
+skill's `topic: "skill:<name>"`), save their own version:
+`{"op": "save", "name": "<the firm skill>", "personal": true, "body": …}`. It starts as a copy of
+the firm's current text; give only what changes. It runs in place of the firm's for them only,
+and nobody else sees it. It is never proposed: to change the skill for the firm, save the change
+without `personal`. When the firm's version changes later, `whats_changed` says so. Bring theirs
+up to date as for a starter: `update_from_base` with `personal: true` if they never changed it,
+otherwise show the firm's new lines and save theirs again. "Go back to the firm's":
+`{"op": "retire", "name": …, "personal": true}`.
 
 ## Restore, retire, list
 

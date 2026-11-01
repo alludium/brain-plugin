@@ -38,6 +38,12 @@ connector's `configure` tool with `me`, always on its own (no firm sections in t
    - `instruction`: a standing rule, for example "Always cc Priya Raman on portfolio updates",
      "Don't offer intros for crypto companies". Give it a `topic` if it is about one kind of task.
    - `about`: their role or focus in their own words.
+   - **For one firm skill**: a preference or instruction with `topic: "skill:<name>"`, for example
+     `skill:ic-prep` "Lead my IC memos with the risks", or `skill:reach-out` "Never mention our
+     fund size". It is added to that skill each time they run it, and to nothing else. Use the
+     skill's name as `configure`'s description lists it. If they want the procedure itself to
+     differ, not just a line of guidance, offer their own version of the skill (the `playbook`
+     skill).
 2. Call `configure` with `me: {"add": [{"kind": …, "topic": …, "text": …, "said": "<their words>"}]}`.
    Put their exact words in `said` when you rephrased them.
 3. Reply in one line with what was saved and its ID, for example "Remembered: always cc Priya on
