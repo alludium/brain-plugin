@@ -53,7 +53,8 @@ Combine the calendar connector (who and when) with Alludium Brain's `search` and
      `entity_brief` for each person found. Note roles and past companies (`former_employee_of`).
    - The company: the organization those searches found (its domain matches the attendees'
      email domain); else `search` its name or domain. Then `entity_brief` with
-     `thesis_check: true`, which adds how it fits the firm's thesis (cached). Its `met_by` and
+     `fit_check: true`, which adds how it fits the firm's thesis (cached; `thesis_check` is its
+     older name). Its `met_by` and
      `interactions` say which colleagues have met them and when. If its `coverage` is
      "crm_only" (CRM record only), offer the backfill below before writing the brief.
    - Related companies that matter: `similar_to`, a founder's past company, and the lead

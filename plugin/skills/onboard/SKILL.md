@@ -23,22 +23,24 @@ starts from the stored configuration and proposes changes to it.
   a proposal is applied until someone accepts it.
 - Accepting a thesis proposal only adds to the thesis: it fills an empty statement or cheque and
   adds the stages, sectors, regions and criteria it lacks; it never removes or replaces what is
-  configured. To change or drop a part, pass the edited `thesis` with the acceptance.
+  configured. To change or drop a part, pass the edited `fit` with the acceptance.
 - `proposals: [{"id": "cfp_…", "decision": "accept"}]` applies a proposal; `"dismiss"` drops it.
   To accept with changes, pass the edited section in the same call as the acceptance: the
   edited section wins.
 - `funds` is the firm's funds (name, vintage, size, currency, strategy); it replaces the list,
   and each fund becomes a Fund in the brain.
-- Each section you pass (`thesis`, `process`, `funds`, `custom_fields`, `members`,
+- Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`, `templates`, `routines`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
-- `thesis` is an object: `statement` (one sentence), `stages` (the funding stages the firm invests
+- The thesis is the `fit` section (the firm's fit profile, which VC Brain shows as its thesis;
+  `thesis` is its older name and still works, and reads return both). It is an object:
+  `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
   themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`) and
   `criteria` (each `{"text": "...", "weight": "must" | "nice"}`, or without a weight). Leave out
-  what the partner did not give. Put criteria inside `thesis`; the separate `criteria` argument
+  what the partner did not give. Put criteria inside `fit`; the separate `criteria` argument
   is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with
-  `thesis_check`), so keep each part short and specific.
+  `fit_check`), so keep each part short and specific.
 - `members` is the whole team: name, email, role, `focus_areas`, `responsibilities` (what each
   person owns at the firm, in the partner's words: "IC prep", "LP reporting") and
   `approves_skills` (who may approve the firm's own skills; see the `playbook` skill). Focus and

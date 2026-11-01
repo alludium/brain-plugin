@@ -7,22 +7,24 @@
   a proposal is applied until someone accepts it.
 - Accepting a thesis proposal only adds to the thesis: it fills an empty statement or cheque and
   adds the stages, sectors, regions and criteria it lacks; it never removes or replaces what is
-  configured. To change or drop a part, pass the edited `thesis` with the acceptance.
+  configured. To change or drop a part, pass the edited `fit` with the acceptance.
 - `proposals: [{"id": "cfp_…", "decision": "accept"}]` applies a proposal; `"dismiss"` drops it.
   To accept with changes, pass the edited section in the same call as the acceptance: the
   edited section wins.
 - `funds` is the firm's funds (name, vintage, size, currency, strategy); it replaces the list,
   and each fund becomes a Fund in the brain.
-- Each section you pass (`thesis`, `process`, `funds`, `custom_fields`, `members`,
+- Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
-- `thesis` is an object: `statement` (one sentence), `stages` (the funding stages the firm invests
+- The thesis is the `fit` section (the firm's fit profile, which VC Brain shows as its thesis;
+  `thesis` is its older name and still works, and reads return both). It is an object:
+  `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
   themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`) and
   `criteria` (each `{"text": "...", "weight": "must" | "nice"}`, or without a weight). Leave out
-  what the partner did not give. Put criteria inside `thesis`; the separate `criteria` argument
+  what the partner did not give. Put criteria inside `fit`; the separate `criteria` argument
   is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with
-  `thesis_check`), so keep each part short and specific.
+  `fit_check`), so keep each part short and specific.
 - `members` is the whole team. `configure` refuses a list that leaves out a current member
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
@@ -72,9 +74,9 @@
   anyone else's, and **everyone at the firm can see it** (connector names and when, never
   content). Say so before you record it.
 - `cites` says where items of the same update came from: each `{"field", "source_id", "quote"}`.
-  `field` is `section.part` or `section[item]`: `thesis.statement`, `thesis.stages`,
-  `thesis.in_scope`, `thesis.out_of_scope`, `thesis.regions`, `thesis.cheque`,
-  `thesis.criteria`, `funds[<fund name>]`, `members[<email, else name>]`, `process.stages`,
+  `field` is `section.part` or `section[item]`: `fit.statement`, `fit.stages`,
+  `fit.in_scope`, `fit.out_of_scope`, `fit.regions`, `fit.cheque`,
+  `fit.criteria` (`thesis.…` still works), `funds[<fund name>]`, `members[<email, else name>]`, `process.stages`,
   `tag_vocabularies.sector`, `systems.crm`. The source must be shared with the firm and the
   quote must be its exact words; otherwise the whole update is refused and nothing changes.
   Cite only what came from a source; what the partner told you needs no cite (the

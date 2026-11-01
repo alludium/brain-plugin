@@ -55,14 +55,15 @@ then label it as not from the brain.
      unless their words already name a detail of one of them.
    - None match: say the firm has nothing on it. Offer `note` if the user wants to start a record.
 2. Call `entity_brief` with `entity` set to the entity's ID (`org_…`), and for a company
-   `thesis_check: true`. If its `coverage` is "crm_only" (CRM record only), offer the backfill
+   `fit_check: true` (`thesis_check` is its older name). If its `coverage` is "crm_only" (CRM record only), offer the backfill
    below before answering.
-   - **Against our thesis.** `thesis_check` judges each part of the firm's thesis (stage, sector,
+   - **Against our thesis.** `fit_check` judges each part of the firm's thesis (stage, sector,
      region, cheque, each criterion) as met, not met or unknown, each with exact quotes, and gives
      an overall `fit` (fits, partial, no_fit, unknown) with a reason. It is cached, so asking
      again is free. Report it as the brain's judgement, cited to its quotes; never turn an
      unknown into met or not met from your own knowledge, and say what would settle it. With
-     `status` "no_thesis", say the firm has not set a thesis and suggest `onboard`.
+     `status` "no_thesis", say the firm has not set a thesis and suggest `onboard`. The result is
+     `fit_check` (also `thesis_check`, for now); its `label` is the word to use ("Thesis").
    - **Current values.** Each fact is the current value with its date and `authority` (the
      company's own figure, the firm's, a third party's, an estimate). Give it with its date and
      source. Mention values in `also` marked corrected, newer but less authoritative or last
