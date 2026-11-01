@@ -53,7 +53,7 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
      candidates with their status, and wait.
    - None match: it is new. Use the name the user gave, and ask for the type only if it is not
      obvious (company, person, fund).
-   - Link people the note names (a founder, a co-investor) only when they resolve clearly.
+   - Link people the note names (a founder, a co-investor, a customer contact) only when they resolve clearly.
 3. Call `capture` with `kind: "note"`, `text` (the user's words), `scope`, and `entities`:
    resolved ones with their ID (`[{"type": "organization", "name": "Acme AI Ltd", "id":
    "org_…"}]`), new ones by name, with a website or email in `external_refs` if the user gave

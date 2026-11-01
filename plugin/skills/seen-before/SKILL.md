@@ -1,6 +1,6 @@
 ---
 name: seen-before
-description: Check a list of sourced companies against the firm's Alludium Brain and say for each whether it is new, seen, met or passed, with the reason and who at the firm knows them. Use when the user shares a sourcing list, CSV, spreadsheet, newsletter or pasted list of startups and asks "have we seen these?", "which of these are new?", "check this list against the brain" or "dedupe this list".
+description: Check a list of sourced companies against the firm's Alludium Brain and say for each whether it is new, seen, met or passed, with the reason and who at the firm knows them. Use when the user shares a sourcing or prospect list, CSV, spreadsheet, newsletter or pasted list of startups or accounts and asks "have we seen these?", "which of these are new?", "check this list against the brain" or "dedupe this list".
 ---
 
 # Seen before?
@@ -9,7 +9,7 @@ Look the whole list up in Alludium Brain with one batch `search`, then give each
 
 | Verdict | Means |
 |---|---|
-| `passed` | The firm decided not to invest (entity status `passed`, or a pass decision). |
+| `passed` | The firm decided not to go ahead, for a venture firm not to invest (entity status `passed`, or a pass decision). |
 | `met` | Someone at the firm has had a meeting with them. |
 | `seen` | The firm has something on them (a deck, an email, a note, a CRM record) but no meeting. |
 | `new` | Nothing in the brain matches. |

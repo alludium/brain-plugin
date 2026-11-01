@@ -1,6 +1,6 @@
 ---
 name: brief
-description: Answer "what do we know about X?" and "who has met them?" from the firm's Alludium Brain, with every claim cited to its source. Use for any question about a company, founder, investor, LP, fund or deal the firm may have touched, for example "what do we know about Acme", "who's met Maya Lindqvist", "have we talked to Kestrel", "what's our history with Copperbeck". Offers, never silently, to file new information the user adds.
+description: Answer "what do we know about X?" and "who has met them?" from the firm's Alludium Brain, with every claim cited to its source. Use for any question about a company, founder, investor, LP, fund, customer or deal the firm may have touched, for example "what do we know about Acme", "who's met Maya Lindqvist", "have we talked to Kestrel", "what's our history with Copperbeck". Offers, never silently, to file new information the user adds.
 ---
 
 # Brief: what the firm knows
