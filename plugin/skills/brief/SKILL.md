@@ -65,8 +65,9 @@ then label it as not from the brain.
      `status` "no_thesis", say the firm has not set a thesis and suggest `onboard`. The result is
      `fit_check` (also `thesis_check`, for now); its `label` is the word to use ("Thesis").
    - **Current values.** Each fact is the current value with its date and `authority` (the
-     company's own figure, the firm's, a third party's, an estimate). Give it with its date and
-     source. Mention values in `also` marked corrected, newer but less authoritative or last
+     company's own figure, the firm's, a third party's, an estimate). On the firm's own side (its
+     cheque, its stake, a holding's cost or value, an LP's commitment) `own` is the firm's own
+     record, such as its CRM, not the company's word. Give it with its date and source. Mention values in `also` marked corrected, newer but less authoritative or last
      reported, and say why in a few words. Never present a projection as current. When a fact
      is `conflicting`, show both values with their sources and do not choose.
    - **People and roles.** `roles` says who holds or held each role (CEO, CFO, founder, board)

@@ -1,6 +1,6 @@
 ---
 name: playbook
-description: Capture how the firm works in Alludium Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach Alludium Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update", "roll back lp-update" or "I want my own version of ic-prep". To run a firm skill, load it with configure(skill=...) instead.
+description: Capture how the firm works in Alludium Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda) and how its drafts look (colours, fonts, logo), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach Alludium Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "make our memos use our logo and colours", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update", "roll back lp-update" or "I want my own version of ic-prep". To run a firm skill, load it with configure(skill=...) instead.
 ---
 
 # How the firm works, and its own skills
@@ -21,6 +21,17 @@ Two halves. **How the firm works** is firm configuration everyone's assistant re
   `attendees`, `steps`, the `templates` it produces and the firm `skills` that do its work.
 - **Who owns what**: `responsibilities` on each member in `members` (pass the whole team, as
   `onboard` does). It shows on their person page ("At the firm: responsible for IC prep").
+- **How drafts look**: `configure(theme={…})`, the whole theme (it replaces; `{}` clears it).
+  Drafts Claude files under these templates show in Alludium Brain, and in cards, as documents in it,
+  and print from the browser to PDF: `accent` and `ink` (`#rrggbb`, dark enough to read on white
+  paper; the server refuses light ones), `heading_font` and `body_font` (family names, never
+  loaded: a reader without the font sees a standard one), `logo` (a small PNG, JPEG or SVG as a
+  `data:` URI under 64 KB; build it with code from a file the user gives, never retype it),
+  `header` and `footer` (printed on every page, e.g. "Confidential"), `paper` (`a4` or
+  `letter`). Ask for the firm's colours, fonts and logo when the user wants their memos to look
+  like theirs; structure stays in the templates. For Word, the firm's own `reference.docx` (a
+  Word file with their styles, header, footer and logo) dresses every export: upload it with
+  the `drop` skill's reference document steps (`request_upload(asset="reference_docx")`).
 - Read what is there first (`configure`) and change only what the user asks; never drop a
   template or routine they did not mention.
 

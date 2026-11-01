@@ -1,6 +1,6 @@
 ---
 name: drop
-description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's Alludium Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
+description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's Alludium Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also uploads the firm's Word reference document (reference.docx) that styles Word exports. Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
 ---
 
 # Drop files into Alludium Brain
@@ -101,6 +101,16 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
 8. If a job's `Type:` line says the brain is not sure, ask the user what that file is, using the
    types it suggests. When they answer, call `request_upload` with only that file's `source_id`
    and the `doc_type` they gave; nothing is uploaded or created.
+
+## The firm's Word reference document
+
+When the user gives a `.docx` to style the firm's Word exports ("use this as our Word template",
+"our reference.docx", "make exported memos look like this"), it is configuration, not a document
+to file: its styles, page setup, header, footer and logo dress every draft exported to Word. Do
+steps 1 and 2 for that one file, then call `request_upload` with `asset: "reference_docx"` and
+the single-file fields (`filename`, `content_type`, `sha256`), no `files`, scope or entities. It
+replaces the firm's current one for everyone, so say so first. If the result has an
+`upload_url`, do steps 4 and 5 for it; there is no job to follow. Report that exports now use it.
 
 ## Fallback when the upload cannot get through
 

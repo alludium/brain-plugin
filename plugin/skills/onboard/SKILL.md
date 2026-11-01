@@ -221,7 +221,8 @@ Look at your own tools and match them (names after the host's prefix):
 
 Ask once, with what you have ticked: "Which does the firm use? Email: Google · Calendar: Google
 · CRM: Affinity · Drive: Google Drive · Meeting notes: Granola, Zoom. Right?" Save it as
-`systems`. Then say the visibility line (Rules) and save the user's own `connections`.
+`systems`. The firm's CRM is then its record for its own side (its cheques and stakes); for a
+company's figures it stays an estimate. Then say the visibility line (Rules) and save the user's own `connections`.
 
 Then one question on how the firm works: "Does the firm already have its own Claude skills,
 templates for memos or LP letters, or a document on how IC works?" Skills: the `playbook` skill
