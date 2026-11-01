@@ -50,9 +50,12 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    call). Add `entities` to an entry if the user said who that file is about. Resolve all the
    names first in one `search` call with `query: ""` and `queries` (one `{"name": …}` row per
    company), then pass `{"type": "organization", "name": "<exact name>", "id": "<org_…>"}`.
-   Add `doc_type` to an entry when the user said what the file is ("our LPA" → `lpa`, "the IC
-   charter" → `investment_process`, "Acme's term sheet" → `term_sheet`), and `hints` with the
-   folder path when the files come from a folder. Otherwise the brain works out the type.
+   Add `doc_type` to an entry when the user said what the file is ("Acme's board pack" →
+   `board_pack`, "the financial model" → `financials`; at a venture firm, "our LPA" → `lpa`,
+   "the IC charter" → `investment_process`, "Acme's term sheet" → `term_sheet`), and `hints` with
+   the folder path when the files come from a folder. Otherwise the brain works out the type. The
+   types come from the firm's packs: if a type is refused, the error lists the firm's types; pick
+   the one that fits, or leave `doc_type` out.
    When the user says a file is a new version of one already in the brain ("the revised Acme
    memo", "v3 of the LP letter"), find the earlier one (`search`), confirm it in one line, and add
    `revision_of: "<src_…>"` to that entry: the earlier version's comments follow to the new one.
