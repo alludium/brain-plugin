@@ -16,6 +16,15 @@ Two halves. **How the firm works** is firm configuration everyone's assistant re
   `memo_headings` and `house_style`), a `name`, a `kind` (memo, letter, one_pager, agenda, report,
   other), `headings` in order, each with one line of `guidance`, a `style` note, and `examples`:
   firm source IDs of past documents that show the format.
+  - **A report** (a portfolio review, an LP update) also has a `period` (`week`, `month`,
+    `quarter`, `half`, `year`) and an `audience` (`firm` for anything others or outsiders read:
+    its figures then come from firm-shared sources only). A heading that shows figures has a
+    `data` block: `keys` (fact keys, such as `arr`, `cash`, `runway_months`, `cost`,
+    `fair_value`), `compare` (`previous_period`, the default, or `year_before`) and `attention`
+    thresholds that flag a company (`{"key": "runway_months", "below": 9}`, `{"key": "arr",
+    "change_pct_below": 0}`). From past reports: one data block per table they show, with the
+    keys its columns hold. `search(view="portfolio", template=<key>)` then returns every block's
+    figures for the period, computed by the server.
 - **Routines**: `configure(routines=[…])`, the whole list: `key` (`ic_meeting`,
   `portfolio_review`, `lp_reporting`, `sourcing`), `name`, `when`, `owners` (members' emails),
   `attendees`, `steps`, the `templates` it produces and the firm `skills` that do its work.

@@ -105,6 +105,10 @@ then label it as not from the brain.
      who has not reported. Quote figures exactly as given, write "not reported" for missing
      ones, show both sides of a conflict, and never add, convert or estimate a figure yourself.
      For anything others will read, pass `audience: "firm"` so only firm-shared sources count.
+     When the firm has a report template for it (`configure` lists templates; a portfolio review
+     or an LP update), pass `template` with `as_of` instead of `keys` and `compare_to`: one call
+     returns each of its sections' figures for the period, with companies past its thresholds
+     under "Needs attention".
    - **The pipeline** ("what's in diligence?", "show me the pipeline"): one `search` with
      `view: "pipeline"` and an empty `query`, adding `stage` (a stage's name) for one stage. It
      lists each company at the stage with since when and its checklist progress, and hosts that
