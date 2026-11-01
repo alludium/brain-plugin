@@ -56,6 +56,8 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    When the user says a file is a new version of one already in the brain ("the revised Acme
    memo", "v3 of the LP letter"), find the earlier one (`search`), confirm it in one line, and add
    `revision_of: "<src_…>"` to that entry: the earlier version's comments follow to the new one.
+   A Word file's own comments (and replies, and done) come in as comments on it, under their Word
+   authors' names; say so in your report when the user mentions them.
    Add `scope: "private"` (for the whole call) if the user asked, or if you offered the drop
    yourself; then offer to share the files in your report (`share` with each source ID). Without
    a scope, fund documents (LPA, side letter, subscription booklet, administrator's statement)
