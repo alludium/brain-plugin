@@ -53,6 +53,9 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    Add `doc_type` to an entry when the user said what the file is ("our LPA" → `lpa`, "the IC
    charter" → `investment_process`, "Acme's term sheet" → `term_sheet`), and `hints` with the
    folder path when the files come from a folder. Otherwise the brain works out the type.
+   When the user says a file is a new version of one already in the brain ("the revised Acme
+   memo", "v3 of the LP letter"), find the earlier one (`search`), confirm it in one line, and add
+   `revision_of: "<src_…>"` to that entry: the earlier version's comments follow to the new one.
    Add `scope: "private"` (for the whole call) if the user asked, or if you offered the drop
    yourself; then offer to share the files in your report (`share` with each source ID). Without
    a scope, fund documents (LPA, side letter, subscription booklet, administrator's statement)

@@ -1,6 +1,6 @@
 ---
 name: note
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s VC Brain. Use when the user says "note on Acme: …", "note that …", "remember that …", "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm.'
+description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s VC Brain. Use when the user says "note on Acme: …", "note that …", "remember that …", "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread.'
 
 description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s VC Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
 ---
@@ -92,3 +92,21 @@ deal summary), it is the author's document, not a note. File it only on their sa
 Filing an edited draft again with the same `system` and `external_id` stores a new version of it,
 keeping its scope, and briefs show only the latest. A `.docx` or `.pdf` export is a file: use
 `drop`. Then offer to share it, as for a note. The `ic-prep` skill does this for IC memos.
+
+## Comments on a document
+
+A comment sits on a passage of a document in the brain (a filed draft, an upload) and is shown
+there to everyone who can see it, in VC Brain's viewer too. Use `capture` with `comment`:
+
+- **A new thread**: `comment: {"on": "<src_…>", "quote": "<the passage's exact words>"}` and the
+  comment as `text`. Find the document with `search` first. If the passage occurs more than once,
+  add a few words just before it (`prefix`) or after it (`suffix`). Leave `scope` out: a comment
+  takes its document's, and is never wider. "Just for me" is `scope: "private"`.
+- **A reply**: `comment: {"reply_to": "<com_…>"}`. **Resolve** or **reopen** a thread:
+  `comment: {"resolve": "<com_…>"}` (any `text` becomes a closing reply).
+- **A review pass** ("review the Acme memo against our IC checklist and comment"): read the
+  document (`search` with its `source_id`, which also lists its comments), draft the comments,
+  each with its quote, and show them as a list. Add only the ones the user agrees to, one
+  `capture` each. Say who will see them before adding any.
+- Comments follow the document to its new versions; one whose passage was removed is listed
+  against the version it was made on.
