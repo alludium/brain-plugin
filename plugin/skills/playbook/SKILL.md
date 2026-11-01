@@ -87,7 +87,7 @@ describes how they do something:
 1. Draft the skill from what happened: the phrases the user used to ask (they go in the
    description), the Alludium Brain tool calls that worked, in order, with the parameters by their real
    names, the firm configuration it relied on (by name: memo headings, house style, the deal
-   process), and the user's corrections, as rules. Keep Alludium Brain's rules in it: cite source IDs;
+   process), and the user's corrections, as rules. Keep Alludium Brain's rules in it: cite sources by their links, never bare IDs;
    never file, share or log a decision without a yes; private by default. Leave out anything about
    this one company or deal. Pass every parameter by the name the tool declares, and resolve
    names to entity IDs with `search` before `capture` or `entity_brief`.

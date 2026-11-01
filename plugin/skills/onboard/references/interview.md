@@ -76,8 +76,8 @@ what is configured. The rules in SKILL.md apply.
    including people who are not changing, with their stored emails, roles and focus areas,
    and put anyone the partner agreed to drop in `remove`. If `configure` says the update would
    drop someone, do not add them to `remove` yourself: ask the partner whether to keep them.
-5. Reply in two or three lines: which sections were saved, the configuration source ID
-   (`src_…`), and how many members the team now has. If `configure` lists `tag_suggestions`,
+5. Reply in two or three lines: which sections were saved and how many members the team now
+   has, with no source ID or link (a configuration save needs none). If `configure` lists `tag_suggestions`,
    say how many and offer to review them (below). Suggest the next step once: "Try
    `brief` on a company, or `note` to add a first take."
 

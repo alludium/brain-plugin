@@ -1,9 +1,9 @@
 # Nightly filing run (file my day)
 
 A scheduled task runs this with nobody watching. Copy the day's meetings, outside calendar
-events and deal email from the user's own connectors into Alludium Brain with `capture`. Your job is
-a faithful copy with source IDs, plus the commitments each record makes (`follow_ups`). You pass
-no facts: Alludium Brain extracts the figures, roles and people from each email and meeting on the
+events, deal email and threads from chosen Slack channels from the user's own connectors into
+Alludium Brain with `capture`. Your job is a faithful copy with source IDs, plus the commitments
+each record makes (`follow_ups`). You pass no facts: Alludium Brain extracts the figures, roles and people from each email and meeting on the
 server, with exact quotes, links them to the firm's entities, and recognises copies of the same
 email or meeting from other tools.
 
@@ -30,6 +30,9 @@ email or meeting from other tools.
   email and meeting capture; otherwise leave that out too and the firm's rule applies. Alludium Brain
   keeps each one private until it has checked it, and keeps sensitive ones (an internal 1:1 about
   pay, an HR call) private whatever the rule says.
+- **No scope on threads either**, and no `email_scope`: the channel decides. A public channel's
+  thread is shared once Alludium Brain has checked it; a private channel's or a direct message's stays
+  private to the user.
 - Do not repeat captured text in your messages, and do not read attachments: only upload them
   (step 5).
 - If a connector is missing or fails, skip it, carry on with the others, and say so at the end.
@@ -109,6 +112,40 @@ email or meeting from other tools.
 
    Alludium Brain shares the attachments together with their email if it shares the email, and they
    stay private with it otherwise.
-6. **Finish** with one short table: source (meetings, calendar events, email, attachments),
-   found, filed, already there, skipped, truncated, failed, follow-ups. Then the run ID, and
-   one line on anything that went wrong.
+6. **Slack threads.** Only when the task prompt lists `Slack channels:` (`none`, or no line,
+   means skip this step). Never file direct messages or group DMs unless the task prompt says
+   `Include direct messages: yes`. For each channel listed, read its messages in the window with
+   the Slack connector. Keep a thread (a message and its replies) when any of its messages is in
+   the window and it is about a company, founder, co-investor, LP or deal the firm deals with, or
+   records a firm decision; skip social chat, stand-ups, and threads with only bots or channel
+   events. A message with no replies counts as a thread of one. For each thread kept, read the
+   whole thread (the parent and every reply, including those before the window) and call
+   `capture` with:
+   - `kind: "thread"`, `title`: `#channel: ` and the parent message's first words (up to 80
+     characters), `occurred_at`: the parent message's time, `system: "slack"`, `external_id`:
+     `<channel ID>/<parent message timestamp>` (for example `C0123ABC/1697270000.000100`),
+     `url`: the parent message's permalink if the connector gave one;
+   - `text`: these lines, a blank line, then one line per message in order, each message's text
+     word for word (its further lines follow it). Mark a bot's or app's messages with `(bot)`
+     after its name. Leave reactions and link previews as the connector gave them: Alludium Brain sets
+     them aside, and joins and leaves too.
+
+     ```text
+     Workspace: workspace name
+     Channel: #channel-name (public)
+     [YYYY-MM-DD HH:MM] Display Name: the message, word for word
+     ```
+
+     Write `(private)` for a private channel, and `Channel: direct message` or
+     `Channel: group DM` for direct messages;
+   - `entities`: each person who wrote in the thread as a person with `attendee: true` and
+     `{"system": "email", "external_id": "<email>"}` when their Slack profile gives an email,
+     and the company the thread is about, resolved once by `search` on its name and reused. If
+     the company is unclear, link only the people;
+   - `follow_ups`: the thread's commitments, as for email.
+
+   A thread filed last night that has new replies is filed again whole: Alludium Brain stores it as a
+   new version, and a thread with nothing new said is `Already captured`.
+7. **Finish** with one short table: source (meetings, calendar events, email, attachments,
+   threads), found, filed, already there, skipped, truncated, failed, follow-ups. Then the run
+   ID, and one line on anything that went wrong.

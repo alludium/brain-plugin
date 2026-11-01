@@ -260,8 +260,8 @@ buys and the words to say:
    the connector for the firm first (Organization settings → Connectors). List who has not
    connected yet (the report's `team`). Alludium Brain sends no invitations itself.
 
-Reply with what was saved (sections and the `src_…` of the last configuration save) and the
-list. Then offer one thing to try: "Ask me what we know about <a portfolio company>."
+Reply with what was saved (the sections, in plain words; no source ID or link: the user does not
+need one for a configuration save) and the list. Then offer one thing to try: "Ask me what we know about <a portfolio company>."
 
 ## 3. The personal setup
 

@@ -1,6 +1,6 @@
 ---
 name: capture-meeting
-description: File a meeting's notes into the firm's Alludium Brain word for word, with the meeting's source IDs from the notes connector (Granola, Fireflies, Otter, Fathom, Zoom, Teams or Google Meet). Use after a call when the user says "file this meeting", "capture my call with …", "save today's meeting notes to the brain", or pastes meeting notes to keep. Also use it to offer, never silently, when the user shares or discusses a meeting's notes without asking to file them.
+description: File a meeting's notes, or a Slack thread, into the firm's Alludium Brain word for word, with the source IDs from the notes connector (Granola, Fireflies, Otter, Fathom, Zoom, Teams or Google Meet) or Slack. Use after a call when the user says "file this meeting", "capture my call with …", "save today's meeting notes to the brain", or pastes meeting notes to keep, and when they say "file this Slack thread" or "save the #deal-flow discussion about Acme to the brain". Also use it to offer, never silently, when the user shares or discusses a meeting's notes without asking to file them.
 ---
 
 # Capture a meeting
@@ -77,7 +77,7 @@ it states.
    recurring meeting shares one UID. Meetings
    default to the firm scope when the user asked to file them. Use `scope: "private"` if the user
    asks, or if you offered to file it, and then offer to share it in your reply.
-9. Reply in one or two lines: the meeting title, the source ID, the scope, the entities it was
+9. Reply in one or two lines (no source ID): the meeting title, the scope, the entities it was
    linked to, any facts recorded or skipped, and the follow-ups recorded (each is private to its
    owner). If the result says it was already captured,
    say it was already in the brain; if it lists a related source (`same event`, `notes of`,
@@ -128,3 +128,35 @@ One follow-up per commitment, even when the notes repeat it.
 
 If there is no notes connector and the user pasted the notes, capture the pasted text with
 `kind: "meeting"` and no source IDs, and say that it has no link back to a notes system.
+
+## A Slack thread
+
+File a chat thread the same way, word for word, with `kind: "thread"`; the rules above apply.
+
+1. Read the whole thread with the Slack connector: the parent message and every reply, and
+   the channel's name and whether it is public or private (or a direct message).
+2. Build `text` as these header lines, a blank line, then one line per message in order, the
+   text exactly as returned (a message's further lines follow it). Mark a bot's or app's
+   messages with `(bot)` after its name; leave reactions and link previews as the connector
+   gave them (Alludium Brain sets them aside, and joins and leaves too):
+
+   ```text
+   Workspace: workspace name
+   Channel: #channel-name (public)
+   [2026-10-14 09:12] Display Name: the message, word for word
+   ```
+
+   Write `(private)` for a private channel, `Channel: direct message` or `Channel: group DM`
+   for direct messages.
+3. `entities`: everyone who wrote in the thread as a person with `attendee: true` and their
+   email from their Slack profile when the connector gives it, and the company the thread is
+   about, resolved as in step 5. Add `facts` (step 6) only for figures someone in the thread
+   states, and `follow_ups` as below.
+4. Call `capture` with `kind: "thread"`, `title` (`#channel: ` and the parent message's first
+   words), `occurred_at` (the parent message's time), `system: "slack"`, `external_id` (the
+   channel ID and the parent message's timestamp, `C0123ABC/1697270000.000100`) and `url` (the
+   parent message's permalink). Leave `scope` out unless the user asks: a public channel's
+   thread is shared with the firm once Alludium Brain has checked it for sensitive content; a private
+   channel's or direct message's stays private to the user.
+5. Reply as in step 9. Filing a thread again after new replies is safe: Alludium Brain stores it as a
+   new version of the same thread.

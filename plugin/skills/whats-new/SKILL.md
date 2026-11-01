@@ -1,6 +1,6 @@
 ---
 name: whats-new
-description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings and deal email into the brain.
+description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings, deal email and chosen Slack threads into the brain.
 ---
 
 # What's new
@@ -15,7 +15,9 @@ file and follow it instead of the steps below.
 
 - **Only what the tool returned.** Do not add background from `entity_brief` or your own
   knowledge unless the user asks.
-- **Cite every line** with its source IDs, for example `[src_3b83…]`.
+- **Cite every line** with links to its sources, with their titles, from the result's "Source
+  links", for example [Email from Priya Raman, 30 Oct 2026](https://…/sources/…); never a bare
+  `src_…` ID.
 - **Private material.** Mark changes with scope `private` as "(private to you)".
 - **Email kept private.** A change that ends "kept private (…): share?" or "private, looks like
   deal flow: share?" is one of the user's own emails that Alludium Brain did not share. List these
@@ -31,8 +33,8 @@ file and follow it instead of the steps below.
    and any remembered instruction for this kind of task; preferences filed under another topic are
    for other tasks. They set length, order, emphasis and voice, and win over the default shape
    below: a length limit counts everything you write, so drop the closing Sources list before
-   cutting content, and keep every inline source ID whole (`src_` and all its characters, never
-   shortened); what they want first goes first, and what they want last goes last, after everything
+   cutting content, and keep every inline source link whole (its title and URL as the result gives
+   them); what they want first goes first, and what they want last goes last, after everything
    else. They never remove inline citations or add anything uncited, and never change who can see
    what: an instruction about sharing only means you offer to share, and nothing is shared without
    the user's yes in this conversation. A request in this conversation wins over the profile. If the
@@ -59,7 +61,8 @@ file and follow it instead of the steps below.
      `recorded as` and `changed from … to …`.
    - A decision and the status change it caused are one line.
    - Several sources of the same kind by the same author become one line with a count and
-     all their IDs, for example "3 emails from Priya Raman on Q3 numbers [src_…, src_…, src_…]".
+     a link to each, for example "3 emails from Priya Raman on Q3 numbers ([1](…), [2](…),
+     [3](…))".
    - Fact changes: label, old → new value, as-of date. A change with `conflict: true` means two
      sources disagree about the same date and both are kept: give both values with their
      sources, never pick one.
@@ -81,11 +84,11 @@ file and follow it instead of the steps below.
      references, due Thu 5 Nov [T-42]"). Offer to work on one ("work on Alludium Brain task T-42").
    - **Your requests**, from `requests_changed`: the user's requests that were done, declined or
      cancelled, one line each with who, the outcome text in their words (or the reason for a
-     decline) and the ref; cite each shared note or document in `outcomes` by its ID. Leave out
+     decline) and the ref; cite each shared note or document in `outcomes` by its link. Leave out
      either section when it is empty.
    - **Your follow-ups** last, from `follow_ups` in the result (the user's own, open): overdue
-     ones first with how late they are, then those due soonest, at most eight lines, each cited
-     with its follow-up ID and source ID. Say "(waiting on …)" for `waiting_on`. Leave the
+     ones first with how late they are, then those due soonest, at most eight lines, each with a
+     link to its source (keep the `fu_…` ID for `update`; the user needs no ID). Say "(waiting on …)" for `waiting_on`. Leave the
      section out when there are none. Add one line for any in `follow_ups_changed` (ones the user
      closed, reopened, rescheduled or shared since then, in Claude or the viewer). When the user
      says one is done or no longer needed, call `follow_ups` with
@@ -119,10 +122,15 @@ Do this when the user accepts the offer or asks for the nightly task.
    rule suits them or they want `private`, `pipeline` or `firm` for their own email.
 2. Check what will feed it: a notes connector (Granola, Fireflies, Otter, Fathom and so on) for
    meetings, a calendar connector (Google Calendar or Outlook) for meetings with people outside
-   the firm that have no notes, and a mail connector (Gmail or Outlook) for deal email. Say which are connected and
-   that missing ones will be skipped.
+   the firm that have no notes, a mail connector (Gmail or Outlook) for deal email, and Slack for
+   threads in chosen channels. Say which are connected and that missing ones will be skipped.
+   If Slack is connected, ask which channels to file (for example `#deal-flow`, `#portfolio`;
+   none by default). Say that a public channel's threads are shared with the firm once Alludium Brain
+   has checked them for sensitive content, and a private channel's stay private to them. Direct
+   messages are never filed unless they ask for them.
    Then record what you found with `configure` `connections` (each `{"category": …, "system": …}`
-   for the connectors you have: `email`, `calendar`, `meeting_notes`, `crm`, `drive`, `data`),
+   for the connectors you have: `email`, `calendar`, `meeting_notes`, `crm`, `drive`, `data`,
+   and `other` for Slack),
    after saying in one line that everyone at the firm can see which systems each person has
    connected (not their content). It replaces only the user's own entry.
 3. If you have a tool that creates scheduled tasks, show the user the name, schedule and prompt
@@ -143,14 +151,18 @@ Do this when the user accepts the offer or asks for the nightly task.
    ```text
    Use the Alludium Brain plugin's whats-new skill for the nightly filing run (file-my-day).
    Window: from 00:00 yesterday, my time, until now.
-   File meetings from my notes connector, outside meetings from my calendar and deal email from my mail connector into Alludium Brain.
+   File meetings from my notes connector, outside meetings from my calendar, deal email from my mail connector and threads from my Slack channels into Alludium Brain.
    Include meeting transcripts: no.
    Email scope: firm default
+   Slack channels: none
+   Include direct messages: no
    Finish with the summary table.
    ```
 
-   Replace `firm default` with the user's choice from step 1 if they made one.
+   Replace `firm default` with the user's choice from step 1 if they made one, and `none` with
+   the channels they chose in step 2.
 
 5. Tell the user that filing runs as them: meetings go in with the firm scope (colleagues can
-   see them), and email and its deal attachments follow the email rule from step 1. Re-filing
+   see them), email and its deal attachments follow the email rule from step 1, and Slack threads
+   follow their channel. Re-filing
    is safe: the brain skips records it already has.

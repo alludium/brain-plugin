@@ -76,7 +76,7 @@ A table, in the list's order, then one line of totals:
 
 | Company | Verdict | Reason | Who knows | Tags | Sources |
 |---|---|---|---|---|---|
-| ACME AI | met | Live deal (`in_deal`); partner meeting on 21 Oct | Jonah, Priya, Clara | sector: AI infrastructure | src_…, src_… |
+| ACME AI | met | Live deal (`in_deal`); partner meeting on 21 Oct | Jonah, Priya, Clara | sector: AI infrastructure | [Partner meeting, 21 Oct 2026](…), [Intro email, 2 Oct 2026](…) |
 
 End with: "N new, N seen, N met, N passed." Offer to note the new ones only if the user asks.
 

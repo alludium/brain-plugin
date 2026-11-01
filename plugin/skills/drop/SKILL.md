@@ -96,7 +96,8 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    `processing`, wait about ten seconds and check again, up to four times. Then stop waiting.
 7. Report, from the script's summary and `job_status`: how many files were uploaded, which jobs
    are done, each file's type (its `Type:` line), any failures or warnings (for example "no
-   text layer, OCR needed", or one kept private), and the source IDs. Do not describe what the
+   text layer, OCR needed", or one kept private), and each file as its link from `job_status`
+   (never its source ID). Do not describe what the
    files contain: you have not read them.
 8. If a job's `Type:` line says the brain is not sure, ask the user what that file is, using the
    types it suggests. When they answer, call `request_upload` with only that file's `source_id`

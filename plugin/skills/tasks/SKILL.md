@@ -57,7 +57,7 @@ their list:
 5. **Review before sharing.** Show the user, exactly:
    - the outcome text, word for word;
    - each note or document made for the task (`follow_ups` with `task` lists them under
-     `outcomes`), by title and id;
+     `outcomes`), each as its link with its title;
    - who will see what they approve: the person who asked and the user ("only you and Clara"),
      or the firm when the request says `audience: firm`. They can choose instead: `audience:
      "firm"`, or a group's name when both they and the person who asked are in it (the person who

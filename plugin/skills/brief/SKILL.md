@@ -11,8 +11,10 @@ then label it as not from the brain.
 
 ## Rules
 
-- **Cite everything.** Each fact, quote and claim ends with the source ID it came from, for
-  example `[src_20e9…]`. If the brain has nothing on a point, say so; do not fill gaps.
+- **Cite everything.** Each fact, quote and claim ends with a link to the source it came from,
+  with its title, from the result's "Source links", for example
+  [Partner meeting, 21 Oct 2026](https://…/sources/…). Never show a bare `src_…` ID. If the brain
+  has nothing on a point, say so; do not fill gaps.
 - **Never merge lookalikes.** Different entities with similar names (for example `Acme AI Ltd`
   and `Acme Robotics GmbH`) are different companies. Keep their facts and people apart.
 - **Notes in their authors' words.** Quote notes as written, with the author.
@@ -37,8 +39,8 @@ then label it as not from the brain.
    and any remembered instruction for this kind of task; preferences filed under another topic are
    for other tasks. They set length, order, emphasis and voice, and win over the default shape
    below: a length limit counts everything you write, so drop the closing Sources list before
-   cutting content, and keep every inline source ID whole (`src_` and all its characters, never
-   shortened); what they want first goes first, and what they want last goes last, after everything
+   cutting content, and keep every inline source link whole (its title and URL as the result gives
+   them); what they want first goes first, and what they want last goes last, after everything
    else. They never remove inline citations or add anything uncited, and never change who can see
    what: an instruction about sharing only means you offer to share, and nothing is shared without
    the user's yes in this conversation. A request in this conversation wins over the profile. If the
@@ -167,7 +169,8 @@ then label it as not from the brain.
    - **Connections and history**: founders, investors, similar companies, past decisions, and
      the paths from the firm when asked how we are connected. [src]
    - **Gaps**: what the firm has asked for and not received, and what the brain lacks.
-   - **Sources**: the cited sources only, as `src_… title (system) <url>`.
+   - **Sources**: the cited sources only, each as its link, then (system) and the original's
+     own URL if it has one.
 
 ## Backfill: a company the brain knows only from its CRM
 

@@ -75,10 +75,11 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
    Decision: advance Acme AI Ltd (org_…) from Partner meeting to Due diligence; status in_deal
    Reasons: <exactly as given>
    Decided by: Clara Oyelaran, Tomas Brandt, on 2026-10-30
-   Sources: src_… Partner meeting (meeting), src_… Clara's note (private)
+   Sources: [Partner meeting, 21 Oct 2026](…), [Clara's note, 22 Oct 2026](…) (private)
    Scope: firm
    Tick (you said done): Partner meeting held
-   Suggested tick: Key risks listed, from src_… "we listed the three big risks: …" - tick it?
+   Suggested tick: Key risks listed, from [Partner meeting, 21 Oct 2026](…) "we listed the
+   three big risks: …" - tick it?
    ```
 
    If a source is private, say colleagues will see the decision but not that source. Use
@@ -94,7 +95,7 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
    checked: two strong, one lukewarm") is recorded as its own cited note source. People can also
    tick items, with a note, on the company page in Alludium Brain or its card; the brief shows who
    ticked each one and their note.
-7. Reply in two or three lines: the decision and the recording source ID, the stage it moved
+7. Reply in two or three lines (no source ID): the decision, the stage it moved
    from and to and the status now, the items ticked, and any warnings from the result in
    plain words. If a cited private source was the user's own, offer to share it with `share`
    so colleagues can see why.

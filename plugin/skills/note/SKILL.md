@@ -83,11 +83,11 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    say so in a few words. Say what happened on each list in one line ("Added Acme to Climate
    sourcing"). If it returned a note that was already stored (the same
    text from the same author), say it was already saved; it was not stored twice.
-5. Reply in one or two lines: what it was linked to, the source ID, and the scope. If it is
-   private, offer to share it in the same reply, for example: "Saved to Acme AI Ltd
-   (src_…), private to you. Share it with the firm?"
+5. Reply in one or two lines: what it was linked to and the scope, with no source ID (a link
+   to the note only if the user asks for one). If it is private, offer to share it in the same
+   reply, for example: "Saved to Acme AI Ltd, private to you. Share it with the firm?"
 6. If the user says yes, call `share` with the source ID and `scope: "firm"`, and reply in one
-   line: "Shared with the firm (src_…)." For some people or a group, pass `scope: "people"` with
+   line: "Shared with the firm." For some people or a group, pass `scope: "people"` with
    `people`, or `scope: "group"` with `group`, and say who now sees it as `share` words it ("you
    and Priya Raman"). Do not capture it a second time. To make a note private again, call `share`
    with `scope: "private"`. Only the note's author can change its scope; if `share` says so, tell
@@ -117,8 +117,9 @@ from what they said, never from your own guess:
   "waiting for the note to be shared"). So when the note is private, offer to share it in step 5
   and say what the firm gains, for example: "Saved, private to you: the brain now reads 'FC' as
   Ferncastle in your own notes. Share it so it does for the whole firm?"
-- Tell the user what changed in a line per lesson, from the result's text ("Lesson les_…:
-  "Yusuf", alongside Ferncastle, is Yusuf Adeyemi; linked src_…"). If the tool refuses one, say
+- Tell the user what changed in a line per lesson, from the result's text, linking a source it
+  names by its link, never its ID: ""Yusuf", alongside Ferncastle, is Yusuf Adeyemi; linked in
+  [Call with Ferncastle, 21 Oct 2026](…)". If the tool refuses one, say
   why in a few words and ask what they meant.
 - A corrected **figure** is a `fact` with the user's words saying it corrects (step 3), not a
   lesson.
