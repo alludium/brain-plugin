@@ -64,6 +64,8 @@ about. Use the VC Brain connector's `search` and `capture` tools.
    to add, `["-sector:Fintech"]` to take one away. Use only labels in the list; if the user's
    word is not there, pass it with its vocabulary (`sector:Quantum`) and tell them it was
    suggested to the firm, not added. Never tag people. A private note's tags are private too.
+   **Lessons.** When the user tells the brain to remember how to read something, or corrects how
+   it linked or filed something, add `lessons` (see "Teaching the brain" below).
 4. Check the result. If it created an entity you expected to be linked, tell the user that a
    new entity was created and name it. If it reports a tag as suggested, or warns about one,
    say so in a few words. If it returned a note that was already stored (the same
@@ -75,6 +77,36 @@ about. Use the VC Brain connector's `search` and `capture` tools.
    line: "Shared with the firm (src_…)." Do not capture it a second time as a firm note. To make
    a note private again, call `share` with `scope: "private"`. Only the note's author can
    change its scope; if `share` says so, tell the user.
+
+## Teaching the brain
+
+Some notes teach the brain how to read the firm's material, so the same mistake is not made
+again. Keep the user's words as the note's `text` and add `lessons` to the same `capture`, each
+from what they said, never from your own guess:
+
+| The user says | Lesson |
+|---|---|
+| "FC is what we call Ferncastle", "remember Acme AI also trades as Halcyon" | `{"kind": "alias", "entity_id": "org_…", "name": "FC"}` |
+| "Yusuf is Yusuf Adeyemi" (a first name) | `alias` with `context_entity_id`: the company it is used with, e.g. Ferncastle's `org_…`. Ask which company if it is unclear. The tool refuses a one-word person name without it |
+| "Acme Robotics isn't Acme AI" | `{"kind": "not_alias", "entity_id": "<Acme AI's id>", "name": "Acme Robotics"}` |
+| "I met Yusuf on that call, it's in my notes", "that meeting was with Priya Raman" | `{"kind": "link", "entity_id": "per_…", "source_id": "src_…", "name": "Yusuf"}`: the source to fix, and the name as the source writes it if you can see it |
+| "that email isn't about Acme" | `{"kind": "unlink", "entity_id": "org_…", "source_id": "src_…"}` |
+| "in LP updates, 'committed capital' means their commitment to our fund" | `{"kind": "field", "entity_type": "organization", "name": "committed capital", "key": "lp_commitment"}`: the key must be a fact key or one of the firm's custom fields; if it is neither, offer to add the field with `onboard` first |
+
+- Resolve every entity and source by `id` first, with `search` or the brief you are working
+  from. Never teach about an entity you have not resolved.
+- A link fix also teaches the general rule: the result lists a second lesson "learned from your
+  fix" (the name, alongside the source's company). Say both in one line each.
+- **Scope.** A lesson is seen as its note is. In a private note it fixes only the user's own
+  sources, and a fix to a firm source or a field waits until the note is shared (the result says
+  "waiting for the note to be shared"). So when the note is private, offer to share it in step 5
+  and say what the firm gains, for example: "Saved, private to you: the brain now reads 'FC' as
+  Ferncastle in your own notes. Share it so it does for the whole firm?"
+- Tell the user what changed in a line per lesson, from the result's text ("Lesson les_…:
+  "Yusuf", alongside Ferncastle, is Yusuf Adeyemi; linked src_…"). If the tool refuses one, say
+  why in a few words and ask what they meant.
+- A corrected **figure** is a `fact` with the user's words saying it corrects (step 3), not a
+  lesson.
 
 ## A draft Claude wrote
 

@@ -22,6 +22,11 @@ then label it as not from the brain.
 - **Offer to file what the user adds, once.** If the user adds something the brain lacks (a
   view, a figure, news from a call), offer once in one line ("Note this in VC Brain, private to
   you?") and file it with `note` only after a yes. Never offer to file what the brief returned.
+- **Offer to fix what the user says is wrong, once.** If the user says the brief is wrong about
+  who met whom, which company a source is about, or what a name means ("I met Yusuf last week,
+  it's in my notes", "that email isn't about Acme", "FC is Ferncastle"), offer once to fix it and
+  teach the brain, and do it with the `note` skill's "Teaching the brain" after a yes, naming the
+  source by its id from this brief. A wrong figure is a correction note with the figure as a fact.
 - **Backfill only when asked.** When a company's brief says `coverage` "crm_only", offer
   to fill it in (below) and wait for a yes. Never backfill without one, and never for a list.
 
