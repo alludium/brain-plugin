@@ -27,8 +27,10 @@ starts from the stored configuration and proposes changes to it.
 - `proposals: [{"id": "cfp_…", "decision": "accept"}]` applies a proposal; `"dismiss"` drops it.
   To accept with changes, pass the edited section in the same call as the acceptance: the
   edited section wins.
-- `funds` is the firm's funds (name, vintage, size, currency, strategy); it replaces the list,
-  and each fund becomes a Fund in the brain.
+- `funds` is the firm's funds (name, vintage, size, `currency`, `cheque`, strategy); it replaces
+  the list, and each fund becomes a Fund in the brain. Always give each fund's currency (an ISO
+  code such as GBP); nothing defaults to dollars. `cheque` is the fund's own first cheque,
+  `{"min": 500000, "max": 1000000}`, in the fund's currency.
 - Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`, `templates`, `routines`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
@@ -36,7 +38,9 @@ starts from the stored configuration and proposes changes to it.
   `thesis` is its older name and still works, and reads return both). It is an object:
   `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
-  themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`) and
+  themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`, only when
+  every fund's cheque is the same range in the same currency; when funds differ, give each fund
+  its own `cheque` instead and leave the firm's out) and
   `criteria` (each `{"text": "...", "weight": "must" | "nice"}`, or without a weight). Leave out
   what the partner did not give. Put criteria inside `fit`; the separate `criteria` argument
   is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with
@@ -166,12 +170,15 @@ anything yet.
 
 In this order, each as a few lines with links and short quotes, then one question:
 
-1. **Thesis**: statement, stages, in and out of scope, regions, cheque. Take the scope from
+1. **Thesis**: statement, stages, in and out of scope, regions, cheque (the firm's, only if it is
+   the same for every fund). Take the scope from
    what the firm says it invests in and does not, item by item as it lists them; never from
    team members' focus areas or the portfolio's sectors (those are evidence, not the thesis).
    Regions as the firm lists them ("UK, DACH, the Nordics"), not a summary ("Europe"). Then ask
    for criteria that are not public ("a minimum ARR at Series A? the buyer you look for?").
-2. **Funds**: name, vintage, size, currency.
+2. **Funds**: name, vintage, size, currency, and each fund's own cheque range when they differ
+   ("£500k–1m or €500k–1m, depending on the fund" is a cheque on each fund, in its currency;
+   never ask the partner to pick one currency for the firm).
 3. **Team**: names, titles, focus areas. Then the gap: their emails.
 4. **Portfolio**: the companies, current and exited. "Are these yours, and are any missing?"
 5. **Tags**: a sector and theme list from the portfolio and focus pages, short.

@@ -11,8 +11,10 @@
 - `proposals: [{"id": "cfp_…", "decision": "accept"}]` applies a proposal; `"dismiss"` drops it.
   To accept with changes, pass the edited section in the same call as the acceptance: the
   edited section wins.
-- `funds` is the firm's funds (name, vintage, size, currency, strategy); it replaces the list,
-  and each fund becomes a Fund in the brain.
+- `funds` is the firm's funds (name, vintage, size, `currency`, `cheque`, strategy); it replaces
+  the list, and each fund becomes a Fund in the brain. Always give each fund's currency (an ISO
+  code such as GBP); nothing defaults to dollars. `cheque` is the fund's own first cheque,
+  `{"min": 500000, "max": 1000000}`, in the fund's currency.
 - Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
@@ -20,7 +22,9 @@
   `thesis` is its older name and still works, and reads return both). It is an object:
   `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
-  themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`) and
+  themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`, only when
+  every fund's cheque is the same range in the same currency; when funds differ, give each fund
+  its own `cheque` instead and leave the firm's out) and
   `criteria` (each `{"text": "...", "weight": "must" | "nice"}`, or without a weight). Leave out
   what the partner did not give. Put criteria inside `fit`; the separate `criteria` argument
   is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with

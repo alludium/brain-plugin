@@ -35,8 +35,8 @@ different firm with a similar name is not evidence: check the domain, the city a
 
 | Section | Look for |
 |---|---|
-| Thesis | the firm's own one-sentence statement; funding stages; sectors and themes in and out of scope; regions; first cheque range and currency |
-| Funds | names, vintages, sizes and currency, strategy line |
+| Thesis | the firm's own one-sentence statement; funding stages; sectors and themes in and out of scope; regions; first cheque range and currency, when one range covers every fund |
+| Funds | names, vintages, sizes and currency, each fund's own first cheque when ranges or currencies differ, strategy line |
 | Team | names, titles, focus areas from bios. No emails unless the firm publishes them |
 | Portfolio | company names and domains; current or exited, as the page says |
 | Process | rarely public: only what a founders page says ("a decision within four weeks") |

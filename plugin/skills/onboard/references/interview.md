@@ -22,7 +22,9 @@ what is configured. The rules in SKILL.md apply.
    only for what no document gave (usually members' emails and focus areas).
 2. **Nothing stored yet:** interview, a few questions at a time, and wait for the answers:
    1. **Thesis**: what the firm invests in, in one sentence; the funding stages it invests at;
-      sectors and themes in and out of scope; regions; and the cheque range.
+      sectors and themes in and out of scope; regions; and the cheque range. If the range or its
+      currency differs by fund, take it with the funds (each fund's own `cheque`, in its currency)
+      rather than asking for one currency for the firm.
    2. **Criteria**: anything else they screen for, such as metric thresholds (for example
       minimum ARR at Series A) or the buyer they look for, one item each, and which are musts
       and which are nice-to-haves. Funds with their own thesis are not set up here yet: if the
