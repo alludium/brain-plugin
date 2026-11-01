@@ -122,6 +122,16 @@ reviews it, that they will see it in VC Brain's Skills page, and that the digest
    `{"op": "reject", "name": …, "note": "the reason"}` (a note is required; the author sees it).
    The viewer's Skills page does the same with a side-by-side diff.
 
+## A copy of a VC Brain skill
+
+A firm skill saved with `derived_from: "vc-brain:<skill>"` is a copy of one of VC Brain's own
+skills. The brain keeps the version it was copied from. When that skill changes, `configure` and
+`whats_changed` say so ("The VC Brain skill `brief` has changed since `our-brief` was copied from
+it"), and `configure`'s listing has the changed lines (`base.diff`). When the user asks to bring a
+copy up to date, show those changes, propose how to fold them into the firm's version (keeping
+what the firm changed), and on a yes save it with the same `derived_from`: that records the current
+VC Brain version as its new base. A firm skill is proposed for review as usual.
+
 ## Restore, retire, list
 
 - "Roll back lp-update": `{"op": "restore", "name": …, "version": N}`, an earlier approved
