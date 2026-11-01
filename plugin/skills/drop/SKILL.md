@@ -64,7 +64,9 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    stay private to the user, and every file is private until the brain has read what it is; tell
    them, and that `share` shows one to the firm. Each upload in the
    result has an `upload_url`, `upload_headers` and a `job_id`; if it says no upload is needed,
-   the brain already has that file.
+   the brain already has that file. If your host exposes only text, read the JSON transfer plan
+   in that text: it contains the same exact URLs, headers and job IDs as the structured result.
+   Never reconstruct a signed URL or replace it with the field name `upload_url`.
 4. Check that this machine can reach the upload host, using any one `upload_url`:
 
    ```bash
