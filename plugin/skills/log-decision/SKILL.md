@@ -1,6 +1,6 @@
 ---
 name: log-decision
-description: Record a firm decision on a company or deal in Alludium Brain - move it to a stage of the firm's deal process, pass, lose, put on hold, or invest - with the reasons in the deciders' words, who decided, the date and the sources it rests on; and tick checklist items the user confirms are done. Use when the user says "log a pass on Acme", "we're passing on Kestrel because …", "record that we're moving Acme to IC", "Acme is in due diligence", "we lost Wren to another fund", "put Ferrolith on hold", "we decided to invest in Ferrolith" or "tick customer references for Acme". Also use it to offer, never silently, when the user mentions a decision without asking to record it. Not for an opinion or a take that is not a decision (use note).
+description: Record a firm decision on a company or deal in Alludium Brain - move it to a stage of the firm's deal process, pass, lose, put on hold, or invest - with the reasons in the deciders' words, who decided, the date and the sources it rests on; and tick checklist items the user confirms are done. Use when the user says "log a pass on Acme", "we're passing on Kestrel because …", "record that we're moving Acme to IC", "Acme is in due diligence", "we lost Wren to another fund", "put Ferrolith on hold", "we decided to invest in Ferrolith" or "tick customer references for Acme"; and a decision that moves nothing, about any company, person or fund ("we're dropping Kestrel as our fund admin", "Maya joins our advisory board"). Also use it to offer, never silently, when the user mentions a decision without asking to record it. Not for an opinion or a take that is not a decision (use note).
 ---
 
 # Log a decision
@@ -9,7 +9,8 @@ Record one decision, or checklist ticks, with the Alludium Brain connector's `lo
 after the user has confirmed it. A decision moves the company or deal to a stage of the firm's
 deal process, dated and cited, and keeps its history. On an organization it also sets the
 status the stage implies (screening: `prospect`; evaluation through closing: `in_deal`;
-portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
+portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`). A `decide` records a
+decision about anything, with its reasons, deciders, date and sources, and moves nothing.
 
 ## Rules
 
@@ -40,12 +41,18 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
      process). "Pass", "decline", "not for us" → `outcome: "pass"`. "We lost it", "they went
      with another fund" → `outcome: "lose"`. "Park it", "on hold", "come back next year" →
      `outcome: "hold"`. "Invest", "we're in", "signed" → `outcome: "invest"` (the first
-     portfolio stage), or `stage` if the user named one, for example "Term sheet". If it is
+     portfolio stage; `win` means the same and is stored as win, shown as invest), or `stage`
+     if the user named one, for example "Term sheet". If it is
      unclear, for example "send a term sheet" when the firm's process has no term sheet stage,
      ask which stage. A company back from Passed, Lost or On hold ("they're raising again,
      let's take another look", "back on") is `outcome: "advance"`: without a stage it goes to
      the stage after the last one it was at (the first stage if it never had one), and the
-     history keeps the way out. Name the stage if the user said where it goes back to. Name the
+     history keeps the way out. Name the stage if the user said where it goes back to. A
+     decision that does not move a company through the process (a choice, a policy, a decision
+     about a person, fund or service provider: "we chose Carta for the cap tables", "Maya joins
+     our advisory board") → `outcome: "decide"`, with no stage or checklist. If it reverses an
+     earlier decision, pass that decision's ID (`dec_…`, from the brief's decisions) as
+     `supersedes`. Name the
      stage whenever the company is at the last stage (a follow-on is not an advance) or the
      decision is dated before its latest move: `log_decision` refuses an outcome alone there,
      so the status never contradicts the stage. A move dated before the latest one goes into the history without
@@ -57,7 +64,8 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
      made earlier and recorded now keeps the day it happened: the history is ordered by it. A
      decision not yet taken is not recorded: future dates are refused.
 2. **Find the entity**: `search` with the name (`limit: 5`).
-   - One organization matches: use it. Use a deal only if the user named that deal.
+   - One organization matches: use it. Use a deal only if the user named that deal. A `decide`
+     may be about any entity: a person, fund or deal as well.
    - Several match: pick the one this conversation is about, else the one in active work
      (status `prospect`, `in_deal` or `portfolio`), and name the other in the confirmation.
      If it is still unclear, ask.
@@ -73,6 +81,7 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
 
    ```text
    Decision: advance Acme AI Ltd (org_…) from Partner meeting to Due diligence; status in_deal
+   (or, for a decide: "Decision about Carta (org_…), moves nothing; supersedes dec_…")
    Reasons: <exactly as given>
    Decided by: Clara Oyelaran, Tomas Brandt, on 2026-10-30
    Sources: [Partner meeting, 21 Oct 2026](…), [Clara's note, 22 Oct 2026](…) (private)
@@ -87,7 +96,8 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
    stage or status. Wait for a clear yes, and apply any corrections before writing. Leave out
    a suggested tick the user does not say yes to.
 6. Call `log_decision` with `entity` (the ID), `stage` and/or `outcome`, `reasons`,
-   `deciders`, `decided_on`, `source_ids`, `scope`, and `checked` for the items the user
+   `deciders`, `decided_on`, `source_ids`, `scope`, `supersedes` when it replaces an earlier
+   decision, and `checked` for the items the user
    confirmed: `{"item": "<as the checklist words it>", "source_id": "src_…", "quote": "<the
    source's exact words>"}`, with the source and quote only when a source shows it. To tick
    items without a decision, pass only `entity` and `checked`. `done: false` unticks an item. Ticks take the call's `scope`: with a private decision

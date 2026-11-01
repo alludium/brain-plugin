@@ -96,6 +96,15 @@ then label it as not from the brain.
      is seen only by whoever asked and whoever was asked: keep it out of anything meant for others.
    - **Across companies** ("runway of every portfolio company"): one `search` with `key` and
      `status` (for example `key: runway_months`, `status: portfolio`) and an empty `query`.
+   - **Figures for a report or a period** ("Q3 numbers for Fund II", "how did the portfolio do
+     this quarter?", "who hasn't sent their Q3 numbers?"): one `search` with `view: "portfolio"`,
+     `as_of` (the period's end), `compare_to` (the previous period's end), `keys` and, for a
+     fund, `fund`. The server computes every figure: each company's value then and before, the
+     change, its sources and flags (`missing`, `stale`, `conflict`, `said_not_shown`,
+     `projected_only`), totals per currency, the fund's own figures from its statements, and
+     who has not reported. Quote figures exactly as given, write "not reported" for missing
+     ones, show both sides of a conflict, and never add, convert or estimate a figure yourself.
+     For anything others will read, pass `audience: "firm"` so only firm-shared sources count.
    - **The pipeline** ("what's in diligence?", "show me the pipeline"): one `search` with
      `view: "pipeline"` and an empty `query`, adding `stage` (a stage's name) for one stage. It
      lists each company at the stage with since when and its checklist progress, and hosts that
