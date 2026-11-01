@@ -1,45 +1,44 @@
 # Interview and the firm's own documents
 
 Use this when the host has no web search or research found little, for the firm's own documents
-(an IC charter, LP deck, LPA, PPM), for what research cannot answer, and on a re-run to change
-what is configured. The rules in SKILL.md apply.
+(a process document, a strategy, fund documents), for what research cannot answer, and on a
+re-run to change what is configured. The rules in SKILL.md apply.
 
-1. Call `configure` with no arguments. If the partner has documents about the firm (an
-   investment process or IC charter, a thesis or strategy, an LPA, PPM or LP deck), offer to
-   start from them: run the `drop` skill on them, passing `doc_type` for each one the partner
-   named (`investment_process`, `thesis`, `firm_policy`, `lpa`, `ppm`, `fund_deck`). Without a
-   scope, an LPA stays private to the partner; that is fine, its proposals are theirs to accept.
+1. Call `configure` with no arguments. If the partner has documents about the firm (how it runs
+   its process, its strategy or what it looks for, its fund documents), offer to start from
+   them: run the `drop` skill on them, passing `doc_type` for each one the partner named (for a
+   venture firm `investment_process`, `thesis`, `firm_policy`, `lpa`, `ppm`, `fund_deck`; the
+   `drop` skill lists them). Without a scope, a document stays private to the partner; that is
+   fine, its proposals are theirs to accept.
    Wait for the jobs (`job_status`), then call `configure` again and go to step 1a. Do not read
    the documents yourself.
 
    1a. **Proposals.** Walk the partner through each proposal, one section at a time: the
-   proposed stages with their checklists, the thesis (only what it `adds`), the funds, each
+   proposed stages with their checklists, the fit profile (only what it `adds`), the funds, each
    beside what is configured now and with a short quote showing where it came from. Ask "Accept, change or skip?" For
    accept, call `configure` with that decision; for a change, the edited section and the
    acceptance together; for skip, `"dismiss"`. A proposal from a document only the partner can
-   see (a private LPA) becomes firm-wide configuration once accepted, while the document stays
+   see (a private fund document) becomes firm-wide configuration once accepted, while the document stays
    private: say so and ask before accepting; `configure` repeats it as a warning. Then interview
    only for what no document gave (usually members' emails and focus areas).
 2. **Nothing stored yet:** interview, a few questions at a time, and wait for the answers:
-   1. **Thesis**: what the firm invests in, in one sentence; the funding stages it invests at;
-      sectors and themes in and out of scope; regions; and the cheque range. If the range or its
-      currency differs by fund, take it with the funds (each fund's own `cheque`, in its currency)
-      rather than asking for one currency for the firm.
-   2. **Criteria**: anything else they screen for, such as metric thresholds (for example
-      minimum ARR at Series A) or the buyer they look for, one item each, and which are musts
-      and which are nice-to-haves. Funds with their own thesis are not set up here yet: if the
-      partner mentions one, say the thesis is firm-wide for now.
-   3. **Deal process.** Offer a template and show its stages in one line each: Seed to Series A
-      (the default: Sourced, First call, Partner meeting, Due diligence, Investment committee,
-      Term sheet, Legal and closing, Portfolio), Multi-stage, Growth, or Blank (they list their
-      own). `configure` with no arguments lists each template's stages, checklists and
-      documents while the firm has no stages. Then ask what to rename, add, remove or
-      reorder in the firm's own words, and whether each stage's checklist and documents fit.
-      Keep each stage's kind; ask when a renamed or new stage's kind is unclear. A firm that
-      names no process gets the default template.
-   4. **Team**: each person's name, email, role (for example General Partner, Principal,
-      Analyst) and focus areas.
-   5. **Custom fields** (optional): anything they track per company, person or deal beyond the
+   1. **The Setup sections**, in the onboarding report's order (`configure` with `onboarding:
+      true`), each with its own question. By what a section fills:
+      - `fit`: what the firm looks for, in one sentence, and each part the question names; then
+        **criteria**: anything else they screen for, one item each, and which are musts and
+        which are nice-to-haves.
+      - `process`: offer a template and show its stages in one line each; `configure` with no
+        arguments lists each template's stages, checklists and documents while the firm has no
+        stages. Then ask what to rename, add, remove or reorder in the firm's own words, and
+        whether each stage's checklist and documents fit. Keep each stage's kind; ask when a
+        renamed or new stage's kind is unclear. A firm that names no process gets the default
+        template.
+      - `status:…`: the organisations, each captured with one of the section's statuses once
+        the partner confirms it (`references/research.md`, "Storing what the partner confirmed").
+      - anything else: its question, saved as "How `configure` works" in SKILL.md describes
+        that section.
+   2. **Team**: each person's name, email, role and focus areas.
+   3. **Custom fields** (optional): anything they track per company, person or deal beyond the
       basics, for example lead partner or deal source. Each field is `entity_type`
       (`organization`, `person`, `fund` or `deal`), `key` (lowercase snake_case), `label`, and
       `kind` (`text`, `number`, `date`, `choice` with its `choices`, or `list`). For a figure,
@@ -56,7 +55,8 @@ what is configured. The rules in SKILL.md apply.
       figures already stored under its key or a synonym are filed under it when it is added
       (`configure` says how many). Suggest a custom field for a figure the firm tracks that has
       no standard key.
-   6. **IC memo** (optional): the headings the firm's investment memos use, in order, with a
+   4. **Memo headings** (optional, when the firm drafts memos with a firm skill such as
+      `ic-prep`): the headings the firm's memos use, in order, with a
       line on what goes under each if they want, and any house style (for example "British
       spelling, figures in $m, four pages at most"). If they paste or attach a memo template,
       take the headings from it in its order and confirm them; leave out its boilerplate. Skip

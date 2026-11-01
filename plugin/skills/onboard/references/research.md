@@ -10,20 +10,20 @@ email, CRM records, files or meeting notes: those come later, and only with thei
   and fetch one page at a time rather than crawling a site.
 - **Connected data tools** (only those the user already has; never ask them to sign up for one):
   a data provider's connector such as Harmonic, a Crunchbase-style connector, or the CRM's
-  company enrichment (Affinity's company lookup). Look up the firm itself and the portfolio
-  companies you found. Match tools by the name after the host's prefix
+  company enrichment (Affinity's company lookup). Look up the firm itself and the organisations
+  its pages name (a portfolio, customers). Match tools by the name after the host's prefix
   (`mcp__<connector>__harmonic_lookup_company` is Harmonic's `lookup_company`).
 
 Budget: about 15 page fetches and 10 connector lookups. Stop when the sections below are covered.
 
 ## Order of trust
 
-1. The firm's own site: home, about, team and bios, focus or thesis, portfolio, news, any "for
-   founders" page (stages, cheque, regions, how they decide).
-2. The firm's own announcements: fund close press releases, thesis posts.
-3. Public filings and registers: SEC Form D, Companies House, the FCA register, a
-   Handelsregister. Authoritative for fund names, often for sizes.
-4. Press and trade coverage: fund closes, new partners, rounds they led.
+1. The firm's own site: home, about, team and bios, news, and the pages each Setup section's
+   **Look for** names.
+2. The firm's own announcements and posts.
+3. Public filings and registers (Companies House, a Handelsregister, a regulator's register),
+   where a Setup section says they are authoritative.
+4. Press and trade coverage: new people, announcements about the firm.
 5. Public profile pages (Crunchbase, PitchBook, Dealroom, LinkedIn): only what shows without
    signing in.
 6. The user's data connectors.
@@ -33,14 +33,13 @@ different firm with a similar name is not evidence: check the domain, the city a
 
 ## What to look for
 
+Each Setup section in the onboarding report says what to look for and where (its **Look for**
+line), in the words of the firm's pack. Besides those:
+
 | Section | Look for |
 |---|---|
-| Thesis | the firm's own one-sentence statement; funding stages; sectors and themes in and out of scope; regions; first cheque range and currency, when one range covers every fund |
-| Funds | names, vintages, sizes and currency, each fund's own first cheque when ranges or currencies differ, strategy line |
 | Team | names, titles, focus areas from bios. No emails unless the firm publishes them |
-| Portfolio | company names and domains; current or exited, as the page says |
-| Process | rarely public: only what a founders page says ("a decision within four weeks") |
-| Tags | sectors and themes from the portfolio filters or the focus page |
+| Tags | themes and sectors from the firm's focus pages and the filters on its lists of organisations |
 
 ## Each item needs
 
@@ -66,12 +65,13 @@ section it supports, and before the `configure` call that cites it:
   (prefixed by its type, `company:` or `person:`, as `import-from-crm` does), `url`: the
   record's link if it gave one, `scope: "firm"`, `text`: the fields you used as `Field: value`
   lines, word for word.
-- `entities`: what the page names: the firm's funds (`type: "fund"`), the team members (people,
-  with `external_refs` of their emails only once confirmed), the portfolio companies
-  (organizations with their domain in `external_refs`, and `status: "portfolio"` or `"exited"`
-  only for the companies the partner confirmed). Never the firm itself as an organization.
-- No `facts`: the configuration holds the thesis and funds; the server extracts figures from
-  the text where it needs them.
+- `entities`: what the page names: the team members (people, with `external_refs` of their
+  emails only once confirmed), and the organisations it lists (with their domain in
+  `external_refs`, and a `status` from a `status:…` Setup section only for those the partner
+  confirmed). A section that fills `funds` makes funds Fund entities through `configure`; do not
+  capture them as organisations. Never the firm itself as an organization.
+- No `facts`: the configuration holds what the Setup sections fill; the server extracts figures
+  from the text where it needs them.
 
 The same URL captured again later with changed text is stored as a new version, so a re-run
 refreshes it. Cite the `source_id` each capture returns, with the exact words from its `text`.

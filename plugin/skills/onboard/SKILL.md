@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Onboard a firm or a person to Alludium Brain, research first. For the first person at a firm, researches the firm's public footprint (website, team, thesis, funds, portfolio, filings, press) and the user's connected data tools, proposes the configuration with every item cited, and asks only to confirm, correct and fill gaps; then records the systems the firm uses and sets up the CRM import, nightly run and team. For later users, a short personal setup (profile, connections, nightly run) and a tour of what the brain already knows. Also changes the firm's configuration - thesis and criteria, deal process (stages, checklists, documents), funds, custom fields, tag vocabularies, team members and focus areas, IC memo headings and house style - by interview or from the firm's own documents (IC charter, strategy, LPA, PPM, LP deck). Use when someone says "onboard us", "onboard me", "set up Alludium Brain for our firm", "I'm new to Alludium Brain", "here are our fund documents", "update our thesis", "add Priya to the team", "Tomas now covers security", "change our deal stages", "add a checklist to due diligence", "add a sector tag for climate", "review suggested tags" or "use our memo template". Not for notes about companies (use note), deal decisions (use log-decision) or one person's own preferences, such as how they like their briefs (use profile).
+description: Onboard a firm or a person to Alludium Brain, research first. For the first person at a firm, asks what the firm's packs need (set by Alludium when it created the organisation), researches the firm's public footprint (website, team, filings, press) and the user's connected data tools, proposes each section with every item cited, and asks only to confirm, correct and fill gaps; then records the systems the firm uses and sets up the CRM import, nightly run and team. For later users, a short personal setup (profile, connections, nightly run) and a tour of what the brain already knows. Also changes the firm's configuration - its fit profile (a venture firm's thesis, a sales team's ideal customer profile) and criteria, deal process (stages, checklists, documents), funds, custom fields, tag vocabularies, team members and focus areas, memo headings and house style, and which mail the nightly run files - by interview or from the firm's own documents. Use when someone says "onboard us", "onboard me", "set up Alludium Brain for our firm", "I'm new to Alludium Brain", "here are our fund documents", "update our thesis", "update our ICP", "add Priya to the team", "Tomas now covers security", "change our deal stages", "add a checklist to due diligence", "add a sector tag for climate", "review suggested tags", "use our memo template" or "stop filing recruiter mail". Not for notes about companies (use note), deal decisions (use log-decision) or one person's own preferences, such as how they like their briefs (use profile).
 ---
 
 # Onboard
@@ -10,8 +10,10 @@ Everything goes through the Alludium Brain connector's `configure` and `capture`
 `configure` works (each section, `systems`, `connections`, `cites`, tags) is in
 `references/configure.md`; read it before the first write.
 
-Interview a partner about how the firm invests and who is on the team, confirm what you heard,
-then save it with the Alludium Brain connector's `configure` tool. It is safe to run again: it always
+Interview a partner or lead about what the firm does and who is on the team, confirm what you
+heard, then save it with the Alludium Brain connector's `configure` tool. What the firm's setup
+asks comes from the server: the firm's packs, set by Alludium when it created the organisation,
+each name the sections they need, as questions in their own words. It is safe to run again: it always
 starts from the stored configuration and proposes changes to it.
 
 ## How `configure` works
@@ -34,8 +36,8 @@ starts from the stored configuration and proposes changes to it.
 - Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`, `templates`, `routines`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
-- The thesis is the `fit` section (the firm's fit profile, which VC Brain shows as its thesis;
-  `thesis` is its older name and still works, and reads return both). It is an object:
+- The fit profile is the `fit` section (shown to a venture firm as its thesis; `thesis` is its
+  older name and still works, and reads return both). It is an object:
   `statement` (one sentence), `stages` (the funding stages the firm invests
   at, such as Seed and Series A, not its deal stages), `in_scope` and `out_of_scope` (sectors and
   themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`, only when
@@ -122,6 +124,13 @@ starts from the stored configuration and proposes changes to it.
   to whoever filed it. Anything Alludium Brain finds sensitive stays private under any rule, and each
   person can choose their own rule when they set up the nightly task. Change it only when a
   partner asks.
+- `mail_rules` changes which mail the nightly run files. Every read lists the firm's rule under
+  **Mail the nightly run files**: its packs' kinds of mail to keep and to skip, each with a key
+  and a line. `{"add": [{"key": "board_packs", "description": "board packs from portfolio
+  companies", "keep": true}], "off": ["recruiting"]}` adds a kind and switches a default off; it
+  replaces the firm's changes, and `{}` goes back to the defaults. Personal mail is never filed
+  and sensitive mail stays private whatever the rules. Firm admins only, once the firm has one.
+  Change it only when a partner asks.
 - The configuration applies to the whole firm, so everyone at the firm sees it.
 
 ## Rules
@@ -157,8 +166,15 @@ Call `configure` with `onboarding: true`, then go by `phase`:
 | Phase | Flow |
 |---|---|
 | `new` | The firm setup (section 2). Suggest a partner does it; anyone may |
-| `setup_incomplete` | Say what is missing in one line ("The thesis and team are set; there's no deal process and nothing about funds") and ask: "Finish the firm's setup now, or just set yourself up?" Then section 2 for the gaps only, or section 3 |
+| `setup_incomplete` | Say what is missing in one line, from the report's **Setup** and gaps ("The thesis and team are set; there's no deal process yet") and ask: "Finish the firm's setup now, or just set yourself up?" Then section 2 for the gaps only, or section 3 |
 | `in_use` | The personal setup (section 3). Change firm configuration only if they ask (`references/interview.md`, "Already configured") |
+
+While setup is unfinished, the report's **Setup** block names the firm's packs and lists their
+sections in order: each section's key, what it fills (a `configure` section, or organisations
+with one of some statuses), whether it is done, its question and where to look for it. The packs
+were set by Alludium when it created the organisation: never ask what kind of firm it is or offer
+to change them. If they look wrong, say so once and suggest a firm admin asks Alludium
+(hello@alludium.ai).
 
 A request to change one thing ("add Priya, her email is priya@northwind.vc", "change our deal
 stages") skips onboarding: read `configure` and follow `references/interview.md`.
@@ -176,11 +192,10 @@ say yes. If the host has no web search, say so and use `references/interview.md`
 
 Follow `references/research.md`. Before proposing anything:
 
-- open every page of the firm's own site that states its focus, thesis, or what it looks for
-  in founders (stages, cheque, regions), as well as the team and portfolio pages: search the
-  site for them rather than stopping at the home page;
+- open every page of the firm's own site that a Setup section's **Look for** points to, as well
+  as its team page: search the site for them rather than stopping at the home page;
 - look the firm up in **each** data connector you have (Harmonic, a Crunchbase-style
-  connector, CRM enrichment), and its portfolio companies too;
+  connector, CRM enrichment), and the organisations its pages name too;
 - then announcements, filings, press and public profile pages, to fill and cross-check.
 
 Budget about 15 fetches. Collect each item with its exact quote, URL and date. Do not store
@@ -188,42 +203,43 @@ anything yet.
 
 ### 2c. Propose, one section at a time
 
-In this order, each as a few lines with links and short quotes, then one question:
+Walk the report's Setup sections in their order, skipping those already done, each as a few
+lines with links and short quotes, then the section's own question for what is not public. Then
+the **Team** (names, titles, focus areas, then the gap: their emails) and **Tags** (a short theme
+list from the pages above). By what a section fills:
 
-1. **Thesis**: statement, stages, in and out of scope, regions, cheque (the firm's, only if it is
-   the same for every fund). Take the scope from
-   what the firm says it invests in and does not, item by item as it lists them; never from
-   team members' focus areas or the portfolio's sectors (those are evidence, not the thesis).
-   Regions as the firm lists them ("UK, DACH, the Nordics"), not a summary ("Europe"). Then ask
-   for criteria that are not public ("a minimum ARR at Series A? the buyer you look for?").
-2. **Funds**: name, vintage, size, currency, and each fund's own cheque range when they differ
-   ("£500k–1m or €500k–1m, depending on the fund" is a cheque on each fund, in its currency;
-   never ask the partner to pick one currency for the firm).
-3. **Team**: names, titles, focus areas. Then the gap: their emails.
-4. **Portfolio**: the companies, current and exited. "Are these yours, and are any missing?"
-5. **Tags**: a sector and theme list from the portfolio and focus pages, short.
-6. **Deal process**: rarely public. Offer the Seed to Series A template (`configure` lists the
-   templates) and ask what to rename; checklists can wait.
+- **`fit`**: the statement and each part the question names, item by item as the firm lists
+  them, in its words: regions as listed ("UK, DACH, the Nordics"), not a summary ("Europe").
+  Never from team members' focus areas or the organisations the firm works with (those are
+  evidence, not the profile). Then ask for criteria that are not public, each a must or a nice
+  only when the partner says so.
+- **`process`**: rarely public. Offer the template `configure` lists first and ask what to
+  rename; checklists can wait.
+- **`status:…`**: the organisations themselves, as the pages list them: "Are these yours, and
+  are any missing?" They are captured, not configured (2d).
+- **Anything else** (such as `funds`): what the sources say, as "How `configure` works" above
+  describes that section.
 
 For anything that disagrees between sources (a partner on a 2023 press release but not on the
-team page; two cheque ranges), show both with dates and ask. Offer documents once: "If you have
-an IC charter or LP deck, drop it and I'll take the process and funds from it" (the `drop` skill,
-then `references/interview.md` step 1a for the proposals).
+team page; two figures for one thing), show both with dates and ask. Offer documents once: "If
+you have documents on how the firm works or what it does, drop them and I'll take the setup from
+them" (the `drop` skill, then `references/interview.md` step 1a for the proposals).
 
 ### 2d. Store each confirmed section
 
 1. `capture` each page or record the section rests on, as `references/research.md` says
    (firm-scoped, `system: "web"` or the connector, the passages word for word). A data
    connector's record you relied on or showed as a match ("matching Harmonic") is captured too,
-   as `external_record` with `system` the connector and its record ID, and cited like a page. For the
-   portfolio, its confirmed companies go on the portfolio page's capture with `status:
-   "portfolio"` or `"exited"`.
+   as `external_record` with `system` the connector and its record ID, and cited like a page. For a
+   `status:…` section, its confirmed organisations go on their page's capture, each with one of
+   the section's statuses as the page says (`status:portfolio|exited`: `"portfolio"` or
+   `"exited"`).
 2. `configure` with the section and `cites`: one per item that came from a source, with the
    `source_id` the capture returned and the exact quote. Items the partner gave need no cite.
    A refused cite means the quote is not in the captured text: fix the quote, never drop the
    check.
 
-Members: pass the whole team, as `references/configure.md` says. Funds become Fund entities.
+Members: pass the whole team, as `references/configure.md` says.
 
 ### 2e. The firm's systems
 
@@ -241,13 +257,13 @@ Look at your own tools and match them (names after the host's prefix):
 
 Ask once, with what you have ticked: "Which does the firm use? Email: Google · Calendar: Google
 · CRM: Affinity · Drive: Google Drive · Meeting notes: Granola, Zoom. Right?" Save it as
-`systems`. The firm's CRM is then its record for its own side (its cheques and stakes); for a
-company's figures it stays an estimate. Then say the visibility line (Rules) and save the user's own `connections`.
+`systems`. The firm's CRM is then its record for its own side of each deal; for an
+organisation's own figures it stays an estimate. Then say the visibility line (Rules) and save the user's own `connections`.
 
 Then one question on how the firm works: "Does the firm already have its own Claude skills,
-templates for memos or LP letters, or a document on how IC works?" Skills: the `playbook` skill
-imports them. Templates and process documents: drop them, or let the `playbook` skill read past
-examples and propose the templates; otherwise note "how we run IC" as a next step.
+templates for its documents, or a document on how it runs its process?" Skills: the `playbook`
+skill imports them. Templates and process documents: drop them, or let the `playbook` skill read
+past examples and propose the templates; otherwise note it as a next step.
 
 ### 2f. Next steps
 
@@ -259,12 +275,13 @@ buys and the words to say:
    CRM is not connected here, say how to connect it; where you have a tool that suggests
    connectors, use it.
 2. **Nightly run**: "Set up the nightly Alludium Brain filing task" (the `whats-new` skill): "your
-   meetings and deal email filed every night, so colleagues see who met whom". Claude and Cowork
-   only today.
+   meetings and the email the firm keeps filed every night, so colleagues see who met whom".
+   Claude and Cowork only today.
 3. **Drives**: "Ask Alludium to connect your Google Drive" (hello@alludium.ai).
 4. **Email-in**: the firm's address from `configure`, if it has one.
-5. **How the firm works**, if not done: "Teach Alludium Brain how we run IC" or "Make our LP update a
-   skill" (the `playbook` skill): "so everyone's assistant drafts in the firm's format".
+5. **How the firm works**, if not done: "Teach Alludium Brain how we run <a recurring process the
+   firm named>" or "Make our <document> a skill" (the `playbook` skill): "so everyone's assistant
+   drafts in the firm's format".
 6. **The team**: a short message the partner can send colleagues: in Claude, install the Alludium Brain
    plugin (Customize → Plugins → Add → Add marketplace → `alludium/brain-plugin`, unless the
    firm already installed it for everyone), connect its connector on the plugin's Connectors tab
@@ -274,7 +291,8 @@ buys and the words to say:
    connected yet (the report's `team`). Alludium Brain sends no invitations itself.
 
 Reply with what was saved (the sections, in plain words; no source ID or link: the user does not
-need one for a configuration save) and the list. Then offer one thing to try: "Ask me what we know about <a portfolio company>."
+need one for a configuration save) and the list. Then offer one thing to try: "Ask me what we
+know about <an organisation the firm works with>."
 
 ## 3. The personal setup
 
@@ -291,7 +309,7 @@ Ten minutes. In order, skipping what the report already has:
 4. **Your nightly run** (`your_nightly`): offer to set it up now (the `whats-new` skill), with
    their own email scope choice.
 5. **The tour.** Call `whats_changed` with `mine: true` and `since` 30 days ago, and show:
-   - the firm in three lines: thesis, deal process, team, funds (from the report);
+   - the firm in three lines, from the report's **The firm**;
    - the firm's own skills, if it has any (the "Firm skills" in `configure`), one line each;
    - the pipeline by stage with counts and the latest names (`data.pipeline`);
    - **your deals** (`you.deals`): company, status, last met;

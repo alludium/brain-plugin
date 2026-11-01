@@ -1,6 +1,6 @@
 ---
 name: whats-new
-description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings, deal email and chosen Slack threads into the brain.
+description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings, the email the firm keeps and chosen Slack threads into the brain.
 ---
 
 # What's new
@@ -20,10 +20,10 @@ file and follow it instead of the steps below.
   `src_…` ID.
 - **Private material.** Mark changes with scope `private` as "(private to you)".
 - **Email kept private.** A change that ends "kept private (…): share?" or "private, looks like
-  deal flow: share?" is one of the user's own emails that Alludium Brain did not share. List these
-  together under **Kept private**, one line each with the reason, and ask once whether to share
-  any. Share only the ones the user names, with `share` and `scope: "firm"`; never share one
-  without being asked.
+  <a kind of mail the firm keeps, such as deal flow>: share?" is one of the user's own emails that
+  Alludium Brain did not share. List these together under **Kept private**, one line each with the
+  reason, and ask once whether to share any. Share only the ones the user names, with `share` and
+  `scope: "firm"`; never share one without being asked.
 - Do not paste the tool's change list back as it is; group and shorten it.
 
 ## Steps
@@ -107,7 +107,7 @@ file and follow it instead of the steps below.
      insight in one line, from its statement, and whether it waits for review (`candidate`). The
      `onboard` skill reviews them; never mark one from the digest.
 7. **Offer the nightly task**, once, at the end of a firm-wide digest: "Want the brain fed
-   every night? I can set up a scheduled task that files each day's meetings and deal email."
+   every night? I can set up a scheduled task that files each day's meetings and the email we keep."
    Skip the offer if a scheduled task named "Alludium Brain: file my day" already exists (check if
    you have a tool that lists scheduled tasks) or the user has declined in this conversation.
 
@@ -125,8 +125,10 @@ Do this when the user accepts the offer or asks for the nightly task.
    rule suits them or they want `private`, `pipeline` or `firm` for their own email.
 2. Check what will feed it: a notes connector (Granola, Fireflies, Otter, Fathom and so on) for
    meetings, a calendar connector (Google Calendar or Outlook) for meetings with people outside
-   the firm that have no notes, a mail connector (Gmail or Outlook) for deal email, and Slack for
-   threads in chosen channels. Say which are connected and that missing ones will be skipped.
+   the firm that have no notes, a mail connector (Gmail or Outlook) for the email the firm keeps
+   (the step 1 read lists its mail rule under **Mail the nightly run files**: say it in one
+   line), and Slack for threads in chosen channels. Say which are connected and that missing ones
+   will be skipped.
    If Slack is connected, ask which channels to file (for example `#deal-flow`, `#portfolio`;
    none by default). Say that a public channel's threads are shared with the firm once Alludium Brain
    has checked them for sensitive content, and a private channel's stay private to them. Direct
@@ -154,7 +156,7 @@ Do this when the user accepts the offer or asks for the nightly task.
    ```text
    Use the Alludium Brain plugin's whats-new skill for the nightly filing run (file-my-day).
    Window: from 00:00 yesterday, my time, until now.
-   File meetings from my notes connector, outside meetings from my calendar, deal email from my mail connector and threads from my Slack channels into Alludium Brain.
+   File meetings from my notes connector, outside meetings from my calendar, the email my firm keeps from my mail connector and threads from my Slack channels into Alludium Brain.
    Include meeting transcripts: no.
    Email scope: firm default
    Slack channels: none
@@ -166,6 +168,6 @@ Do this when the user accepts the offer or asks for the nightly task.
    the channels they chose in step 2.
 
 5. Tell the user that filing runs as them: meetings go in with the firm scope (colleagues can
-   see them), email and its deal attachments follow the email rule from step 1, and Slack threads
+   see them), email and its attachments follow the email rule from step 1, and Slack threads
    follow their channel. Re-filing
    is safe: the brain skips records it already has.

@@ -1,16 +1,17 @@
 # Nightly filing run (file my day)
 
 A scheduled task runs this with nobody watching. Copy the day's meetings, outside calendar
-events, deal email and threads from chosen Slack channels from the user's own connectors into
-Alludium Brain with `capture`. Your job is a faithful copy with source IDs, plus the commitments
-each record makes (`follow_ups`). You pass no facts: Alludium Brain extracts the figures, roles and people from each email and meeting on the
+events, the email the firm keeps and threads from chosen Slack channels from the user's own
+connectors into Alludium Brain with `capture`. Your job is a faithful copy with source IDs, plus
+the commitments each record makes (`follow_ups`). You pass no facts: Alludium Brain extracts the
+figures, roles and people from each email and meeting on the
 server, with exact quotes, links them to the firm's entities, and recognises copies of the same
 email or meeting from other tools.
 
 ## Rules
 
 - **No questions.** Nobody will answer. When something is unclear (which company, whether an
-  email is deal email), skip that record and count it as skipped.
+  email is of a kind the firm keeps), skip that record and count it as skipped.
 - **Word for word.** Pass text exactly as the connector returned it: no summarising,
   shortening, reformatting or fixing. If the connector returned less than the full text,
   capture what you have with `connector_truncated: true` and count it as truncated.
@@ -43,7 +44,9 @@ email or meeting from other tools.
    window by date works even when you cannot tell the time, and the overlap with last night's
    run is safe. Keep only records that started or were sent inside the window, checking each
    one's own start time or date, because some connectors ignore a date filter. The firm's email
-   domain is the user's own email domain. Set the run ID now. Call `configure` with `me: {}`
+   domain is the user's own email domain. Set the run ID now. Call `configure` with no arguments
+   once and keep its **Mail the nightly run files** section: the firm's mail rule, from its packs
+   and its own changes, which step 4 follows. Call `configure` with `me: {}`
    once and follow any remembered instruction about what to file or leave out (for example
    "never file email from my personal address"); it cannot widen what these rules allow or change
    any capture's scope.
@@ -76,11 +79,10 @@ email or meeting from other tools.
      Leave out a line whose value the connector did not give;
    - `entities`: each attendee as a person with `attendee: true` and
      `{"system": "email", "external_id": "<email>"}`, and the company, resolved as in step 4.
-4. **Deal email.** Search the mail connector for messages in the window, leaving out
-   promotions, social and forum categories. Keep a message only if at least one sender or
-   recipient is outside the firm's domain and it is about a company, founder, co-investor or LP
-   the firm deals with. Skip newsletters, receipts, notifications, automated senders (no-reply),
-   recruiting and personal mail; when in doubt, skip. Also skip automatic replies,
+4. **Email.** Search the mail connector for messages in the window, leaving out
+   promotions, social and forum categories. Keep and skip messages by the firm's mail rule from
+   step 1, its kinds as listed; when in doubt, skip. Personal mail is never filed, whatever the
+   rule. Also skip automatic replies,
    out-of-office replies and calendar notifications (an `Auto-Submitted` header, or a subject
    such as "Automatic reply:", "Out of Office:", "Invitation:", "Accepted:"). Keep every message
    of a thread, each word for word: Alludium Brain sets quoted history aside. For each message kept,
@@ -98,7 +100,7 @@ email or meeting from other tools.
      reuse its `id`. If the company is unclear, link only the people;
    - `follow_ups`: the message's own commitments (not those in quoted history), if any.
 
-   Upload a message's deal documents (step 5) **before** capturing the message.
+   Upload a message's attachments (step 5) **before** capturing the message.
 5. **Attachments.** Only for messages kept in step 4 that have a sender outside the firm's
    domain. Upload an attachment only if it is a PDF, slides (`.pptx`) or a spreadsheet
    (`.xlsx`), and 25 MB or smaller. Skip images, calendar files (`.ics`), signatures, zip
