@@ -46,6 +46,12 @@ starts from the stored configuration and proposes changes to it.
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
+- **Firm admins.** Removing members, `approves_skills`, `email_scope` and `connectors` change who
+  sees or approves what, so once the firm has a firm admin (the admin or owner role in its WorkOS
+  organization), only admins can change them; `configure` names the admins and says whether the
+  caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
+  none, anyone can, and onboarding asks to have one made. Everything else stays open to every
+  member.
 - `process` is the deal process. `{"template": "seed_to_series_a"}` alone sets up a template's
   stages (`seed_to_series_a`, the default; `multi_stage`; `growth`; `blank`). `{"stages": [...]}`
   replaces the stages, in order. Each stage has a `name`, a `kind` Alludium Brain understands
