@@ -1,12 +1,12 @@
 ---
 name: capture-meeting
-description: File a meeting's notes into the firm's VC Brain word for word, with the meeting's source IDs from the notes connector (Granola, Fireflies, Otter, Fathom, Zoom, Teams or Google Meet). Use after a call when the user says "file this meeting", "capture my call with …", "save today's meeting notes to the brain", or pastes meeting notes to keep. Also use it to offer, never silently, when the user shares or discusses a meeting's notes without asking to file them.
+description: File a meeting's notes into the firm's Alludium Brain word for word, with the meeting's source IDs from the notes connector (Granola, Fireflies, Otter, Fathom, Zoom, Teams or Google Meet). Use after a call when the user says "file this meeting", "capture my call with …", "save today's meeting notes to the brain", or pastes meeting notes to keep. Also use it to offer, never silently, when the user shares or discusses a meeting's notes without asking to file them.
 ---
 
 # Capture a meeting
 
-You copy one meeting's notes from the user's own notes connector into VC Brain with the
-connector's `capture` tool. VC Brain links the meeting to the firm's entities and recognises
+You copy one meeting's notes from the user's own notes connector into Alludium Brain with the
+connector's `capture` tool. Alludium Brain links the meeting to the firm's entities and recognises
 copies of it from other tools. Your job is a faithful copy with its source IDs and the figures
 it states.
 
@@ -22,7 +22,7 @@ it states.
   or guess an ID or a link.
 - **One capture per meeting.** Several meetings mean several captures.
 - **Offer, don't file silently.** If the user shared or discussed the notes without asking to
-  file them, offer once in one line ("File these meeting notes in VC Brain, private to you?")
+  file them, offer once in one line ("File these meeting notes in Alludium Brain, private to you?")
   and file only after a yes. Offer once per meeting; if they decline, drop it. Never offer for a
   meeting that came from the brain or is already in it.
 - **Do not repeat the notes** in your messages. They are stored; repeating them costs tokens.
@@ -36,7 +36,7 @@ it states.
    `external_id` plus `/transcript`.
 3. If the notes connector gave no attendees, look the event up in the calendar connector, if
    there is one, for names and emails. When the notes connector or the calendar names the
-   calendar event, keep its iCal UID and start time: VC Brain uses them to know that the
+   calendar event, keep its iCal UID and start time: Alludium Brain uses them to know that the
    calendar event, these notes, a transcript and a CRM note are one meeting.
 4. Build `text` as these header lines, copied from the connector's fields, then a blank line,
    then the notes exactly as returned:
@@ -51,7 +51,7 @@ it states.
 5. Build `entities`:
    - every attendee as `{"type": "person", "name": "<Name>", "attendee": true,
      "external_refs": [{"system": "email", "external_id": "<email>"}]}`, including colleagues,
-     because that is how VC Brain knows who at the firm met them. People the notes only
+     because that is how Alludium Brain knows who at the firm met them. People the notes only
      mention are not attendees; leave them out.
    - the company the meeting was with. `search` the external attendees' email domain (unless
      it is webmail such as gmail.com), or the company name if there is no domain, and pass the
@@ -86,7 +86,7 @@ it states.
 
 ## Follow-ups
 
-`follow_ups` lists the concrete commitments the text records. VC Brain shows each one to its
+`follow_ups` lists the concrete commitments the text records. Alludium Brain shows each one to its
 owner only, in their morning digest and on the company's page, until it is done. A list of
 false to-dos gets ignored, so precision matters more than completeness: most meetings have one
 to three, many emails have none, and when unsure leave it out.

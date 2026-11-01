@@ -1,11 +1,11 @@
 ---
 name: ic-prep
-description: Draft an investment committee (IC) memo for a deal from what the firm's VC Brain knows - facts with their history and conflicts, the team's notes and meetings, decisions, open questions, thesis fit and similar companies the firm passed on - under the firm's own memo headings, with every claim cited. The deal lead edits it in the conversation and it is filed only on their say-so, private by default. Use when the user says "draft the IC memo for Acme", "prep Acme for IC", "write up Ferrolith for the partner meeting" or "start an investment memo on Kestrel".
+description: Draft an investment committee (IC) memo for a deal from what the firm's Alludium Brain knows - facts with their history and conflicts, the team's notes and meetings, decisions, open questions, thesis fit and similar companies the firm passed on - under the firm's own memo headings, with every claim cited. The deal lead edits it in the conversation and it is filed only on their say-so, private by default. Use when the user says "draft the IC memo for Acme", "prep Acme for IC", "write up Ferrolith for the partner meeting" or "start an investment memo on Kestrel".
 ---
 
 # Draft an IC memo
 
-Gather what the firm knows about one deal with the VC Brain connector's `configure`, `search`,
+Gather what the firm knows about one deal with the Alludium Brain connector's `configure`, `search`,
 `entity_brief` and `whats_changed` tools, draft the memo in the conversation, let the deal lead
 edit it, and file it with `capture` only when they say so. The memo is the author's document:
 Claude drafts, the author decides what it says.
@@ -127,7 +127,7 @@ Claude drafts, the author decides what it says.
    and always end with the appendix of sources, even if the headings leave it out. Put
    unknowns and open questions under the firm's heading for them, or at the end.
 5. **Draft.** Start with a header line: "IC memo: <company>, <round>. Draft by Claude for
-   <author>, <date>. From VC Brain as of <date>." Keep it to what an IC reads in ten minutes,
+   <author>, <date>. From Alludium Brain as of <date>." Keep it to what an IC reads in ten minutes,
    unless the house style says otherwise. Follow the firm's house style for spelling, units,
    number formats and length; follow the user's profile style and preferences for voice and
    phrasing only. The firm's headings and house style still decide structure, and the profile

@@ -1,13 +1,13 @@
 ---
 name: tasks
-description: 'Ask a colleague at the firm to do something through VC Brain, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "work on VC Brain task T-42" (or any "T-" number from VC Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for" or "decline T-42, I never met them".'
+description: 'Ask a colleague at the firm to do something through Alludium Brain, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "work on Alludium Brain task T-42" (or any "T-" number from Alludium Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for" or "decline T-42, I never met them".'
 ---
 
 # Tasks
 
 A task is something a firm member asked a colleague to do: what, why (in the asker's words), by
 when, the companies or people it is about and what to read first. It shows up for the assignee in
-VC Brain, and their answer goes back to the person who asked. Use the VC Brain connector's
+Alludium Brain, and their answer goes back to the person who asked. Use the Alludium Brain connector's
 `follow_ups`, `search` and `entity_brief` tools. Tasks are referred to by ref, like `T-42`.
 
 ## Rules
@@ -21,7 +21,7 @@ VC Brain, and their answer goes back to the person who asked. Use the VC Brain c
   share it (`share`) or to say what matters in `why`. Never share without their yes.
 - **The answer is the user's.** When finishing a task, draft the outcome from the work done in
   this chat, show it, and send it only once the user agrees it. It goes to the person who asked.
-- **No content in the reference.** "Work on VC Brain task T-42" is all a hand-over needs; load the
+- **No content in the reference.** "Work on Alludium Brain task T-42" is all a hand-over needs; load the
   rest with the tool.
 
 ## Ask a colleague
@@ -37,7 +37,7 @@ VC Brain, and their answer goes back to the person who asked. Use the VC Brain c
 
 ## Work on a task
 
-When the user says "work on VC Brain task T-42", clicks "Action this in Claude", or picks one from
+When the user says "work on Alludium Brain task T-42", clicks "Action this in Claude", or picks one from
 their list:
 
 1. Call `follow_ups` with `task: "T-42"`. Tell the user in two lines who asked, what and why, and

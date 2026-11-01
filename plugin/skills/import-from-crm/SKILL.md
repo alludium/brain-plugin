@@ -1,15 +1,15 @@
 ---
 name: import-from-crm
-description: Fill the firm's VC Brain from its CRM (Affinity, Attio or HubSpot) - the companies, people and deals on a chosen list, saved view, pipeline or set of named companies, with their notes and recent meetings - through the CRM's hosted connector. Always dry-runs first, works in batches with progress, is safe to re-run (changed records are updated) and stops at a size limit. Also backfills one company the brain knows only from its CRM record, when brief, prepare-meeting or seen-before offer it. Use when the user says "import our Affinity pipeline", "import from Affinity", "load our deal list from the CRM into the brain", "backfill the brain from HubSpot", "import our Attio deals" or "dry-run a CRM import". Not for checking a sourcing list against the brain (use seen-before) or filing one meeting (use capture-meeting).
+description: Fill the firm's Alludium Brain from its CRM (Affinity, Attio or HubSpot) - the companies, people and deals on a chosen list, saved view, pipeline or set of named companies, with their notes and recent meetings - through the CRM's hosted connector. Always dry-runs first, works in batches with progress, is safe to re-run (changed records are updated) and stops at a size limit. Also backfills one company the brain knows only from its CRM record, when brief, prepare-meeting or seen-before offer it. Use when the user says "import our Affinity pipeline", "import from Affinity", "load our deal list from the CRM into the brain", "backfill the brain from HubSpot", "import our Attio deals" or "dry-run a CRM import". Not for checking a sourcing list against the brain (use seen-before) or filing one meeting (use capture-meeting).
 ---
 
 # Import from a CRM
 
-You copy CRM records from the user's CRM connector into VC Brain with the connector's `capture`
+You copy CRM records from the user's CRM connector into Alludium Brain with the connector's `capture`
 tool. Each CRM record becomes one source with its CRM ID, so a re-run finds it already stored:
 an unchanged record comes back "Already captured", and a record or note whose text changed in
 the CRM comes back "Updated" and is stored as a new version, whose stage, status, fields and
-facts replace the old ones. VC Brain links and resolves entities; your job is a faithful,
+facts replace the old ones. Alludium Brain links and resolves entities; your job is a faithful,
 bounded copy.
 
 This file is the workflow. How to call a particular CRM's connector (tool names, IDs, links,
@@ -62,7 +62,7 @@ stop and report it rather than guess.
   `aliases`.
 - **Source IDs on every capture.** `system`: the CRM's value from the table above.
   `external_id` as `<object>:<id>` (`company:`, `person:`, `deal:`, `note:`, `meeting:`, or the
-  object names the reference gives), because a CRM's ID spaces can overlap and VC Brain keys a
+  object names the reference gives), because a CRM's ID spaces can overlap and Alludium Brain keys a
   source by system and ID alone. `url`: the record's page, built as the reference says. Never
   invent an ID or a link; leave `url` out if the reference gives no way to build it.
 - **Entity refs use the bare ID**: `{"system": "<system>", "external_id": "<id>", "url":
@@ -81,19 +81,19 @@ stop and report it rather than guess.
   is the member under an old address.
 - **No merging.** Two CRM records that look like one person or one company (the same name
   under different emails, a renamed company with two domains) are captured as they are, each
-  with its own refs. List them in the dry run as possible duplicates; VC Brain resolves them,
+  with its own refs. List them in the dry run as possible duplicates; Alludium Brain resolves them,
   and a wrong merge is worse than a split.
 - **Notes carry their author and date**: the author's name and email in an `Author:` line and
   as a person entity (not an attendee), and `occurred_at` set to when the note was written.
-  VC Brain records you as the capturer; the `Author:` line says who wrote it.
+  Alludium Brain records you as the capturer; the `Author:` line says who wrote it.
 - **Meetings carry their attendees and time**: every attendee as a person entity with
   `attendee: true` and an email ref, and `occurred_at` set to the start time.
 
 ## Steps
 
 1. **Setup.** Call `configure` with no arguments. If it lists no members, stop and suggest
-   running `onboard` first: without members, VC Brain cannot say who at the firm met whom.
-   If VC Brain is not connected, a dry run can still go ahead (it reads only the CRM); an
+   running `onboard` first: without members, Alludium Brain cannot say who at the firm met whom.
+   If Alludium Brain is not connected, a dry run can still go ahead (it reads only the CRM); an
    import cannot. Then do the reference's setup (the current user and the base for links).
 2. **Choose the records.** From the user's words: a list, a saved view on it, a pipeline, a
    filter on stage or another field, or named companies. The reference says which tools do
@@ -112,7 +112,7 @@ stop and report it rather than guess.
    - **Status.** The firm stage sets the status (screening: `prospect`; evaluation through
      closing: `in_deal`; portfolio: `portfolio`; Passed and Lost: `passed`; On hold:
      `tracking`), so a record with a mapped stage needs no status. For a CRM stage with no
-     firm stage, map it to VC Brain's organization statuses (`tracking`, `prospect`,
+     firm stage, map it to Alludium Brain's organization statuses (`tracking`, `prospect`,
      `in_deal`, `passed`, `portfolio`, `exited`) instead, or leave it unmapped when unsure.
    - **The brain's stage wins.** A company the brain already has at a stage keeps it: VC
      Brain ignores the stage on an undated CRM record for it, because decisions logged in the
@@ -132,7 +132,7 @@ stop and report it rather than guess.
 4. **Dry run.** For each chosen record, without capturing anything, count its notes, its
    meetings in the meeting window (default the last 90 days) and the distinct external people
    in those meetings, using the reference's counting calls.
-   Then one VC Brain `search` with `queries` (name and domain per company, if VC Brain is
+   Then one Alludium Brain `search` with `queries` (name and domain per company, if Alludium Brain is
    connected) counts how many are already in the brain and gives each match's `stage`, to
    compare with the mapped stage.
 
@@ -141,7 +141,7 @@ stop and report it rather than guess.
    people + notes + meetings), the limit, what would be left over, the mappings (stage and facts), the
    window, and three short lists: records marked "check" with the reason, possible duplicate
    people or companies, and possible firm members under another address. Say if notes look
-   like call write-ups from a notes tool (they name it): VC Brain links them to the notes
+   like call write-ups from a notes tool (they name it): Alludium Brain links them to the notes
    tool's copy of that meeting, so they are not counted twice. Ask "Import these?" and wait for a
    clear yes, with answers to any "check".
 5. **Import**, one record at a time, in the dry run's order. The text formats below are the
@@ -160,7 +160,7 @@ stop and report it rather than guess.
       `entities`: the company as `{"type": "organization", "name": "<name>", "status":
       "<mapped status>", "external_refs": [the CRM ref, a domain ref for each domain]}` (leave
       `status` out if unmapped or "check" unanswered); `facts`: the mapped fields. Keep the
-      `id` VC Brain returns for the company. For a mapped stage, use `"stage": "<firm stage
+      `id` Alludium Brain returns for the company. For a mapped stage, use `"stage": "<firm stage
       name>"` instead of `status`; the record's date (`occurred_at`, when the CRM gives the date
       it entered the stage, else leave it out) dates the move. A deal record is the same with `deal` as the
       entity type and the companies it names linked by name or `id`.
@@ -176,12 +176,12 @@ stop and report it rather than guess.
       <note body exactly as returned>
       ```
 
-      `entities`: the record by its VC Brain `id`, and the author as a person with their
+      `entities`: the record by its Alludium Brain `id`, and the author as a person with their
       email ref. If the CRM gives no author, write `Author: unknown` and leave the person out.
       A note attached to a CRM meeting also gets `refs: [{"system": "<crm system>",
-      "external_id": "meeting:<meeting id>"}]`, so VC Brain files it as notes of that meeting.
+      "external_id": "meeting:<meeting id>"}]`, so Alludium Brain files it as notes of that meeting.
    3. **Its meetings** in the window, pages of 10. One `capture` per meeting, including one
-      that seems to arrive twice: VC Brain matches records of one meeting by the calendar
+      that seems to arrive twice: Alludium Brain matches records of one meeting by the calendar
       event ID together with the start (a recurring meeting reuses the ID for every
       occurrence), else by the start and attendees, and links them rather than counting
       twice. `kind: "meeting"`, `title`: the title if it has one, `occurred_at`: the start

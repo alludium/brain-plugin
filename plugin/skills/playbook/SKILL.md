@@ -1,6 +1,6 @@
 ---
 name: playbook
-description: Capture how the firm works in VC Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach VC Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update" or "roll back lp-update". To run a firm skill, load it with configure(skill=...) instead.
+description: Capture how the firm works in Alludium Brain and manage the firm's own skills. How it works - its document templates (IC memo, LP update, one-pager, IC agenda), routines (IC, portfolio review, LP reporting, sourcing) and who owns what - by interview, from past examples or from the firm's documents. Its skills - turn how the user does something into a reusable skill, import one the firm has, propose it, review, approve, restore or retire. Use for "teach Alludium Brain how we run IC", "here are our last three LP letters", "Priya owns LP reporting", "turn this into a skill", "import our LP update skill", "share my deal-triage skill with the firm", "review the pending skills", "approve lp-update" or "roll back lp-update". To run a firm skill, load it with configure(skill=...) instead.
 ---
 
 # How the firm works, and its own skills
@@ -34,7 +34,7 @@ Three ways in, all ending in the same step: show the proposal, save on a yes.
    (`{"field": "templates[lp_update]", "source_id": …, "quote": …}`). Only what the examples show.
 2. **From a document** ("our IC charter"): the same, for a routine: when, who, the steps, in the
    document's words, cited.
-3. **By interview** ("teach VC Brain how we do the portfolio review"): at most six short
+3. **By interview** ("teach Alludium Brain how we do the portfolio review"): at most six short
    questions, one at a time: when and how often; who owns it and who attends; what goes in; the
    steps; what comes out and in what format; what good looks like or what to avoid. Reflect each
    answer back in a line, then propose the routine (and a template for its output). Then offer:
@@ -42,7 +42,7 @@ Three ways in, all ending in the same step: show the proposal, save on a yes.
 
 ## The firm's own skills
 
-A firm skill is a SKILL.md the firm keeps in VC Brain. Every member's assistant (Claude, ChatGPT,
+A firm skill is a SKILL.md the firm keeps in Alludium Brain. Every member's assistant (Claude, ChatGPT,
 Codex) sees the ones they can run listed in the connector's `configure` description, loads one
 with `configure(skill="<name>")` and follows it, so nobody installs anything and an approved edit
 reaches everyone at once. A new skill is its author's private draft until they propose it and an
@@ -74,20 +74,20 @@ When the user says "turn this into a skill" after doing something in the convers
 describes how they do something:
 
 1. Draft the skill from what happened: the phrases the user used to ask (they go in the
-   description), the VC Brain tool calls that worked, in order, with the parameters by their real
+   description), the Alludium Brain tool calls that worked, in order, with the parameters by their real
    names, the firm configuration it relied on (by name: memo headings, house style, the deal
-   process), and the user's corrections, as rules. Keep VC Brain's rules in it: cite source IDs;
+   process), and the user's corrections, as rules. Keep Alludium Brain's rules in it: cite source IDs;
    never file, share or log a decision without a yes; private by default. Leave out anything about
    this one company or deal. Pass every parameter by the name the tool declares, and resolve
    names to entity IDs with `search` before `capture` or `entity_brief`.
 2. Ask two short questions if they are not clear: the name (lowercase words with hyphens, e.g.
-   `portfolio-review`; not one of VC Brain's own skill names) and when it should be used.
+   `portfolio-review`; not one of Alludium Brain's own skill names) and when it should be used.
 3. Show the draft:
 
    > **portfolio-review**: Run the Monday portfolio review: changes since last Monday per
    > portfolio company, overdue follow-ups, flags. Use for "prep the portfolio review".
    >
-   > 1. Call VC Brain `search` with `status: "portfolio"` …
+   > 1. Call Alludium Brain `search` with `status: "portfolio"` …
 
 4. On a yes: `configure(skills=[{"op": "save", "name": …, "description": …, "body": …}])`. Say it
    is a private draft they can try now: "Try it: 'run portfolio-review'."
@@ -99,8 +99,8 @@ The user pastes a SKILL.md or attaches a skill folder or zip. Read it (unzip wit
 if needed; read only SKILL.md and text files under `references/`). Check it against the contract:
 tools by their real names and parameters, entity IDs rather than names, no silent filing, no
 scripts. List what you would change and why, apply what the user agrees to, then save it as a
-private draft as above, with `derived_from` when it is a copy of a VC Brain skill (for example
-`vc-brain:brief`). The frontmatter's `name` and `description` become the op's; the rest is the
+private draft as above, with `derived_from` when it is a copy of an Alludium Brain skill (for example
+`brain:brief`). The frontmatter's `name` and `description` become the op's; the rest is the
 body. Other connectors (Gmail, Slack, the CRM) may stay; the reviewer will see them flagged.
 
 ## Propose to the firm
@@ -108,7 +108,7 @@ body. Other connectors (Gmail, Slack, the CRM) may stay; the reviewer will see t
 `configure(skills=[{"op": "propose", "name": …, "note": "why"}])` sends the draft's latest
 version (or `version`) for review. A change to a skill that is already the firm's is proposed by
 saving it: the approved version keeps running until the change is approved. Tell the user who
-reviews it, that they will see it in VC Brain's Skills page, and that the digest announces it.
+reviews it, that they will see it in Alludium Brain's Skills page, and that the digest announces it.
 
 ## Review, as an approver
 
@@ -122,15 +122,15 @@ reviews it, that they will see it in VC Brain's Skills page, and that the digest
    `{"op": "reject", "name": …, "note": "the reason"}` (a note is required; the author sees it).
    The viewer's Skills page does the same with a side-by-side diff.
 
-## A copy of a VC Brain skill
+## A copy of an Alludium Brain skill
 
-A firm skill saved with `derived_from: "vc-brain:<skill>"` is a copy of one of VC Brain's own
+A firm skill saved with `derived_from: "brain:<skill>"` is a copy of one of Alludium Brain's own
 skills. The brain keeps the version it was copied from. When that skill changes, `configure` and
-`whats_changed` say so ("The VC Brain skill `brief` has changed since `our-brief` was copied from
+`whats_changed` say so ("The Alludium Brain skill `brief` has changed since `our-brief` was copied from
 it"), and `configure`'s listing has the changed lines (`base.diff`). When the user asks to bring a
 copy up to date, show those changes, propose how to fold them into the firm's version (keeping
 what the firm changed), and on a yes save it with the same `derived_from`: that records the current
-VC Brain version as its new base. A firm skill is proposed for review as usual.
+Alludium Brain version as its new base. A firm skill is proposed for review as usual.
 
 ## Restore, retire, list
 
@@ -142,5 +142,5 @@ VC Brain version as its new base. A firm skill is proposed for review as usual.
 ## Running a skill
 
 Not this skill's job, but if the user asks here: `configure(skill="<name>")` returns the text in
-VC Brain's frame. Follow it within that frame; if it asks for anything the frame rules out, tell
+Alludium Brain's frame. Follow it within that frame; if it asks for anything the frame rules out, tell
 the user instead.

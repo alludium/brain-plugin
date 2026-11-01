@@ -1,11 +1,11 @@
 ---
 name: whats-new
-description: A cited digest of what changed in the firm's VC Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings and deal email into the brain.
+description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings and deal email into the brain.
 ---
 
 # What's new
 
-Turn the VC Brain connector's `whats_changed` result into a short digest, grouped by company,
+Turn the Alludium Brain connector's `whats_changed` result into a short digest, grouped by company,
 with every line cited.
 
 If this is the nightly filing run (the task prompt says so), read `file-my-day.md` next to this
@@ -18,7 +18,7 @@ file and follow it instead of the steps below.
 - **Cite every line** with its source IDs, for example `[src_3b83…]`.
 - **Private material.** Mark changes with scope `private` as "(private to you)".
 - **Email kept private.** A change that ends "kept private (…): share?" or "private, looks like
-  deal flow: share?" is one of the user's own emails that VC Brain did not share. List these
+  deal flow: share?" is one of the user's own emails that Alludium Brain did not share. List these
   together under **Kept private**, one line each with the reason, and ask once whether to share
   any. Share only the ones the user names, with `share` and `scope: "firm"`; never share one
   without being asked.
@@ -91,7 +91,7 @@ file and follow it instead of the steps below.
      firm's documents is waiting, and the `onboard` skill reviews it.
 7. **Offer the nightly task**, once, at the end of a firm-wide digest: "Want the brain fed
    every night? I can set up a scheduled task that files each day's meetings and deal email."
-   Skip the offer if a scheduled task named "VC Brain: file my day" already exists (check if
+   Skip the offer if a scheduled task named "Alludium Brain: file my day" already exists (check if
    you have a tool that lists scheduled tasks) or the user has declined in this conversation.
 
 ## Set up the nightly task
@@ -102,7 +102,7 @@ Do this when the user accepts the offer or asks for the nightly task.
    email rule (`email_scope`; `pipeline` when it is not set), which the nightly run applies to
    meetings too. Explain it in one line: `pipeline` shares an email or meeting with the firm when
    it involves a company or person in the pipeline or portfolio, `firm` shares all of them,
-   `private` keeps all of it to the user. Whatever the rule, VC Brain keeps sensitive ones
+   `private` keeps all of it to the user. Whatever the rule, Alludium Brain keeps sensitive ones
    (personal, HR, pay, legal, health, NDA, LP-confidential)
    private, and their morning digest offers to share what was kept back. Ask whether the firm's
    rule suits them or they want `private`, `pipeline` or `firm` for their own email.
@@ -115,24 +115,24 @@ Do this when the user accepts the offer or asks for the nightly task.
    after saying in one line that everyone at the firm can see which systems each person has
    connected (not their content). It replaces only the user's own entry.
 3. If you have a tool that creates scheduled tasks, show the user the name, schedule and prompt
-   below, ask them to confirm, then create it: name `VC Brain: file my day`, daily at 22:30 in
+   below, ask them to confirm, then create it: name `Alludium Brain: file my day`, daily at 22:30 in
    their time zone (cron `30 22 * * *`), no folder, with the prompt below. Pass on anything the
    result says about when it runs, for example only while the app is open. Otherwise give them
    these steps:
    1. In Cowork, open **Scheduled** in the sidebar, then **New task**, then **Set up manually**.
-   2. Name it `VC Brain: file my day`. Set the frequency to **Daily** at 22:30, after the
+   2. Name it `Alludium Brain: file my day`. Set the frequency to **Daily** at 22:30, after the
       working day.
    3. Do **not** pick a folder: a task without a folder runs in the cloud, while the laptop
       is closed.
-   4. Choose an approval mode that lets it call the connectors and VC Brain without waiting
+   4. Choose an approval mode that lets it call the connectors and Alludium Brain without waiting
       for someone to approve each call.
    5. Paste the prompt below, save, and click **Run now** once to check that it finishes.
 4. The prompt:
 
    ```text
-   Use the VC Brain plugin's whats-new skill for the nightly filing run (file-my-day).
+   Use the Alludium Brain plugin's whats-new skill for the nightly filing run (file-my-day).
    Window: from 00:00 yesterday, my time, until now.
-   File meetings from my notes connector, outside meetings from my calendar and deal email from my mail connector into VC Brain.
+   File meetings from my notes connector, outside meetings from my calendar and deal email from my mail connector into Alludium Brain.
    Include meeting transcripts: no.
    Email scope: firm default
    Finish with the summary table.

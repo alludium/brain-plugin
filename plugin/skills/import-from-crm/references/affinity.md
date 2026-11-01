@@ -72,11 +72,11 @@ If Affinity says the user's seat lacks a permission (for example list export), s
 - **A renamed company** under its old and new names with two domains. List it as a possible
   duplicate; do not merge.
 - **Notes that copy a notes tool's write-up.** Some notes are generated post-call write-ups
-  that name the Granola note they came from. Import them: VC Brain links each to the Granola
+  that name the Granola note they came from. Import them: Alludium Brain links each to the Granola
   note it wraps, so they will be linked, not counted twice. Say so in the dry run.
 - **Duplicate and recurring calendar events.** Affinity can hold one event twice under two IDs
   (same title, start and attendees), and a recurring meeting shares one `ical_uid` across its
-  occurrences. Capture each as it is with its `ical_uid` in `refs` and its start: VC Brain
+  occurrences. Capture each as it is with its `ical_uid` in `refs` and its start: Alludium Brain
   matches a meeting by the UID together with the start, else by start and attendees. Some
   meetings have no title.
 - **Statuses that lag.** Several companies with regular board meetings were still at an open

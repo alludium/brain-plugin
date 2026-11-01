@@ -1,11 +1,11 @@
 ---
 name: profile
-description: 'Keep the user''s own private profile in VC Brain: how they like their briefs, meeting prep and digests, standing instructions, and their writing style. Use when the user talks about themselves rather than a company, for example "remember that I…", "I prefer…", "always cc Priya on portfolio updates", "never…", "I don''t do intros for crypto", "learn my writing style from these emails", "what do you know about me?", "show my profile", "forget that", "change my brief preference". Not for notes about companies or people (use note) or for firm conventions such as memo headings and deal stages (use onboard).'
+description: 'Keep the user''s own private profile in Alludium Brain: how they like their briefs, meeting prep and digests, standing instructions, and their writing style. Use when the user talks about themselves rather than a company, for example "remember that I…", "I prefer…", "always cc Priya on portfolio updates", "never…", "I don''t do intros for crypto", "learn my writing style from these emails", "what do you know about me?", "show my profile", "forget that", "change my brief preference". Not for notes about companies or people (use note) or for firm conventions such as memo headings and deal stages (use onboard).'
 ---
 
 # Your profile
 
-The profile is the user's own memory in VC Brain: their preferences, remembered instructions and
+The profile is the user's own memory in Alludium Brain: their preferences, remembered instructions and
 writing style. Only they can see it; it is never searched, summarised or shared with the firm, and
 it follows them to any host connected to the brain (Claude, ChatGPT, the nightly run). Use the
 connector's `configure` tool with `me`, always on its own (no firm sections in the same call).

@@ -1,14 +1,14 @@
 ---
 name: note
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s VC Brain. Use when the user says "note on Acme: …", "note that …", "remember that …", "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread.'
+description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …", "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread.'
 
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s VC Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
+description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
 ---
 
 # Note
 
 A note is a few lines a person wrote, stored in their own words and linked to the entities it is
-about. Use the VC Brain connector's `search` and `capture` tools.
+about. Use the Alludium Brain connector's `search` and `capture` tools.
 
 ## Rules
 
@@ -22,7 +22,7 @@ about. Use the VC Brain connector's `search` and `capture` tools.
   pass that record's `system`, `external_id` and `url` exactly as the connector gave them. A note
   typed in this chat has none; leave them out. Never invent an ID or link.
 - **Offer, don't file silently.** If the user gave the view without asking to save it, offer
-  once in one line ("Note this in VC Brain, private to you?") and file only after a yes. Offer
+  once in one line ("Note this in Alludium Brain, private to you?") and file only after a yes. Offer
   once per topic; if they decline, drop it. Never offer for what came from the brain or is
   already in it.
 - An email, a document's text or another record the user pasted is not a note: `capture` it word
@@ -128,7 +128,7 @@ keeping its scope, and briefs show only the latest. A `.docx` or `.pdf` export i
 ## Comments on a document
 
 A comment sits on a passage of a document in the brain (a filed draft, an upload) and is shown
-there to everyone who can see it, in VC Brain's viewer too. Use `capture` with `comment`:
+there to everyone who can see it, in Alludium Brain's viewer too. Use `capture` with `comment`:
 
 - **A new thread**: `comment: {"on": "<src_…>", "quote": "<the passage's exact words>"}` and the
   comment as `text`. Find the document with `search` first. If the passage occurs more than once,

@@ -1,11 +1,11 @@
 ---
 name: brief
-description: Answer "what do we know about X?" and "who has met them?" from the firm's VC Brain, with every claim cited to its source. Use for any question about a company, founder, investor, LP, fund or deal the firm may have touched, for example "what do we know about Acme", "who's met Maya Lindqvist", "have we talked to Kestrel", "what's our history with Copperbeck". Offers, never silently, to file new information the user adds.
+description: Answer "what do we know about X?" and "who has met them?" from the firm's Alludium Brain, with every claim cited to its source. Use for any question about a company, founder, investor, LP, fund or deal the firm may have touched, for example "what do we know about Acme", "who's met Maya Lindqvist", "have we talked to Kestrel", "what's our history with Copperbeck". Offers, never silently, to file new information the user adds.
 ---
 
 # Brief: what the firm knows
 
-Answer from VC Brain only, through the connector's `search` and `entity_brief` tools. Your own
+Answer from Alludium Brain only, through the connector's `search` and `entity_brief` tools. Your own
 knowledge of a company is not the firm's memory; leave it out unless the user asks for it, and
 then label it as not from the brain.
 
@@ -20,7 +20,7 @@ then label it as not from the brain.
   `private` as "(private to you)" and remind the user not to forward it.
 - Do not paste whole sources or the full `entity_brief` page back to the user.
 - **Offer to file what the user adds, once.** If the user adds something the brain lacks (a
-  view, a figure, news from a call), offer once in one line ("Note this in VC Brain, private to
+  view, a figure, news from a call), offer once in one line ("Note this in Alludium Brain, private to
   you?") and file it with `note` only after a yes. Never offer to file what the brief returned.
 - **Offer to fix what the user says is wrong, once.** If the user says the brief is wrong about
   who met whom, which company a source is about, or what a name means ("I met Yusuf last week,

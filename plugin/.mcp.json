@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "vc-brain": {
+    "alludium-brain": {
       "type": "http",
       "url": "https://app.brain.alludium.ai/mcp"
     }

@@ -45,7 +45,7 @@ what is configured. The rules in SKILL.md apply.
       `synonyms`: other names the firm's sources use for it ("venues", "live restaurants").
       Skip this if they have none.
 
-      VC Brain already records standard figures per type, listed in `capture`'s `facts`
+      Alludium Brain already records standard figures per type, listed in `capture`'s `facts`
       description (for example `arr`, `paying_customers`, `round_target`,
       `pre_money_valuation` and `logo_churn` for organizations, `round_size` and `check_size`
       for deals). Do not add a custom field for one of those: say it is already tracked under

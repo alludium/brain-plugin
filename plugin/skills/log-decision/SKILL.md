@@ -1,11 +1,11 @@
 ---
 name: log-decision
-description: Record a firm decision on a company or deal in VC Brain - move it to a stage of the firm's deal process, pass, lose, put on hold, or invest - with the reasons in the deciders' words, who decided, the date and the sources it rests on; and tick checklist items the user confirms are done. Use when the user says "log a pass on Acme", "we're passing on Kestrel because …", "record that we're moving Acme to IC", "Acme is in due diligence", "we lost Wren to another fund", "put Ferrolith on hold", "we decided to invest in Ferrolith" or "tick customer references for Acme". Also use it to offer, never silently, when the user mentions a decision without asking to record it. Not for an opinion or a take that is not a decision (use note).
+description: Record a firm decision on a company or deal in Alludium Brain - move it to a stage of the firm's deal process, pass, lose, put on hold, or invest - with the reasons in the deciders' words, who decided, the date and the sources it rests on; and tick checklist items the user confirms are done. Use when the user says "log a pass on Acme", "we're passing on Kestrel because …", "record that we're moving Acme to IC", "Acme is in due diligence", "we lost Wren to another fund", "put Ferrolith on hold", "we decided to invest in Ferrolith" or "tick customer references for Acme". Also use it to offer, never silently, when the user mentions a decision without asking to record it. Not for an opinion or a take that is not a decision (use note).
 ---
 
 # Log a decision
 
-Record one decision, or checklist ticks, with the VC Brain connector's `log_decision` tool,
+Record one decision, or checklist ticks, with the Alludium Brain connector's `log_decision` tool,
 after the user has confirmed it. A decision moves the company or deal to a stage of the firm's
 deal process, dated and cited, and keeps its history. On an organization it also sets the
 status the stage implies (screening: `prospect`; evaluation through closing: `in_deal`;
@@ -25,7 +25,7 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
 - **Cite only real sources.** Supporting `source_ids` come from `search` results in this
   conversation, never from memory or a guess.
 - **Offer, don't record silently.** If the user mentioned the decision without asking to record
-  it, offer once in one line ("Log this pass on Acme AI Ltd in VC Brain?") and go on to the
+  it, offer once in one line ("Log this pass on Acme AI Ltd in Alludium Brain?") and go on to the
   steps only after a yes. Offer once per decision; if they decline, drop it. Never offer for a
   decision the brain already has (its `search` results show a decision on the entity).
 - **A person ticks a checklist item, never you.** You may suggest a tick when a source shows
@@ -92,7 +92,7 @@ portfolio: `portfolio`; passed and lost: `passed`; on hold: `tracking`).
    items without a decision, pass only `entity` and `checked`. `done: false` unticks an item. Ticks take the call's `scope`: with a private decision
    they are private too. A `note` (the user's words, at most 500 characters, e.g. "references
    checked: two strong, one lukewarm") is recorded as its own cited note source. People can also
-   tick items, with a note, on the company page in VC Brain or its card; the brief shows who
+   tick items, with a note, on the company page in Alludium Brain or its card; the brief shows who
    ticked each one and their note.
 7. Reply in two or three lines: the decision and the recording source ID, the stage it moved
    from and to and the status now, the items ticked, and any warnings from the result in

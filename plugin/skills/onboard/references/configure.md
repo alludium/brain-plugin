@@ -21,7 +21,7 @@
   themes), `regions`, `cheque` (`{"min": 500000, "max": 3000000, "currency": "EUR"}`) and
   `criteria` (each `{"text": "...", "weight": "must" | "nice"}`, or without a weight). Leave out
   what the partner did not give. Put criteria inside `thesis`; the separate `criteria` argument
-  is only for older plugins. VC Brain checks companies against each part (`entity_brief` with
+  is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with
   `thesis_check`), so keep each part short and specific.
 - `members` is the whole team. `configure` refuses a list that leaves out a current member
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
@@ -29,7 +29,7 @@
   the team as stored. A dropped member loses the firm-member role; the person stays.
 - `process` is the deal process. `{"template": "seed_to_series_a"}` alone sets up a template's
   stages (`seed_to_series_a`, the default; `multi_stage`; `growth`; `blank`). `{"stages": [...]}`
-  replaces the stages, in order. Each stage has a `name`, a `kind` VC Brain understands
+  replaces the stages, in order. Each stage has a `name`, a `kind` Alludium Brain understands
   (`sourcing`, `screening`, `evaluation`, `due_diligence`, `decision`, `negotiation`, `closing`,
   `portfolio`), a `description`, an optional `checklist` (plain items a person ticks) and the
   `documents` it expects. A stored stage has a `key`: keep it when renaming the stage, so the
@@ -53,7 +53,7 @@
 - `email_scope` is who sees email filed without a scope (by the nightly task, mostly):
   `pipeline`, the default, shares it with the firm when it involves a company or person in the
   pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it
-  to whoever filed it. Mail VC Brain finds sensitive stays private under any rule, and each
+  to whoever filed it. Mail Alludium Brain finds sensitive stays private under any rule, and each
   person can choose their own rule when they set up the nightly task. Change it only when a
   partner asks.
 - The configuration applies to the whole firm, so everyone at the firm sees it.

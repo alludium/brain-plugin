@@ -1,11 +1,11 @@
 ---
 name: seen-before
-description: Check a list of sourced companies against the firm's VC Brain and say for each whether it is new, seen, met or passed, with the reason and who at the firm knows them. Use when the user shares a sourcing list, CSV, spreadsheet, newsletter or pasted list of startups and asks "have we seen these?", "which of these are new?", "check this list against the brain" or "dedupe this list".
+description: Check a list of sourced companies against the firm's Alludium Brain and say for each whether it is new, seen, met or passed, with the reason and who at the firm knows them. Use when the user shares a sourcing list, CSV, spreadsheet, newsletter or pasted list of startups and asks "have we seen these?", "which of these are new?", "check this list against the brain" or "dedupe this list".
 ---
 
 # Seen before?
 
-Look the whole list up in VC Brain with one batch `search`, then give each company one verdict:
+Look the whole list up in Alludium Brain with one batch `search`, then give each company one verdict:
 
 | Verdict | Means |
 |---|---|

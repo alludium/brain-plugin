@@ -1,9 +1,9 @@
 # Nightly filing run (file my day)
 
 A scheduled task runs this with nobody watching. Copy the day's meetings, outside calendar
-events and deal email from the user's own connectors into VC Brain with `capture`. Your job is
+events and deal email from the user's own connectors into Alludium Brain with `capture`. Your job is
 a faithful copy with source IDs, plus the commitments each record makes (`follow_ups`). You pass
-no facts: VC Brain extracts the figures, roles and people from each email and meeting on the
+no facts: Alludium Brain extracts the figures, roles and people from each email and meeting on the
 server, with exact quotes, links them to the firm's entities, and recognises copies of the same
 email or meeting from other tools.
 
@@ -18,7 +18,7 @@ email or meeting from other tools.
   gave them. Never invent an ID or a link; leave `url` out if there is none.
 - **Run ID on every capture**: `run_id: "file-my-day-YYYYMMDD-HHMM"`, the run's start in UTC,
   the same for every capture in this run, so an operator can remove one run if it went wrong.
-- **No facts, no relations.** Do not pass `facts` or `relations`; VC Brain extracts them.
+- **No facts, no relations.** Do not pass `facts` or `relations`; Alludium Brain extracts them.
 - **Follow-ups.** Pass `follow_ups` on each meeting and email as the **Follow-ups** section of
   the `capture-meeting` skill describes: only concrete commitments by a firm member, or made to
   one (`waiting_on`), each with its exact sentence as `quote`. Most emails have none; when in
@@ -27,7 +27,7 @@ email or meeting from other tools.
   and move on. Re-running a window is safe.
 - **No scope on email or meetings.** Leave `scope` out of email and meeting captures. If the
   task prompt says `Email scope: private`, `pipeline` or `firm`, pass it as `email_scope` on every
-  email and meeting capture; otherwise leave that out too and the firm's rule applies. VC Brain
+  email and meeting capture; otherwise leave that out too and the firm's rule applies. Alludium Brain
   keeps each one private until it has checked it, and keeps sensitive ones (an internal 1:1 about
   pay, an HR call) private whatever the rule says.
 - Do not repeat captured text in your messages, and do not read attachments: only upload them
@@ -80,7 +80,7 @@ email or meeting from other tools.
    recruiting and personal mail; when in doubt, skip. Also skip automatic replies,
    out-of-office replies and calendar notifications (an `Auto-Submitted` header, or a subject
    such as "Automatic reply:", "Out of Office:", "Invitation:", "Accepted:"). Keep every message
-   of a thread, each word for word: VC Brain sets quoted history aside. For each message kept,
+   of a thread, each word for word: Alludium Brain sets quoted history aside. For each message kept,
    call `capture` with:
    - `kind: "email"`, `title`: the subject, `occurred_at`: the message date, `system`: `gmail`
      or `outlook`, `external_id`: the message ID, `url`: the message link if the connector gave
@@ -107,7 +107,7 @@ email or meeting from other tools.
      `external_id: "<message ID>/<attachment file name>"`, and the message's `url` if any;
    - `entities`: the company resolved for the message, if any.
 
-   VC Brain shares the attachments together with their email if it shares the email, and they
+   Alludium Brain shares the attachments together with their email if it shares the email, and they
    stay private with it otherwise.
 6. **Finish** with one short table: source (meetings, calendar events, email, attachments),
    found, filed, already there, skipped, truncated, failed, follow-ups. Then the run ID, and

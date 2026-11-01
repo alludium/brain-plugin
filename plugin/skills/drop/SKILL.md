@@ -1,12 +1,12 @@
 ---
 name: drop
-description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's VC Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
+description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's Alludium Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
 ---
 
-# Drop files into VC Brain
+# Drop files into Alludium Brain
 
-The files go straight from this machine or sandbox to VC Brain storage through upload URLs.
-VC Brain extracts and indexes them afterwards, so you never need their content.
+The files go straight from this machine or sandbox to Alludium Brain storage through upload URLs.
+Alludium Brain extracts and indexes them afterwards, so you never need their content.
 
 ## Rules
 
@@ -14,7 +14,7 @@ VC Brain extracts and indexes them afterwards, so you never need their content.
   them, and do not use a file-reading tool on them. Work only with the script's output: names,
   types, sizes and hashes.
 - **Offer, don't file silently.** If the user shared a file without asking to file it, offer
-  once in one line ("Drop this deck into VC Brain, private to you?") and upload only after a
+  once in one line ("Drop this deck into Alludium Brain, private to you?") and upload only after a
   yes. Offer once per file; if they decline, drop it. Never offer for a file that came from the
   brain or that `request_upload` says the brain already has.
 - Upload only what the user asked for. If it is unclear which files they mean, list them and ask.
@@ -45,7 +45,7 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    ```
 
    Tell the user about any `SKIP` lines (unsupported types such as images).
-3. Call the VC Brain connector's `request_upload` once, with `files`: one entry per file,
+3. Call the Alludium Brain connector's `request_upload` once, with `files`: one entry per file,
    with `filename`, `content_type` and `sha256` copied exactly from its line (up to 50 files a
    call). Add `entities` to an entry if the user said who that file is about. Resolve all the
    names first in one `search` call with `query: ""` and `queries` (one `{"name": …}` row per
@@ -104,7 +104,7 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
 
 ## Fallback when the upload cannot get through
 
-This sandbox cannot reach VC Brain's storage, so the files never left. Offer two ways, in this
+This sandbox cannot reach Alludium Brain's storage, so the files never left. Offer two ways, in this
 order:
 
 1. **Email them in.** Call `configure` with no arguments. If it gives an email-in address, tell

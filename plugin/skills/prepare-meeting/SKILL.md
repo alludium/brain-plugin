@@ -1,18 +1,18 @@
 ---
 name: prepare-meeting
-description: Prepare a cited brief for an upcoming meeting from the user's calendar and the firm's VC Brain - who is attending, what the firm already knows about them and their company, colleagues' notes, open questions and similar companies the firm passed on. Use when the user says "prep me for my call with …", "brief me for tomorrow's meeting", "prepare for the Acme meeting" or asks what to know before a meeting.
+description: Prepare a cited brief for an upcoming meeting from the user's calendar and the firm's Alludium Brain - who is attending, what the firm already knows about them and their company, colleagues' notes, open questions and similar companies the firm passed on. Use when the user says "prep me for my call with …", "brief me for tomorrow's meeting", "prepare for the Acme meeting" or asks what to know before a meeting.
 ---
 
 # Prepare for a meeting
 
-Combine the calendar connector (who and when) with VC Brain's `search` and `entity_brief`
+Combine the calendar connector (who and when) with Alludium Brain's `search` and `entity_brief`
 (what the firm knows). The result is a short brief in which every claim is cited.
 
 ## Rules
 
 - **Attendees come from the calendar.** Use the event's attendee list. Never invent an
   attendee. If there is no calendar connector, ask the user who is attending.
-- **History comes from VC Brain.** Use the calendar only for the meeting itself. Do not read
+- **History comes from Alludium Brain.** Use the calendar only for the meeting itself. Do not read
   mail or notes connectors for background: the brain's sources are what the firm shares. The
   one exception is a backfill the user accepted (below).
 - **Backfill only when asked.** When a company's brief says `coverage` "crm_only", offer

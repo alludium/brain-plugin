@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload files to VC Brain without reading them into the conversation.
+"""Upload files to Alludium Brain without reading them into the conversation.
 
 Standard library only, so it runs in any Claude code-execution sandbox. It prints file names,
 sizes, MIME types and hashes, never file content.
