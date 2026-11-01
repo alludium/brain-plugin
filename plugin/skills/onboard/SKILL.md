@@ -277,3 +277,22 @@ Ten minutes. In order, skipping what the report already has:
 Onboarding is safe to run again: the report shows what is done. A firm that changed its
 website: offer to research again and show only what differs from the configuration, each with
 its source; captured pages are stored as new versions.
+
+## What the brain has learned
+
+`configure` also lists `lessons`: what the brain has learned about the firm, with `counts` by
+status. Taught lessons come from members' notes ("FC is Ferncastle", a link fix) and are active
+at once; **proposed** ones come from the brain's own observers and wait for a person. Each has an
+`id`, a `statement`, its `evidence` (source IDs), who taught it or which observer proposed it, and
+how often it has applied.
+
+- **Proposals.** When `lessons.proposed` is not empty, show each statement with its evidence count
+  and ask the partner. On a yes, `configure` with `lessons: [{"id": "les_…", "decision":
+  "accept"}]`; on a no, `"reject"` (it is never proposed again). A proposed field ("Track 'pilot
+  sites' on organizations as a field") becomes a custom field, and the facts stated under that
+  name are filed under it. Never accept or reject without asking.
+- **Asking it to look.** "What should we be tracking?" or "suggest fields": call `configure` with
+  `learn: ["fields"]`; it proposes, never applies. It also runs on its own once a day.
+- **Undoing one.** "Stop reading 'Yusuf' as Yusuf Adeyemi": find the lesson in `lessons.active`
+  and pass `"retire"`, with the partner's reason as `note`; what it did is taken back. `"restore"`
+  brings back a retired or disputed one.

@@ -96,6 +96,10 @@ file and follow it instead of the steps below.
      uploaded or created.
    - If the result has `proposals_pending`, add one line: configuration proposed from the
      firm's documents is waiting, and the `onboard` skill reviews it.
+   - If the result has `learned`, add **What the brain learned**: one line per item, from its
+     `statement`, who taught it (`by`) or that it was learned from a fix, and its id. If
+     `lessons_proposed` is more than 0, add one line that the brain has proposals waiting and the
+     `onboard` skill reviews them. Never accept a proposal from the digest.
 7. **Offer the nightly task**, once, at the end of a firm-wide digest: "Want the brain fed
    every night? I can set up a scheduled task that files each day's meetings and deal email."
    Skip the offer if a scheduled task named "Alludium Brain: file my day" already exists (check if

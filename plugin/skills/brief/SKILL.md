@@ -154,6 +154,8 @@ then label it as not from the brain.
      the brief clearly shows an open item is done, you may suggest ticking it, quoting the
      source's exact words, and tick it with `log-decision` only if the user says yes. Never
      say an item is done because you think it is.
+   - **Known as**: when the brief has `lessons`, the names the firm taught for it and those not
+     to confuse it with, each with who taught it, in one line.
    - **Key facts**: value, as-of date and whose figure it is; a corrected or newer figure in a
      few words. [src]
    - **Against our thesis** (companies): the fit and its reason, then each part met or not met
