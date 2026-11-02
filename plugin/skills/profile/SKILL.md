@@ -108,6 +108,16 @@ cold emails and declines into one style.
    the current style of the same purpose. Reply in one line: "Saved your writing style for cold
    emails (learned from …) [prf_…]" (or "your writing style" for the general one).
 
+## When the digest offers a style
+
+`whats_changed` gives `style_nudges` once five or more of the user's own sent emails of one purpose
+have arrived since that purpose's style was approved, or ever, with none yet. These emails were
+classified when they were filed. Offer the update in one line, and on the user's yes, follow "Learn
+my writing style" above for that `purpose`. Read the emails by their `source_ids`: they are already
+the user's own filed sources, so cite them by `source_id`. When updating, start from the current
+style and change only what the new emails show. Save it pending and show it as usual. Never draft
+or save one unasked.
+
 ## How other skills use it
 
 `brief`, `prepare-meeting`, `whats-new` and `note` read the profile first (`configure` with `me:
