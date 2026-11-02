@@ -58,7 +58,8 @@ starts from the stored configuration and proposes changes to it.
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
 - **Firm admins.** Removing members, `groups`, `permissions`, `approves_skills`, `email_scope`,
-  `connectors` and `origination`'s sharing and caps change who sees or approves what, so once the
+  `meeting_scope`, `connectors` and `origination`'s sharing and caps change who sees or approves
+  what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
   caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
@@ -150,12 +151,15 @@ starts from the stored configuration and proposes changes to it.
   `added_via` built in, plus any `fields` the firm adds. Decisions take entries out (hold,
   pass, advance into a pipeline), and the entries stay, marked. A person's sourcing list is
   private; a team's is `firm`.
-- `email_scope` is who sees email, and meetings the nightly task files, without a scope:
-  `pipeline`, the default, shares it with the firm when it involves a company or person in the
-  pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it
-  to whoever filed it. Anything Alludium Brain finds sensitive stays private under any rule, and each
-  person can choose their own rule when they set up the nightly task. Change it only when a
-  partner asks.
+- `email_scope` and `meeting_scope` are who sees email and meetings filed without a scope. Each
+  always reaches the firm members on it (an email's sender and recipients, a meeting's invitees).
+  `pipeline` (the email default) also shares it with the firm when it involves a company or person
+  in the pipeline or portfolio; `firm` shares all of it; `recipients` (email) and `attendees` (the
+  meeting default) go no further. Anything Alludium Brain finds sensitive stays with the people on
+  it under any rule, and each person can choose their own email rule when they set up the nightly
+  task. Under `attendees`, colleagues who were not at a meeting do not see it, or who met whom,
+  until someone shares it; a firm that wants every pipeline meeting firm-wide sets
+  `meeting_scope: "pipeline"`. Change either only when a partner asks.
 - `mail_rules` changes which mail the nightly run files. Every read lists the firm's rule under
   **Mail the nightly run files**: its packs' kinds of mail to keep and to skip, each with a key
   and a line. `{"add": [{"key": "board_packs", "description": "board packs from portfolio

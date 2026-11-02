@@ -22,8 +22,8 @@ it states.
   or guess an ID or a link.
 - **One capture per meeting.** Several meetings mean several captures.
 - **Offer, don't file silently.** If the user shared or discussed the notes without asking to
-  file them, offer once in one line ("File these meeting notes in Alludium Brain, private to you?")
-  and file only after a yes. Offer once per meeting; if they decline, drop it. Never offer for a
+  file them, offer once in one line ("File these meeting notes in Alludium Brain for you and the
+  colleagues who were there?") and file only after a yes. Offer once per meeting; if they decline, drop it. Never offer for a
   meeting that came from the brain or is already in it.
 - **Do not repeat the notes** in your messages. They are stored; repeating them costs tokens.
 
@@ -31,9 +31,11 @@ it states.
 
 1. Find the meeting in the notes connector: the one the user named, or their most recent
    meeting. If several could match, list them (title and start time only) and ask which.
-2. Fetch the full notes: the generated summary and the user's own notes. Fetch the transcript
-   only if the user asks for it, and capture it separately with the same `url` and
-   `external_id` plus `/transcript`.
+2. Fetch the full notes: the generated summary. Fetch the transcript only if the user asks for
+   it, and capture it separately with the same `url` and `external_id` plus `/transcript`. If the
+   connector returns the user's own typed notes separately from the summary (Granola's private
+   notes), they are the user's alone: capture them as a separate note (step 8), never in the
+   meeting's text.
 3. If the notes connector gave no attendees, look the event up in the calendar connector, if
    there is one, for names and emails. When the notes connector or the calendar names the
    calendar event, keep its iCal UID and start time: Alludium Brain uses them to know that the
@@ -74,11 +76,19 @@ it states.
    `refs: [{"system": "ical", "external_id": "<iCal UID>"}]` when you have the event's UID
    (with the event's start as `occurred_at`). A transcript captured separately gets the same
    `refs` and `occurred_at`. The UID identifies a meeting only together with its start: a
-   recurring meeting shares one UID. Meetings
-   default to the firm scope when the user asked to file them. Use `scope: "private"` if the user
-   asks, or if you offered to file it, and then offer to share it in your reply.
-9. Reply in one or two lines (no source ID): the meeting title, the scope, the entities it was
-   linked to, any facts recorded or skipped, and the follow-ups recorded (each is private to its
+   recurring meeting shares one UID. Leave `scope` out: Alludium Brain files the meeting for the
+   colleagues on the invite (the user alone when nobody else from the firm was there), and the
+   firm's meeting rule may share it with the whole firm once it has checked it for sensitive
+   content. Pass `scope: "private"` only if the user asks to keep it to themselves, and
+   `scope: "firm"` if they ask to share it with the firm.
+   The user's own notes from step 2 go in a second `capture` with `kind: "note"`,
+   `scope: "private"`, `title: "My notes: <meeting title>"`, the notes word for word as `text`, the
+   same `occurred_at`, `entities` (the company) and `system`, `external_id` plus `/my-notes`, and
+   `refs: [{"system": "<system>", "external_id": "<the meeting's external_id>"}]`, so they join the
+   meeting but stay with the user.
+9. Reply in one or two lines (no source ID): the meeting title, who can see it (the result's
+   scope: the colleagues it names, or private to the user, with an offer to share it with the firm
+   if it is about a company the firm is working on), the entities it was linked to, any facts recorded or skipped, and the follow-ups recorded (each is private to its
    owner). If the result says it was already captured,
    say it was already in the brain; if it lists a related source (`same event`, `notes of`,
    `duplicate of`), say the meeting was already in the brain from another tool and is now

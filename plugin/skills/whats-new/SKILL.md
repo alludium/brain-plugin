@@ -20,12 +20,15 @@ run's summary and stop.
 - **Cite every line** with links to its sources, with their titles, from the result's "Source
   links", for example [Email from Priya Raman, 30 Oct 2026](https://…/sources/…); never a bare
   `src_…` ID.
-- **Private material.** Mark changes with scope `private` as "(private to you)".
-- **Email kept private.** A change that ends "kept private (…): share?" or "private, looks like
-  <a kind of mail the firm keeps, such as deal flow>: share?" is one of the user's own emails that
-  Alludium Brain did not share. List these together under **Kept private**, one line each with the
-  reason, and ask once whether to share any. Share only the ones the user names, with `share` and
-  `scope: "firm"`; never share one without being asked.
+- **Private material.** Mark changes with scope `private` as "(private to you)", and scope
+  `people` as "(you and the colleagues on it)".
+- **Email and meetings not shared with the firm.** A change that ends "kept private (…): share?",
+  "kept to the people on it (…): share?", "… looks like <a kind of mail the firm keeps, such as
+  deal flow>: share?" or "…, about a company in the pipeline: share with the firm?" is one of the
+  user's own emails or meetings that Alludium Brain did not share with the whole firm. List these
+  together under **Not shared with the firm**, one line each with the reason, and ask once whether
+  to share any. Share only the ones the user names, with `share` and `scope: "firm"`; never share
+  one without being asked.
 - Do not paste the tool's change list back as it is; group and shorten it.
 
 ## Steps

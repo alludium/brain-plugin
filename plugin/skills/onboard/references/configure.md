@@ -33,8 +33,8 @@
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
-- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `connectors` and
-  `origination`'s sharing and caps
+- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `meeting_scope`,
+  `connectors` and `origination`'s sharing and caps
   change who sees or approves what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
@@ -76,12 +76,15 @@
   preferences ("I like short briefs") go to the `profile` skill; the team entry (role, focus
   areas) stays here and shows in their profile.
 - `tag_vocabularies` and `dismiss_tags`: see "Tag vocabularies" below.
-- `email_scope` is who sees email filed without a scope (by the nightly task, mostly):
-  `pipeline`, the default, shares it with the firm when it involves a company or person in the
-  pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it
-  to whoever filed it. Mail Alludium Brain finds sensitive stays private under any rule, and each
-  person can choose their own rule when they set up the nightly task. Change it only when a
-  partner asks.
+- `email_scope` and `meeting_scope` are who sees email and meetings filed without a scope. Each
+  always reaches the firm members on it (an email's sender and recipients, a meeting's invitees).
+  `pipeline` (the email default) also shares it with the firm when it involves a company or person
+  in the pipeline or portfolio; `firm` shares all of it; `recipients` (email) and `attendees` (the
+  meeting default) go no further. Anything Alludium Brain finds sensitive stays with the people on
+  it under any rule, and each person can choose their own email rule when they set up the nightly
+  task. Under `attendees`, colleagues who were not at a meeting do not see it, or who met whom,
+  until someone shares it; a firm that wants every pipeline meeting firm-wide sets
+  `meeting_scope: "pipeline"`. Change either only when a partner asks.
 - `origination` is how inbound pitches are handled: `inbound_sharing` (`ask`, the default:
   the member a pitch reached is asked to share it; `pipeline`; `private`), the nightly caps
   `classify_usd_per_night`, `inbound_fit_check_usd_per_night` and
