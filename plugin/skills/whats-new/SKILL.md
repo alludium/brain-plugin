@@ -120,6 +120,9 @@ run's summary and stop.
      `statement`, who taught it (`by`) or that it was learned from a fix, and its id. If
      `lessons_proposed` is more than 0, add one line that the brain has proposals waiting and the
      `onboard` skill reviews them. Never accept a proposal from the digest.
+   - If the result has `usage_warnings` (firm admins only), add one line per item under
+     **Plan and usage**, as the server words it, and say Settings → Plan and usage has the detail.
+     Units only: never turn it into dollars.
    - If the result has `insights`, add **What the firm's decisions suggest**: each new or changed
      insight in one line, from its statement, and whether it waits for review (`candidate`). The
      `onboard` skill reviews them; never mark one from the digest.

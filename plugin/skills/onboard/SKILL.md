@@ -97,6 +97,11 @@ starts from the stored configuration and proposes changes to it.
   says the brain has them wrong, or wants another pack, tell them to ask Alludium. Custom fields,
   funds and tag vocabularies may name only the firm's entity types; `configure` refuses others
   and says which types the firm has.
+- `plan_usage` is the firm's plan, set by Alludium, and this month's use of its allowance in
+  units: meetings, emails and notes filed; document pages read; learning runs. Everything else is
+  unlimited. When someone asks about the plan, limits or usage, answer from it in those units,
+  never in dollars, and point to Settings → Plan and usage in the viewer. `configure` cannot change
+  the plan: to change it, ask Alludium.
 - `memo_headings` is the firm's IC memo outline, in order: each item a `heading` and an optional
   one-line `guidance` on what goes under it (a plain string is a heading with no guidance).
   The `ic-prep` skill drafts under these; `[]` goes back to its default headings.
