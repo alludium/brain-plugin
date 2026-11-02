@@ -81,10 +81,16 @@ email or meeting from other tools.
      `{"system": "email", "external_id": "<email>"}`, and the company, resolved as in step 4.
 4. **Email.** Search the mail connector for messages in the window, leaving out
    promotions, social and forum categories. Keep and skip messages by the firm's mail rule from
-   step 1, its kinds as listed; when in doubt, skip. Personal mail is never filed, whatever the
-   rule. Also skip automatic replies,
-   out-of-office replies and calendar notifications (an `Auto-Submitted` header, or a subject
-   such as "Automatic reply:", "Out of Office:", "Invitation:", "Accepted:"). Keep every message
+   step 1, its kinds as listed. A kind the rule keeps is kept even when the sender and their
+   company are new to the brain: for a venture firm, a message from someone outside the firm that
+   asks it to invest, introduces a company or founder to a member, or invites the firm into a
+   round or process, with its deck (step 5). Pass nothing to say what kind of message it is:
+   Alludium Brain recognises pitches and introductions itself. Vendor and service sales,
+   recruiting, newsletters and automated mail stay skipped. Personal mail is never filed,
+   whatever the rule. For everything else, precision first: when in doubt, skip. Also skip
+   automatic replies, out-of-office replies and calendar notifications (an `Auto-Submitted`
+   header, or a subject such as "Automatic reply:", "Out of Office:", "Invitation:",
+   "Accepted:"). Keep every message
    of a thread, each word for word: Alludium Brain sets quoted history aside. For each message kept,
    call `capture` with:
    - `kind: "email"`, `title`: the subject, `occurred_at`: the message date, `system`: `gmail`

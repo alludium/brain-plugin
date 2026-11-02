@@ -79,8 +79,9 @@ file and follow it instead of the steps below.
      reached (`inbound.to`) and, for resurfaced, what was known before with its date and reason
      ("passed 15 Sep: consumer app"), cited. The email's own "added email" line is the same
      source: fold it into this line, keeping its "share?" offer. Then offer once to triage them
-     ("3 pitches came in: triage now?"); for that, read `search` with `view: "inbound"`, which
-     gives each one's fit and whether anyone has decided on it since.
+     ("3 pitches came in: triage now?"). On a yes, load the firm's `triage-inbound` skill
+     (`configure(skill="triage-inbound")`) and follow it; if the firm has none, read `search` with
+     `view: "inbound"`, which gives each one's fit and whether anyone has decided on it since.
    - **Decisions and status changes** next, across all companies, one line each.
    - Then one short section per company, most recent change first, at most five lines each.
      Name a company's status when the change list gives it.
