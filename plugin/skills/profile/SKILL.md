@@ -132,4 +132,19 @@ use the writing style; firm documents keep the firm's own conventions (headings,
 firm configuration.
 
 
-For “my account”, “which workspace am I in?” or account/settings UI, call `configure(account={})`. It opens the account card with authenticated identity, available workspaces, private preferences and personal connection status. Do not pass `me` or firm updates in the same call. The card can change the user's task email preference using its returned identity guard. It cannot switch an assistant connector authorization; web workspace switching changes only the browser session. Never claim a workspace switched until a fresh authenticated tool result confirms it. Host authorization can affect every conversation using that connection, not only this chat.
+For “my account”, “which workspace am I in?” or workspace switching, call
+`configure(account={})` to open the account card. When this chat already has a
+`workspace_context`, include it to reopen the current selection. Pass account alone.
+The card can approve an additional workspace in the signed-in browser and select it for
+this chat without reconnecting the assistant. Approval is explicit, revocable and lasts
+up to eight hours; membership alone is not approval.
+
+Use the returned `workspace_context` on **every Brain tool call**, including uploads,
+profile changes and skill loading. After the user changes the card selection, read its
+visible selection message and replace the previous reference. If the host places the message
+in its composer, the user sends it to confirm; “Tell assistant” retries a failed handoff.
+Never retry a rejected context by omitting it. Open a fresh account card and let the user
+choose again. Do not claim success until the authenticated result names the selected
+workspace. Existing work already admitted keeps its original workspace. Other chat
+contexts retain their selections; removing workspace approval invalidates all contexts
+using that approval. These references route calls, not isolate chats sharing one credential.
