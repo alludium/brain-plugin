@@ -126,6 +126,13 @@ starts from the stored configuration and proposes changes to it.
   `stages` in the process's shape (`name`, `kind`, `description`, `checklist`, `documents`), and
   optionally `fund`. Decisions move companies on it (`log_decision` with `list`); capture only
   records a CRM record's stage there. The firm's own `process` stays its default pipeline.
+- A list with `type: "leads"` (a venture firm's origination list: a sourcing theme or a
+  watchlist) holds companies or people (`item_type`) the firm could pursue. Its stages are
+  fixed: New and Shortlisted, which a person sets through `capture`, then Contacted and Met,
+  which filed email and meetings give; do not pass `stages`. It has `owner`, `revisit_on` and
+  `added_via` built in, plus any `fields` the firm adds. Decisions take entries out (hold,
+  pass, advance into a pipeline), and the entries stay, marked. A person's sourcing list is
+  private; a team's is `firm`.
 - `email_scope` is who sees email, and meetings the nightly task files, without a scope:
   `pipeline`, the default, shares it with the firm when it involves a company or person in the
   pipeline or portfolio and keeps the rest private; `firm` shares all of it; `private` keeps it

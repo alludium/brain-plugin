@@ -85,9 +85,10 @@
   partner asks.
 - `origination` is how inbound pitches are handled: `inbound_sharing` (`ask`, the default:
   the member a pitch reached is asked to share it; `pipeline`; `private`), the nightly caps
-  `classify_usd_per_night` and `inbound_fit_check_usd_per_night` (USD, 1 each by default) and
-  `route_by` (`recipient`, the default, `focus_areas` or `responsibilities`). Only the fields
-  given change; every read shows all four. Sharing and the caps are firm admins only, once the
+  `classify_usd_per_night`, `inbound_fit_check_usd_per_night` and
+  `lead_fit_check_usd_per_night` (fit checks of companies added to leads lists; USD, 1 each by
+  default) and `route_by` (`recipient`, the default, `focus_areas` or `responsibilities`). Only
+  the fields given change; every read shows all five. Sharing and the caps are firm admins only, once the
   firm has one. Nothing acts on `pipeline` sharing or on routing yet: say so if asked. Change it
   only when a partner asks.
 - The configuration applies to the whole firm, so everyone at the firm sees it.

@@ -28,6 +28,13 @@ decision about anything, with its reasons, deciders, date and sources, and moves
   history; the company's status is the highest across them (a portfolio company that another
   fund passes on stays portfolio), so say the status it ends with. A private pipeline's
   decisions are private.
+- **Leads.** On a company on a leads list (an origination list: the brief's lists, or `search`
+  with the list), the decision is how it leaves: hold parks it, with `revisit_on` (YYYY-MM-DD)
+  when the user says when to look again ("park Lumenfold until March"); pass passes it; advance
+  takes it into the pipeline the user names (`list`, a pipeline; never the leads list itself),
+  else the firm's process, at that pipeline's first stage. The entry stays on the leads list,
+  marked. A firm decision on a company only on the user's private leads list makes it visible
+  to the firm: say so and ask before you record it.
 - **The right entity.** Resolve the name with `search` and pass the entity's ID (`org_…` or
   `deal_…`), never a short or shared name. A lookalike with a similar name is a different
   company.
