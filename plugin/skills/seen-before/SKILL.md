@@ -29,8 +29,9 @@ Look the whole list up in Alludium Brain with one batch `search`, then give each
 
 ## Steps
 
-1. Call `search` with `query: ""` and `queries`: one `{"name": …, "domain": …}` per row, in the
-   list's order (up to 200 rows a call). Each row comes back with its best match (status,
+1. Call `search` with `query: ""` and `queries`: one `{"name": …, "domain": …, "description": …}`
+   per row, in the list's order (up to 200 rows a call). `description` is the list's own one-line
+   description or sector column for the row, word for word; leave it out when the list has none. Each row comes back with its best match (status,
    domains, the latest meeting or email, how it matched, `coverage`) and any other candidates.
    A match `also_named` other entities that share the name (a fund named like the company):
    the match is the one the firm is closest to; name the others only if the user asks.
@@ -67,8 +68,14 @@ Look the whole list up in Alludium Brain with one batch `search`, then give each
    list.
 8. **Tags**: a match's `tags` (sector, theme, geography from the firm's vocabularies) go in a
    Tags column, shortest form (`sector: Climate > Carbon removal`). Leave the column out when no
-   match has any. Never guess tags for a `new` company; the brain only reports what its sources
-   say.
+   match has any. For a `new` company the only tags are the row's `list_tags`, which the brain
+   matched from the list's own description: show them with "(from the list)". Never add tags of
+   your own.
+9. **Comparable past cases**: a row with `past_cases` falls in the cohort of one of the firm's
+   learning-run insights. Add each `line` to its reason, with the insight's ID
+   ("comparable past passes: 6 of 8 cited retention [ins_…]"), and "not yet reviewed" for a
+   `candidate`. Say once, under the table, that these describe past decisions and are not a reason
+   to pass. If the result has a `past_cases_note`, say it in one line.
 
 ## Output
 
