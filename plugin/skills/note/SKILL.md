@@ -1,8 +1,6 @@
 ---
 name: note
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …", "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread.'
-
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
+description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
 ---
 
 # Note
