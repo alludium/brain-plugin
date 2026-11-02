@@ -72,8 +72,8 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    off my watchlist"), add `lists` on that entity: `[{"list": "climate_sourcing"}]`, with
    `stage` and `values` (by the list's field keys) when the user gave them, or `"remove": true`.
    `capture`'s description lists the lists the user can add to; `configure` gives them in full.
-   The note's text is the reason, in the user's words. A private list needs a private note;
-   leave `scope` out. A tag says what a company is; a list says what the firm is doing about it.
+   The note's text is the reason, in the user's words. A list that is not the firm's (private,
+   a group's or specific people's) needs a private note: leave `scope` out. A tag says what a company is; a list says what the firm is doing about it.
    If the list does not exist, ask before creating it (see the `onboard` skill's lists), and
    never invent a stage or value the user did not give. On a leads list (an origination list),
    `stage` is only New or Shortlisted: Contacted and Met come from filed email and meetings, so

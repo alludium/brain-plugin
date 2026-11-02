@@ -26,8 +26,9 @@ decision about anything, with its reasons, deciders, date and sources, and moves
   key and name its stages. A company on more than one needs `list`; `log_decision` refuses
   without it and names them: ask the user which. Each pipeline keeps its own stage, checklist and
   history; the company's status is the highest across them (a portfolio company that another
-  fund passes on stays portfolio), so say the status it ends with. A private pipeline's
-  decisions are private.
+  fund passes on stays portfolio), so say the status it ends with. A pipeline that is not the
+  firm's keeps its decisions no wider: a private pipeline's are private, and a group's or
+  specific people's are seen only by them and never change the firm's status.
 - **Leads.** On a company on a leads list (an origination list: the brief's lists, or `search`
   with the list), the decision is how it leaves: hold parks it, with `revisit_on` (YYYY-MM-DD)
   when the user says when to look again ("park Lumenfold until March"); pass passes it; advance

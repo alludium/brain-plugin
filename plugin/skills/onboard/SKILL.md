@@ -112,20 +112,31 @@ starts from the stored configuration and proposes changes to it.
   through that are not the deal process, such as an LP raise, co-investors, a sourcing theme,
   talent or a personal watchlist. Each has a `name`, what it holds (`item_type`:
   `organization`, `person`, `deal` or `fund`; required to create one), `scope` (`private`, the
-  default, or `firm`), optional `stages` in order (`[{"name": "Target"}, …]`; keep a stage's
+  default; `people` with `people`, firm members by name or email; `group` with `group`, a group
+  the user is in; or `firm`), optional `stages` in order (`[{"name": "Target"}, …]`; keep a stage's
   `key` when renaming it) and `fields` (`label`, `kind` `text`, `number`, `date`, `choice` with
   `choices`, `member` or `url`; `total: true` on a number adds up the list). `stages` and
   `fields` replace the list's. `archived: true` archives a list. A list's stages and values are
   the list's, never the company's. Entities go on a list through `capture` (the `note` skill).
-  To share a private list with the firm, call `share` with `list`. `portfolio` and `pipeline`
-  are built in: never create lists with those names. Lists are rows, not part of the
-  configuration: each member sees only the firm's lists and their own.
+  To change who sees a list, call `share` with `list` and the same `scope`, `people` or `group`
+  as for a source: only its creator or a firm admin may. A restricted list hides itself, its
+  entries and values, never the companies on it. `portfolio` is built in: never create a list
+  with that name. Lists are rows, not part of the configuration: each member sees
+  only the lists shown to them.
+- A list with `type: "fundraise"` (a venture firm's) is a raise for one of the firm's funds:
+  `fund` is required, `item_type` is `organization` or `person`, and it comes with the stages
+  Target, Contacted, First meeting, Diligence, Soft-circled, Committed, Passed and Lost to another
+  fund, and a `commitment` field. It is usually restricted to a group (`scope: "group"`).
+  Reaching Committed records the LP in the fund and its commitment, in the list's scope.
 - A list with `type: "pipeline"` is another deal pipeline beside the firm's process, for a
   firm that runs one per fund or strategy ("Fund II has its own pipeline"). Ask whether the firm
   runs one pipeline or several before making any. It takes `template` (as `process` does) or
   `stages` in the process's shape (`name`, `kind`, `description`, `checklist`, `documents`), and
   optionally `fund`. Decisions move companies on it (`log_decision` with `list`); capture only
-  records a CRM record's stage there. The firm's own `process` stays its default pipeline.
+  records a CRM record's stage there. The firm's own pipeline is the list keyed `pipeline`:
+  its stages are `process` (change them there, never through `lists`), and through `lists` with
+  `key: "pipeline"` and `type: "pipeline"` it can be renamed or given a `fund`; a firm admin can
+  restrict it with `share`.
 - A list with `type: "leads"` (a venture firm's origination list: a sourcing theme or a
   watchlist) holds companies or people (`item_type`) the firm could pursue. Its stages are
   fixed: New and Shortlisted, which a person sets through `capture`, then Contacted and Met,
