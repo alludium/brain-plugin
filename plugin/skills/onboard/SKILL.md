@@ -32,7 +32,10 @@ starts from the stored configuration and proposes changes to it.
 - `funds` is the firm's funds (name, vintage, size, `currency`, `cheque`, strategy); it replaces
   the list, and each fund becomes a Fund in the brain. Always give each fund's currency (an ISO
   code such as GBP); nothing defaults to dollars. `cheque` is the fund's own first cheque,
-  `{"min": 500000, "max": 1000000}`, in the fund's currency.
+  `{"min": 500000, "max": 1000000}`, in the fund's currency. `mandate` is what the fund may invest
+  in, from its LPA or the partners' words: `{"statement", "stages", "sectors", "regions", "since"}`
+  (`since` is the date it took effect). Changing a fund's mandate sends the firm's learning-run
+  insights back for review; say so before saving it.
 - Each section you pass (`fit`, `process`, `funds`, `custom_fields`, `members`,
   `memo_headings`, `house_style`, `templates`, `routines`) **replaces** the stored one. To add one criterion or one
   person, pass the whole thesis or the whole team. Never pass a section that is not changing.
