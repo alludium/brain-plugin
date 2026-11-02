@@ -102,9 +102,10 @@ here. Affinity only for now.
   under different emails, a renamed company with two domains) are captured as they are, each
   with its own refs. List them in the dry run as possible duplicates; Alludium Brain resolves them,
   and a wrong merge is worse than a split.
-- **Notes carry their author and date**: the author's name and email in an `Author:` line and
-  as a person entity (not an attendee), and `occurred_at` set to when the note was written.
-  Alludium Brain records you as the capturer; the `Author:` line says who wrote it.
+- **Notes carry their author and date**: the author's name and email in an `Author:` line, as a
+  person entity (not an attendee) and as `author`, and `occurred_at` always set to when the note
+  was written, so "what we knew on a date" works. Alludium Brain stores the note as the
+  author's and records you as the one who captured it.
 - **Meetings carry their attendees and time**: every attendee as a person entity with
   `attendee: true` and an email ref, and `occurred_at` set to the start time.
 
@@ -197,7 +198,10 @@ here. Affinity only for now.
       ```
 
       `entities`: the record by its Alludium Brain `id`, and the author as a person with their
-      email ref. If the CRM gives no author, write `Author: unknown` and leave the person out.
+      email ref. Also pass `author: {"name": "<First Last>", "email": "<email>"}`, so the note is
+      stored as theirs rather than yours (they are added to the firm's members if they are not
+      one). If the CRM gives no author, write `Author: unknown` and leave the person and `author`
+      out. A note kept private is captured without `author`.
       A note attached to a CRM meeting also gets `refs: [{"system": "<crm system>",
       "external_id": "meeting:<meeting id>"}]`, so Alludium Brain files it as notes of that meeting.
    3. **Its meetings** in the window, pages of 10. One `capture` per meeting, including one
