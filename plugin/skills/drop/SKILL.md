@@ -3,6 +3,17 @@ name: drop
 description: Upload files (pitch decks, data-room documents, memos, spreadsheets) to the firm's Alludium Brain without reading them. Use when the user attaches or points to files and says to drop, file, add or upload them to the brain, for example "drop this deck into the brain" or "file the Acme data room". Also uploads the firm's Word reference document (reference.docx) that styles Word exports. Also use it to offer, never silently, when the user shares a deck or document without asking to file it.
 ---
 
+For a user choosing a local file in chat, call `request_upload(interactive=true)` first. The Add
+Source card shows their signed-in firm and name, lets them choose Only me or Everyone at this
+firm, and transfers the original directly from their computer. It does not need a code sandbox
+or a desktop extension. The card follows processing and offers View source. Do not report a
+completed upload until processing is done. If the host cannot display the card, offer the
+browser Add Source link returned by the tool. For task outcomes, revisions, provenance or
+explicit entity links, use the existing script flow below so that context is preserved; do not
+silently replace it with an ordinary picker upload. Never request or display a card's transfer
+token. If sign-in changed, open a fresh card so the user can see the current firm and identity.
+
+
 # Drop files into Alludium Brain
 
 The files go straight from this machine or sandbox to Alludium Brain storage through upload URLs.
@@ -120,17 +131,26 @@ replaces the firm's current one for everyone, so say so first. If the result has
 
 ## Fallback when the upload cannot get through
 
-This sandbox cannot reach Alludium Brain's storage, so the files never left. Offer two ways, in this
-order:
+This sandbox cannot reach Alludium Brain's storage, so the files never left. Offer these options in order:
 
-1. **Email them in.** Call `configure` with no arguments. If it gives an email-in address, tell
+1. **Add Source in chat.** For an ordinary upload (the result includes `browser_upload_url`),
+   call `request_upload(interactive=true)` and ask the user to select the original. The card
+   transfers from their computer, without the sandbox. Follow its processing receipt, not
+   the earlier untransferred job. If the card is unavailable, offer `browser_upload_url`.
+   The user signs in to the same firm, selects the original file and explicitly chooses its
+   audience. It supports one ordinary document at a time, up to 25 MiB. Follow the browser's
+   receipt/source afterwards, not the earlier job that never received bytes. This page does
+   not preserve task-outcome links, external-system provenance or reference-document settings;
+   do not substitute it for those operations. Never describe the file as uploaded until the
+   browser confirms receipt, or as indexed until processing finishes.
+2. **Email them in.** Call `configure` with no arguments. If it gives an email-in address, tell
    the user they can send or forward the files as attachments from their own firm address to
    it (to file them under a deal, the `+<deal-name>` form it shows). Say that anything sent
    there is shared with the whole firm, so it is not a way to file something privately. If
-   `configure` gives no address, say the firm has none set up yet and go to 2.
-2. **Allow the upload host.** An org owner can allow the host from the `EGRESS FAIL` or `FAIL`
+   `configure` gives no address, say the firm has none set up yet and go to 3.
+3. **Allow the upload host, where supported.** On Team/Enterprise an org owner can allow the host from the `EGRESS FAIL` or `FAIL`
    line under Organization settings → Capabilities → Code execution → network egress. Then run
-   the drop again.
+   the drop again. The personal-plan package-manager toggle alone does not promise access to this host.
 
 The jobs from `request_upload` wait for the files for about an hour, then fail; nothing else
 needs undoing.

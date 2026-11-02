@@ -63,32 +63,59 @@ connector's `configure` tool with `me`, always on its own (no firm sections in t
 
 Only when the user asks, and only from text they wrote themselves.
 
+A style is for one **purpose**. `general` is for anything drafted in their name. Five more are for
+one kind of message each, and a draft of that kind uses that style in place of the general one:
+
+| Purpose | Learn from their own… | They might say |
+|---|---|---|
+| `outreach_cold` | first messages to people they had not met | "learn how I write cold emails" |
+| `intro_request` | messages asking someone to introduce them | "look at my past intro asks" |
+| `intro_double_opt_in` | introductions they made between two people | "learn from my intros" |
+| `follow_up` | nudges and follow-ups after no reply or a meeting | "how I follow up" |
+| `decline` | messages saying no | "learn how I pass on companies" |
+
+Pick the purpose from what they asked for. If it is unclear, ask: "Is this for your general
+writing, or one kind of message, such as cold emails?" Keep to one purpose per style. Never mix
+cold emails and declines into one style.
+
 1. **Ask which text**, if they have not said: their sent emails (through the mail connector, for
    example "my last 10 emails to founders"), memos or documents they wrote (through Drive or
    another connector), or notes they wrote in the brain (`search`, then only sources whose author is
-   them: the server refuses anyone else's). Skip forwarded or quoted text and other people's
-   replies. Six to twelve pieces are enough.
+   them: the server refuses anyone else's). For a purpose, keep only messages of that kind: a
+   decline style learns from declines, not from every sent email. Skip forwarded or quoted text and
+   other people's replies. Six to twelve pieces are enough (five for a purpose, if that is all
+   they have).
+   **Mail fetched through a connector**: offer to file the messages you will learn from, private,
+   with `capture` (their system and message IDs, `scope: "private"`), before saving the style. Then
+   cite each one by its `source_id`, so the excerpts stay references into their own filed mail and
+   go if they delete it. File them only on their yes. If they say no, cite the messages by system and
+   external ID instead.
 2. **Describe the style** in five to eight short lines: tone, typical length, structure (bullets
    or prose, what comes first), how they open and sign off, words or habits they use, and what
    they avoid. Pick two or three short excerpts (a few sentences each, word for word) that show it
    best and hold nothing they would not want kept in their profile.
-3. **Save it pending** with `me: {"style": {"description": …, "learned_from": "<what, as they
+3. **Save it pending** with `me: {"style": {"purpose": "<purpose>", "description": …, "learned_from": "<what, as they
    chose it, e.g. 10 sent emails to founders, October 2026>", "sources": [{"system": "gmail",
    "external_id": …, "title": "<subject>"}, …], "examples": [{"text": "<excerpt>", "system": …,
    "external_id": …, "title": …}]}}`. For a brain note, give `{"source_id": "src_…"}`, and for its
    excerpt `{"source_id": "src_…", "text": "<exact words from it>"}`: the server keeps only its
    place in the note, so the excerpt goes if the note is deleted. A new pending style replaces an
-   earlier pending one; the current style stays in use meanwhile.
+   earlier pending one of the same purpose. The current style for that purpose stays in use
+   meanwhile, and styles for other purposes are not touched.
 4. **Show it to the user** exactly as the result gives it (description and examples) and ask: "Save
    this as your writing style?" For changes, save it again (step 3). On a no, `forget` its ID.
 5. **On their yes**, call `me: {"approve_style": "prf_…"}` with the pending style's ID. It replaces
-   the current style. Reply in one line: "Saved your writing style (learned from …) [prf_…]."
+   the current style of the same purpose. Reply in one line: "Saved your writing style for cold
+   emails (learned from …) [prf_…]" (or "your writing style" for the general one).
 
 ## How other skills use it
 
 `brief`, `prepare-meeting`, `whats-new` and `note` read the profile first (`configure` with `me:
 {}`) and follow it: it changes length, order, emphasis and voice, never citations, what is cited, or
-who can see what. Only the approved style (`style`) is used, never `pending_style`. A request in the
+who can see what. Only approved styles are used, never a pending one. For a draft of one purpose
+(a cold email, an intro request, a decline), use that purpose's style from `styles` for voice, else
+the general `style`. The firm's template for that kind of message, if it has one, still decides
+what the message must contain. A request in the
 moment overrides the profile for that task. Drafts in the user's name (the `ic-prep` memo, an email)
 use the writing style; firm documents keep the firm's own conventions (headings, sections) from the
 firm configuration.
