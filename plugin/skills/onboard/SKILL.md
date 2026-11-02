@@ -391,8 +391,9 @@ companies?", "what has changed since the new fund?". This is a **learning run**.
    the default reads what the whole firm can see. Runs cost a little (a few cents; the firm's
    per-run budget) and take a minute or two; `configure` shows each run's status. If the partner
    wants it kept current, add `"after_decisions": 10` (or their number): the run then starts on its
-   own once that many new decisions in its cohort have come in (looked at daily). `{"id": "lrn_…",
-   "after_decisions": 0}` turns that off.
+   own once that many new decisions in its cohort have come in (looked at daily). Or, or as well,
+   `"every": "month"` (`week`, `month` or `quarter`) runs it on a schedule. `{"id": "lrn_…",
+   "after_decisions": 0}` or `"every": "off"` turns either off.
 3. Read what it found with `search` and `view: "insights"`. Show each insight's statement, its cases
    with their quoted reasons, the cases that went the other way, its questions and its limits.
    Say plainly that an insight describes past decisions: it is not a rule and it never rejects a
