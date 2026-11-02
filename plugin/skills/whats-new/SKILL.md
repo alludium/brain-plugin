@@ -8,8 +8,10 @@ description: A cited digest of what changed in the firm's Alludium Brain since a
 Turn the Alludium Brain connector's `whats_changed` result into a short digest, grouped by company,
 with every line cited.
 
-If this is the nightly filing run (the task prompt says so), read `file-my-day.md` next to this
-file and follow it instead of the steps below.
+If this is the nightly filing run (the task prompt says so), load the firm's `file-my-day` skill
+with the Alludium Brain connector, `configure(skill="file-my-day")`, and follow its **Run** section
+instead of the steps below. If `configure` says the firm has no skill by that name, say so in the
+run's summary and stop.
 
 ## Rules
 
@@ -123,61 +125,8 @@ file and follow it instead of the steps below.
 
 ## Set up the nightly task
 
-Do this when the user accepts the offer or asks for the nightly task.
-
-1. **Who sees their email and meetings.** Call `configure` with no arguments and read the firm's
-   email rule (`email_scope`; `pipeline` when it is not set), which the nightly run applies to
-   meetings too. Explain it in one line: `pipeline` shares an email or meeting with the firm when
-   it involves a company or person in the pipeline or portfolio, `firm` shares all of them,
-   `private` keeps all of it to the user. Whatever the rule, Alludium Brain keeps sensitive ones
-   (personal, HR, pay, legal, health, NDA, LP-confidential)
-   private, and their morning digest offers to share what was kept back. Ask whether the firm's
-   rule suits them or they want `private`, `pipeline` or `firm` for their own email.
-2. Check what will feed it: a notes connector (Granola, Fireflies, Otter, Fathom and so on) for
-   meetings, a calendar connector (Google Calendar or Outlook) for meetings with people outside
-   the firm that have no notes, a mail connector (Gmail or Outlook) for the email the firm keeps
-   (the step 1 read lists its mail rule under **Mail the nightly run files**: say it in one
-   line), and Slack for threads in chosen channels. Say which are connected and that missing ones
-   will be skipped.
-   If Slack is connected, ask which channels to file (for example `#deal-flow`, `#portfolio`;
-   none by default). Say that a public channel's threads are shared with the firm once Alludium Brain
-   has checked them for sensitive content, and a private channel's stay private to them. Direct
-   messages are never filed unless they ask for them.
-   Then record what you found with `configure` `connections` (each `{"category": …, "system": …}`
-   for the connectors you have: `email`, `calendar`, `meeting_notes`, `crm`, `drive`, `data`,
-   and `other` for Slack),
-   after saying in one line that everyone at the firm can see which systems each person has
-   connected (not their content). It replaces only the user's own entry.
-3. If you have a tool that creates scheduled tasks, show the user the name, schedule and prompt
-   below, ask them to confirm, then create it: name `Alludium Brain: file my day`, daily at 22:30 in
-   their time zone (cron `30 22 * * *`), no folder, with the prompt below. Pass on anything the
-   result says about when it runs, for example only while the app is open. Otherwise give them
-   these steps:
-   1. In Cowork, open **Scheduled** in the sidebar, then **New task**, then **Set up manually**.
-   2. Name it `Alludium Brain: file my day`. Set the frequency to **Daily** at 22:30, after the
-      working day.
-   3. Do **not** pick a folder: a task without a folder runs in the cloud, while the laptop
-      is closed.
-   4. Choose an approval mode that lets it call the connectors and Alludium Brain without waiting
-      for someone to approve each call.
-   5. Paste the prompt below, save, and click **Run now** once to check that it finishes.
-4. The prompt:
-
-   ```text
-   Use the Alludium Brain plugin's whats-new skill for the nightly filing run (file-my-day).
-   Window: from 00:00 yesterday, my time, until now.
-   File meetings from my notes connector, outside meetings from my calendar, the email my firm keeps from my mail connector and threads from my Slack channels into Alludium Brain.
-   Include meeting transcripts: no.
-   Email scope: firm default
-   Slack channels: none
-   Include direct messages: no
-   Finish with the summary table.
-   ```
-
-   Replace `firm default` with the user's choice from step 1 if they made one, and `none` with
-   the channels they chose in step 2.
-
-5. Tell the user that filing runs as them: meetings go in with the firm scope (colleagues can
-   see them), email and its attachments follow the email rule from step 1, and Slack threads
-   follow their channel. Re-filing
-   is safe: the brain skips records it already has.
+Do this when the user accepts the offer or asks for the nightly task. Load the firm's
+`file-my-day` skill with `configure(skill="file-my-day")` and follow its **Set up** section: it
+checks the connectors, asks who should see the user's email and meetings, and creates the daily
+scheduled task. If `configure` says the firm has no skill by that name, tell the user and ask which
+of the firm's skills listed in `configure`'s description to use instead.
