@@ -389,7 +389,10 @@ companies?", "what has changed since the new fund?". This is a **learning run**.
    "run": true}]`. A cohort can also take `decided_from` and `decided_to` (for example since a
    mandate change). `scope: "me"` reads only what the partner can see and keeps the results theirs;
    the default reads what the whole firm can see. Runs cost a little (a few cents; the firm's
-   per-run budget) and take a minute or two; `configure` shows each run's status.
+   per-run budget) and take a minute or two; `configure` shows each run's status. If the partner
+   wants it kept current, add `"after_decisions": 10` (or their number): the run then starts on its
+   own once that many new decisions in its cohort have come in (looked at daily). `{"id": "lrn_…",
+   "after_decisions": 0}` turns that off.
 3. Read what it found with `search` and `view: "insights"`. Show each insight's statement, its cases
    with their quoted reasons, the cases that went the other way, its questions and its limits.
    Say plainly that an insight describes past decisions: it is not a rule and it never rejects a
@@ -397,7 +400,10 @@ companies?", "what has changed since the new fund?". This is a **learning run**.
 4. Ask the partner, for each insight, whether it fairly describes the firm's past decisions. On a
    yes, `configure` with `insights: [{"id": "ins_…", "decision": "observe"}]`; on a no, `"reject"`
    with their reason as `note`. Never decide for them. A run that finds nothing says so: "not enough
-   evidence" is an answer.
+   evidence" is an answer. An insight goes **stale** at its review-by date (a year on), when the
+   thesis changes, or when a newer run no longer finds it: it leaves prep and briefs. `view:
+   "insights"` lists stale ones; ask whether each still holds, then `"observe"` brings it back (due
+   for review in a year), or `"reject"` or `"retire"` it.
 5. `kind: "fit_vs_decisions"` asks where the firm's thesis and what it actually did differ: parts of
    the thesis that companies it advanced did not meet, and reasons that recur in passes of companies
    that fit the thesis but that the thesis does not mention. It checks each company against the
