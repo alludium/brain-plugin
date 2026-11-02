@@ -36,7 +36,7 @@
 - **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `connectors` and
   `origination`'s sharing and caps
   change who sees or approves what, so once the
-  firm has a firm admin (the admin or owner role in its WorkOS organization), only admins can
+  firm has a firm admin (the admin role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
   caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
   none, anyone can, and onboarding asks to have one made. Everything else stays open to every
