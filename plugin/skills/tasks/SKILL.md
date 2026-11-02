@@ -1,6 +1,6 @@
 ---
 name: tasks
-description: 'Ask a colleague at the firm to do something through Alludium Brain, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "work on Alludium Brain task T-42" (or any "T-" number from Alludium Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for" or "decline T-42, I never met them".'
+description: 'Ask a colleague at the firm to do something through Alludium Brain, collate what everyone at the firm knows about a company, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "collate what everyone knows about Acme AI before IC", "ask whoever covers security to look at Acme", "ask everyone for their Q4 travel", "work on Alludium Brain task T-42" (or any "T-" number from Alludium Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for" or "decline T-42, I never met them".'
 ---
 
 # Tasks
@@ -24,6 +24,9 @@ Alludium Brain, and their answer goes back to the person who asked. Use the Allu
 - **Nothing is shared without a yes.** Notes and documents made for a task are private to the user
   until they approve them in the review step below. Never pass `share` before that yes, and pass
   only the ids they approved; there is no "share all".
+- **A collation shares only what each person approves.** Nobody else's material is read: each
+  colleague's own Claude looks through their own email and notes, and the person who asked sees
+  only where each stands until that colleague approves what they share.
 - **No content in the reference.** "Work on Alludium Brain task T-42" is all a hand-over needs; load the
   rest with the tool.
 
@@ -32,11 +35,58 @@ Alludium Brain, and their answer goes back to the person who asked. Use the Allu
 1. Resolve each company, person or deal the request is about with `search` (pass ids, not short
    names), and any source the user points to ("the deck", "my note from Tuesday").
 2. Confirm, then call `follow_ups` with `ask`: `to` (emails or full names; "me" for the user's own
-   task), `action` (a short imperative, at most 200 characters), `why` (the user's own words),
+   task; `"everyone"` for every member but the user; `{"responsibility": "security"}` or
+   `{"focus": "fintech"}` for whoever covers it in the firm's playbook), `action` (a short imperative, at most 200 characters), `why` (the user's own words),
    `about` (entity ids), `context` (source ids), `due_on` when they gave a deadline. Leave
    `audience` as `people` (answers go back to the user only) unless they want answers shared with
    the firm.
-3. Reply with the ref(s) the tool gives and any warning, in one or two lines.
+3. Reply with the ref(s) the tool gives and any warning, in one or two lines. When `to` was
+   everyone or a responsibility, name who it went to: if someone was not meant to be asked, offer to
+   cancel their task.
+
+## Collate what the firm knows
+
+For "collate everything everyone knows about Acme AI before Thursday's IC":
+
+1. Resolve the company (or person, fund or deal) with `search`.
+2. Confirm in two lines: who will be asked (everyone, named people, or whoever covers something),
+   what about, by when, and that each person's notes are shared **with the firm** once they
+   approve them (unless the user wants them to come back to the user only: `audience: "people"`).
+3. Call `follow_ups` with `ask`: `kind: "collate"`, `to`, `action` ("Tell me what you know about
+   Acme AI"), `why` in the user's words, `about` (the entity id), `due_on`. Each person gets their
+   own task and email. Reply with the request's ref (`T-40`).
+4. Later, `follow_ups` with `task: "T-40"` gives who has opened, has a draft ready, is done or
+   declined, and `combined`: the notes and documents shared so far, each with its author. A draft
+   is never shown; don't guess what is in it.
+5. To write it up, brief from the shared sources (cite their ids, as with any source); the brain
+   stores no combined summary. A summary of the user's own is their note (the `note` skill), citing
+   the contributions.
+
+## Work on a collation
+
+When the task loaded with `follow_ups` has a `collation`, someone is gathering what the firm knows.
+The tool's text lists the steps; in short:
+
+1. Tell the user who is collating, about what, and by when, and that nothing they have is shared
+   until they approve it.
+2. Start from what the firm already knows: `entity_brief` for each entity in `collation.about`.
+   Don't re-file anything already there.
+3. With the user's own connectors in this chat, look for email threads with the company's people,
+   meeting notes (Granola, Fireflies and others) and documents in their drive; `search` also
+   returns the user's own private notes. Read; don't file yet.
+4. Draft **one note**: what the user knows that the firm does not, each claim citing where it came
+   from (a source id, or the email or meeting by date and subject). Pick a short list of documents
+   worth adding, skipping any `search` finds by title already. Nothing found is a fine answer.
+5. File the draft with `capture` (`kind: "note"`, `task: "T-41"`, no `scope`) and documents with
+   `request_upload` (`task: "T-41"`). They are private drafts. If you capture an email or meeting so
+   the note can cite it, it stays private too: don't offer it for sharing unless the user asks.
+6. Review as below: show the note word for word and each document's title, and say who will see
+   them once approved (`collation.shared_with`, usually the firm). The user may edit the note
+   first (capture the edited text again and offer that one), untick documents, send it to the
+   person who asked alone (`audience: "people"`), or say there is nothing to add. Share only on
+   their yes, only the ids they approved.
+7. "Nothing to add" is an answer too: show the user the outcome the person who asked will read, and
+   complete the task (`status: "done"`, no `share`) only once they agree.
 
 ## Work on a task
 
@@ -79,7 +129,8 @@ their list:
 - **You asked**: `follow_ups` with `view: "asked"` lists what the user asked others for and where
   each stands (open, draft ready, done with its outcome, declined with a reason, cancelled). A
   done task's `outcomes` are the notes and documents shared back: cite their ids.
-- **A request to several people**: its own ref (`follow_ups` with `task`) gives who has opened,
-  done or declined theirs. It never shows a draft.
+- **A request to several people**: `view: "asked"` lists each one under `requests` with how many
+  stand where; its own ref (`follow_ups` with `task`) gives who has opened, done or declined
+  theirs, and `combined` (what was shared, by whom). It never shows a draft.
 - **Cancel**: only for a task the user asked for: `update` with `status: "cancelled"` (the request's
   ref cancels every open task in it).
