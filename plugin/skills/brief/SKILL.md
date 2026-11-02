@@ -110,6 +110,10 @@ then label it as not from the brain.
      who has not reported. Quote figures exactly as given, write "not reported" for missing
      ones, show both sides of a conflict, and never add, convert or estimate a figure yourself.
      For anything others will read, pass `audience: "firm"` so only firm-shared sources count.
+     If a figure is missing because its source is filed to a group the user is not in (the fund
+     administrator's statements, say) and the user holds `run_firm_reports` (`configure` says so),
+     add `as_firm: true`: such figures come back marked restricted, with the kind of source, its
+     date and its group but never its text. Quote them as restricted; never ask what the source says.
      When the firm has a report template for it (`configure` lists templates; a portfolio review
      or an LP update), pass `template` with `as_of` instead of `keys` and `compare_to`: one call
      returns each of its sections' figures for the period, with companies past its thresholds
