@@ -66,6 +66,11 @@ then label it as not from the brain.
      unknown into met or not met from your own knowledge, and say what would settle it. With
      `status` "no_thesis", say the firm has not set a thesis and suggest `onboard`. The result is
      `fit_check` (also `thesis_check`, for now); its `label` is the word to use ("Thesis").
+   - **How we found them.** `origin`, when present, says how the company came to the firm:
+     `first` is the attribution (channel, kind, who it reached, via whom, the note in the
+     source's words, the date and its source), `later` any later ones ("came back in October,
+     introduced by …"), and `latest_inbound` the latest pitch or introduction email (kind, ask,
+     date). Report them as they are, cited; never infer an origin the brain does not give.
    - **Past cases like this.** `insights` lists what the firm's learning runs found in past
      decisions on companies with the same tags: each with its counts, its cases and the ones that
      went the other way. Give them as the firm's past decisions, cited, marked reviewed or not;
@@ -176,6 +181,8 @@ then label it as not from the brain.
      the brief clearly shows an open item is done, you may suggest ticking it, quoting the
      source's exact words, and tick it with `log-decision` only if the user says yes. Never
      say an item is done because you think it is.
+   - **How we found them**, when the brief has `origin`: one line for the first origin and one
+     per later one, then the latest inbound email's ask and date. [src]
    - **Known as**: when the brief has `lessons`, the names the firm taught for it and those not
      to confuse it with, each with who taught it, in one line.
    - **Key facts**: value, as-of date and whose figure it is; a corrected or newer figure in a

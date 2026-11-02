@@ -54,8 +54,8 @@ starts from the stored configuration and proposes changes to it.
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
-- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope` and `connectors`
-  change who sees or approves what, and `packs` what the brain extracts for everyone, so once the
+- **Firm admins.** Removing members, `groups`, `permissions`, `approves_skills`, `email_scope` and
+  `connectors` change who sees or approves what, and `packs` what the brain extracts for everyone, so once the
   firm has a firm admin (the admin or owner role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
   caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
@@ -68,6 +68,13 @@ starts from the stored configuration and proposes changes to it.
   only. When `configure` lists `group_suggestions` (from the team's titles), offer them once
   ("Make a Partners group of Alice and Bob, so partner-only notes can be shared with just
   them?"); never create a group nobody asked for, and a title is never a reason to add someone.
+- `permissions` says which groups, besides the admins, hold a permission: `approve_policy` (adopt
+  a learning-run insight as the firm's rule) and `manage_spending` (change spend caps in
+  `settings`), each a list of group names or `"everyone"`. Firm admins only. Once the firm has a
+  Partners group, offer once: "Let Partners approve insights as policy?"
+- `settings` changes named limits, only those given: `learning_run_usd` (a learning run's model
+  budget, default 0.50; holders of `manage_spending`) and `learning_min_cases` (supporting cases an
+  insight needs, default 5).
 - `process` is the deal process. `{"template": "seed_to_series_a"}` alone sets up a template's
   stages (`seed_to_series_a`, the default; `multi_stage`; `growth`; `blank`). `{"stages": [...]}`
   replaces the stages, in order. Each stage has a `name`, a `kind` Alludium Brain understands
@@ -367,3 +374,17 @@ companies?", "what has changed since the new fund?". This is a **learning run**.
    yes, `configure` with `insights: [{"id": "ins_…", "decision": "observe"}]`; on a no, `"reject"`
    with their reason as `note`. Never decide for them. A run that finds nothing says so: "not enough
    evidence" is an answer.
+5. `kind: "fit_vs_decisions"` asks where the firm's thesis and what it actually did differ: parts of
+   the thesis that companies it advanced did not meet, and reasons that recur in passes of companies
+   that fit the thesis but that the thesis does not mention. It checks each company against the
+   thesis as the brain sees it today, so say that the comparison is with today's thesis.
+6. **Adopting an insight as policy** makes it the firm's rule. Only holders of `approve_policy` (the
+   firm's admins, or the groups `permissions` names) can, and only when the partner asks. Agree the
+   exact line first, in their words, and where it goes: a thesis criterion (`adopt_as:
+   "criterion"`, `text`, `weight` `nice` unless they say `must`) or an item on one stage's checklist
+   (`adopt_as: "checklist"`, `stage`, `text`; it defaults to the insight's first question). Read the
+   line back and wait for a yes, then call `configure` with only `insights: [{"id": "ins_…",
+   "decision": "policy", …, "note": "why"}]`. The line is written into the configuration and
+   recorded with the insight it came from. A policy still never rejects a company: a criterion shows
+   in the fit check as met, not met or unknown. Retiring a policy (`"retire"`) leaves the line in
+   the configuration until someone changes it; say so.

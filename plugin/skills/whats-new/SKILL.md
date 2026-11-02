@@ -1,6 +1,6 @@
 ---
 name: whats-new
-description: A cited digest of what changed in the firm's Alludium Brain since a given time - decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings, the email the firm keeps and chosen Slack threads into the brain.
+description: A cited digest of what changed in the firm's Alludium Brain since a given time - inbound pitches and introductions, decisions, status changes, new notes, meetings, emails and documents, shares and changed facts - across the firm or for one company. Load it before calling whats_changed. Use when the user asks "what's new?", "anything I should know this morning?", "what changed since yesterday?", "anything new on Acme this week?", "what changed in Ferrolith's numbers?" or for a morning digest. Also sets up and runs the nightly scheduled task that files each day's meetings, the email the firm keeps and chosen Slack threads into the brain.
 ---
 
 # What's new
@@ -72,7 +72,16 @@ file and follow it instead of the steps below.
 6. **Write the digest**:
    - First line: the window ("Since Thu 29 Oct 09:00 UK time") and, for the firm, how many
      companies and decisions ("4 companies, 1 decision").
-   - **Decisions and status changes** first, across all companies, one line each.
+   - **What came in** first, before everything else: the changes of kind `inbound` (a pitch, a
+     banker's process, an introduction or a co-investor's share classified in the window) and
+     `resurfaced` (one from a company the user could already see as passed, on hold or met). One
+     line each, resurfaced first: the company, the kind, the ask in the email's words, who it
+     reached (`inbound.to`) and, for resurfaced, what was known before with its date and reason
+     ("passed 15 Sep: consumer app"), cited. The email's own "added email" line is the same
+     source: fold it into this line, keeping its "share?" offer. Then offer once to triage them
+     ("3 pitches came in: triage now?"); for that, read `search` with `view: "inbound"`, which
+     gives each one's fit and whether anyone has decided on it since.
+   - **Decisions and status changes** next, across all companies, one line each.
    - Then one short section per company, most recent change first, at most five lines each.
      Name a company's status when the change list gives it.
    - **People** last, only if anything is left. Firm configuration changes (the
