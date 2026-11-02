@@ -116,7 +116,8 @@ classified when they were filed. Offer the update in one line, and on the user's
 my writing style" above for that `purpose`. Read the emails by their `source_ids`: they are already
 the user's own filed sources, so cite them by `source_id`. When updating, start from the current
 style and change only what the new emails show. Save it pending and show it as usual. Never draft
-or save one unasked.
+or save one unasked. If they say "not now", call `me: {"not_now": "<purpose>"}`: the offer comes
+back only after five more of their emails of that purpose.
 
 ## How other skills use it
 

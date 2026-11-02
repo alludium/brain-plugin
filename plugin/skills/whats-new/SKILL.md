@@ -114,7 +114,8 @@ run's summary and stop.
    - If the result has `style_nudges`, add one line each: "6 of your cold emails since your style
      for them was set: update it from them?" (or "learn your style for them?" when `has_style` is
      false). Draft nothing until the user says yes. On a yes, follow the `profile` skill's "Learn my
-     writing style" for that `purpose`, learning from the `source_ids` it gives.
+     writing style" for that `purpose`, learning from the `source_ids` it gives. On "not now", call
+     `configure` with `me: {"not_now": "<purpose>"}`: the offer comes back only after five more.
    - If the result has `learned`, add **What the brain learned**: one line per item, from its
      `statement`, who taught it (`by`) or that it was learned from a fix, and its id. If
      `lessons_proposed` is more than 0, add one line that the brain has proposals waiting and the
