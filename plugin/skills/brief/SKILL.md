@@ -114,6 +114,11 @@ then label it as not from the brain.
      or an LP update), pass `template` with `as_of` instead of `keys` and `compare_to`: one call
      returns each of its sections' figures for the period, with companies past its thresholds
      under "Needs attention".
+   - **LPs** ("who are our LPs?", "who's in Fund III?", "how is the Fund III raise going?"): one
+     `search` with `view: "lps"` and an empty `query` (`fund` for one fund, `type` organization or
+     person): each LP with its funds and commitment. A fund's `entity_brief` gives its `lps` and
+     its `raises` (the firm's fundraise lists for it, when it has any: count per stage and committed
+     total).
    - **The pipeline** ("what's in diligence?", "show me the pipeline"): one `search` with
      `view: "pipeline"` and an empty `query`, adding `stage` (a stage's name) for one stage. It
      lists each company at the stage with since when and its checklist progress, and hosts that
