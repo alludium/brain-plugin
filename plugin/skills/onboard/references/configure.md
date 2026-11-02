@@ -33,7 +33,8 @@
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
-- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope` and `connectors`
+- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `connectors` and
+  `origination`'s sharing and caps
   change who sees or approves what, and `packs` what the brain extracts for everyone, so once the
   firm has a firm admin (the admin or owner role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
@@ -82,6 +83,13 @@
   to whoever filed it. Mail Alludium Brain finds sensitive stays private under any rule, and each
   person can choose their own rule when they set up the nightly task. Change it only when a
   partner asks.
+- `origination` is how inbound pitches are handled: `inbound_sharing` (`ask`, the default:
+  the member a pitch reached is asked to share it; `pipeline`; `private`), the nightly caps
+  `classify_usd_per_night` and `inbound_fit_check_usd_per_night` (USD, 1 each by default) and
+  `route_by` (`recipient`, the default, `focus_areas` or `responsibilities`). Only the fields
+  given change; every read shows all four. Sharing and the caps are firm admins only, once the
+  firm has one. Nothing acts on `pipeline` sharing or on routing yet: say so if asked. Change it
+  only when a partner asks.
 - The configuration applies to the whole firm, so everyone at the firm sees it.
 
 - `systems` is the systems the firm uses, by category: `email`, `calendar`, `crm`, `drive`,
