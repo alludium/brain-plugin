@@ -35,7 +35,7 @@
   the team as stored. A dropped member loses the firm-member role; the person stays.
 - **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `connectors` and
   `origination`'s sharing and caps
-  change who sees or approves what, and `packs` what the brain extracts for everyone, so once the
+  change who sees or approves what, so once the
   firm has a firm admin (the admin or owner role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
   caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
@@ -62,12 +62,11 @@
   connected drive: `remove`, the default, hides it at once and deletes it with what only it
   supports once it is gone for good; `keep` keeps it, marked as removed from the drive. Change it
   only when a partner asks, and say which they chose.
-- `packs` is the kinds of work the brain records for the firm, primary first. `["vc"]` (venture:
-  deals, funds, theses, holdings) is the default and the only pack today, so onboarding leaves
-  it alone. Custom fields, funds and tag vocabularies may name only the firm's entity types;
-  `configure` refuses others and says which types the firm has. Changing packs changes what the
-  brain extracts for everyone, so it needs a firm admin: change it only when one asks.
-  Removing a pack hides its types; nothing is deleted.
+- `packs` is the kinds of work the brain records for the firm, primary first, set by Alludium
+  when it created the organisation. `configure` shows them and cannot change them: if someone
+  says the brain has them wrong, or wants another pack, tell them to ask Alludium. Custom fields,
+  funds and tag vocabularies may name only the firm's entity types; `configure` refuses others
+  and says which types the firm has.
 - `memo_headings` is the firm's IC memo outline, in order: each item a `heading` and an optional
   one-line `guidance` on what goes under it (a plain string is a heading with no guidance).
   The `ic-prep` skill drafts under these; `[]` goes back to its default headings.
