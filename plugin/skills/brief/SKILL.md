@@ -29,6 +29,15 @@ then label it as not from the brain.
   it's in my notes", "that email isn't about Acme", "FC is Ferncastle"), offer once to fix it and
   teach the brain, and do it with the `note` skill's "Teaching the brain" after a yes, naming the
   source by its id from this brief. A wrong figure is a correction note with the figure as a fact.
+- **Outside sources, offered once.** When the brief has the line "Outside sources: on for the
+  firm" and the company or person has no description, was never looked up, or was last looked up
+  more than six months ago, offer once in one line: "Look up <name> in outside sources (its
+  website and logo)? Only its name and domain are sent." On a yes, call `entity_brief` with
+  `enrich: true` for that one entity, answer from what the brain has now, and say the outside
+  sources arrive on its page within a minute or two. Never without a yes, never for a list, and
+  never when the line is absent (the firm has it off). Its result says what was asked and, when
+  nothing was, why: pass that on in one line. If you search the web yourself, send only the name
+  and domain, never the firm's notes, stages or thesis.
 - **Backfill only when asked.** When a company's brief says `coverage` "crm_only", offer
   to fill it in (below) and wait for a yes. Never backfill without one, and never for a list.
 
