@@ -51,13 +51,13 @@ starts from the stored configuration and proposes changes to it.
   is only for older plugins. Alludium Brain checks companies against each part (`entity_brief` with
   `fit_check`), so keep each part short and specific.
 - `members` is the whole team: name, email, role, `focus_areas`, `responsibilities` (what each
-  person owns at the firm, in the partner's words: "IC prep", "LP reporting") and
-  `approves_skills` (who may approve the firm's own skills; see the `playbook` skill). Focus and
+  person owns at the firm, in the partner's words: "IC prep", "LP reporting"). Who approves the
+  firm's own skills is the `approve_skills` permission, not a member field. Focus and
   responsibilities show on each person's page. `configure` refuses a list that leaves out a current member
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
-- **Firm admins.** Removing members, `groups`, `permissions`, `approves_skills`, `email_scope`,
+- **Firm admins.** Removing members, `groups`, `permissions`, `email_scope`,
   `meeting_scope`, `connectors` and `origination`'s sharing and caps change who sees or approves
   what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can
@@ -72,12 +72,20 @@ starts from the stored configuration and proposes changes to it.
   only. When `configure` lists `group_suggestions` (from the team's titles), offer them once
   ("Make a Partners group of Alice and Bob, so partner-only notes can be shared with just
   them?"); never create a group nobody asked for, and a title is never a reason to add someone.
-- `permissions` says which groups, besides the admins, hold a permission: `approve_policy` (adopt
-  a learning-run insight as the firm's rule) and `manage_spending` (change spend caps in
-  `settings`), each a list of group names or `"everyone"`. Firm admins only. Once the firm has a
-  Partners group, offer once: "Let Partners approve insights as policy?"
+- `permissions` says which groups, besides the admins (who hold every permission), hold each one:
+  `approve_skills` (approve, restore or retire the firm's skills, never one's own version;
+  everyone by default), `approve_policy` (adopt a learning-run insight as the firm's rule),
+  `final_decider` (who decides passes, investments and losses; advisory: `log_decision` notes a
+  decider outside it and never refuses; everyone by default), `manage_billing` (the firm's
+  billing: spend caps in `settings` today, the plan, boosters and invoices later; adding packs
+  stays with admins) and `run_firm_reports`, each a list of managed group names or `"everyone"`;
+  `[]` leaves it with the admins. Only the permissions named change. Firm admins only. The read
+  lists who holds each and `You can:` says what the caller can do. Removing a group drops its
+  grants and the result says who holds each now. Once the firm has a Partners group (and more
+  than about five people), offer once: "Let Partners approve skills and insights as policy, and
+  be the deciders of record?"; never change a grant nobody asked for.
 - `settings` changes named limits, only those given: `learning_run_usd` (a learning run's model
-  budget, default 0.50; holders of `manage_spending`) and `learning_min_cases` (supporting cases an
+  budget, default 0.50; holders of `manage_billing`) and `learning_min_cases` (supporting cases an
   insight needs, default 5).
 - `process` is the deal process. `{"template": "seed_to_series_a"}` alone sets up a template's
   stages (`seed_to_series_a`, the default; `multi_stage`; `growth`; `blank`). `{"stages": [...]}`

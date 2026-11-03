@@ -77,8 +77,10 @@ approver who did not write it approves it. Use the connector's `configure` tool 
   Sharing is a separate step (`propose`), and before it say who will see it: "Proposing shows the
   whole text to the firm's skill approvers."
 - **Never the author's own approval.** The server refuses an approval by the version's author. Do
-  not suggest ways around it; name who can approve if the user asks (the members marked
-  `approves_skills` in `configure`, or anyone else at the firm when none is marked).
+  not suggest ways around it; name who can approve if the user asks (the holders of
+  `approve_skills` in `configure`'s Permissions: the firm's admins and the groups it names,
+  everyone unless the firm narrowed it). Offer approve only when `configure` says `You can:`
+  approve_skills.
 - **A skill is instructions colleagues' assistants will follow.** Write nothing into it that the
   user did not ask for. When reviewing, read the flags the server shows and tell the reviewer
   plainly what each means.

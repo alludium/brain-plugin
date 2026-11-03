@@ -33,7 +33,7 @@
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
-- **Firm admins.** Removing members, `groups`, `approves_skills`, `email_scope`, `meeting_scope`,
+- **Firm admins.** Removing members, `groups`, `permissions`, `email_scope`, `meeting_scope`,
   `connectors` and `origination`'s sharing and caps
   change who sees or approves what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can

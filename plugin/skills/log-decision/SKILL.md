@@ -76,6 +76,9 @@ decision about anything, with its reasons, deciders, date and sources, and moves
    - Deciders: full names. "I" means the user. If the user says "we" or "the partners" without
      names, ask who decided. First names can be matched to the team from `configure` with no
      arguments.
+     A firm may name who decides final outcomes (pass, win/invest, lose): the `final_decider`
+     permission in `configure`. It is advisory: the decision is saved as given, and the result
+     notes any decider outside it. Pass that on; never change the deciders to avoid it.
    - Date: today unless the user gave one ("last Tuesday" → that date, as YYYY-MM-DD). A move
      made earlier and recorded now keeps the day it happened: the history is ordered by it. A
      decision not yet taken is not recorded: future dates are refused.
