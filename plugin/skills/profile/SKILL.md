@@ -132,9 +132,11 @@ use the writing style; firm documents keep the firm's own conventions (headings,
 firm configuration.
 
 
-For “my account”, “which workspace am I in?” or workspace switching, call
-`configure(account={})` to open the account card. When this chat already has a
-`workspace_context`, include it to reopen the current selection. Pass account alone.
+For “open my account/settings” or workspace switching, call `open_account()` to show
+the account card. For “which workspace am I in?” or a background identity check, use
+`configure(account={})` to read the data without opening a card. Reuse the current
+`workspace_context`; do not repeat this lookup before every Brain call. Include that
+context on either tool to retain the current selection. Pass `account` alone to configure.
 The card can approve an additional workspace in the signed-in browser and select it for
 this chat without reconnecting the assistant. Approval is explicit, revocable and lasts
 up to eight hours; membership alone is not approval.
