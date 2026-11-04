@@ -96,11 +96,12 @@ decision about anything, with its reasons, deciders, date and sources, and moves
    the next stage needs. If the user said items are done, match each to the checklist's
    wording. If a source you found clearly shows an unticked item of the current or the new
    stage is done, you may suggest it in the confirmation with the source and its exact words.
-5. **Confirm.** Show, and ask "Record this?":
+5. **Confirm.** Show, and ask "Record this?". Name the company or person, never its ID, and say
+   the status in plain words (in deal, not `in_deal`):
 
    ```text
-   Decision: advance Acme AI Ltd (org_…) from Partner meeting to Due diligence; status in_deal
-   (or, for a decide: "Decision about Carta (org_…), moves nothing; supersedes dec_…")
+   Decision: advance Acme AI Ltd from Partner meeting to Due diligence; status stays in deal
+   (or, for a decide: "Decision about Carta, moves nothing; replaces the decision of 12 Oct")
    Reasons: <exactly as given>
    Decided by: Clara Oyelaran, Tomas Brandt, on 2026-10-30
    Sources: [Partner meeting, 21 Oct 2026](…), [Clara's note, 22 Oct 2026](…) (private)
@@ -124,7 +125,7 @@ decision about anything, with its reasons, deciders, date and sources, and moves
    checked: two strong, one lukewarm") is recorded as its own cited note source. People can also
    tick items, with a note, on the company page in Alludium Brain or its card; the brief shows who
    ticked each one and their note.
-7. Reply in two or three lines (no source ID): the decision, the stage it moved
-   from and to and the status now, the items ticked, and any warnings from the result in
+7. Reply in two or three lines, with names and plain words and no IDs: the decision, the
+   stage it moved from and to and the status now, the items ticked, and any warnings from the result in
    plain words. If a cited private source was the user's own, offer to share it with `share`
    so colleagues can see why.

@@ -4,8 +4,8 @@ description: Upload files (pitch decks, data-room documents, memos, spreadsheets
 ---
 
 For a user choosing a local file in chat, call `request_upload(interactive=true)` first. The Add
-Source card shows their signed-in firm and name, lets them choose Only me or Everyone at this
-firm, and transfers the original directly from their computer. It does not need a code sandbox
+Source card shows their signed-in firm and name, lets them choose Only me or Whole firm,
+and transfers the original directly from their computer. It does not need a code sandbox
 or a desktop extension. The card follows processing and offers View source. Do not report a
 completed upload until processing is done. If the host cannot display the card, offer the
 browser Add Source link returned by the tool. For task outcomes, revisions, provenance or
