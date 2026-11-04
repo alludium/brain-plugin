@@ -16,6 +16,20 @@ asks comes from the server: the firm's packs, set by Alludium when it created th
 each name the sections they need, as questions in their own words. It is safe to run again: it always
 starts from the stored configuration and proposes changes to it.
 
+## Connection and scripted-import guidance
+
+For installation help or a message to colleagues, read `references/install.md`. Match the
+person's host: Claude app, Claude Code, Codex desktop (the plugin ZIP), or Codex CLI/IDE
+(MCP tools without bundled skills). Use the host context when known; ask only when unclear.
+If the connector is unavailable, help connect it before calling tools. Once connected, use
+`configure` with `account: {}` to check the signed-in person and firm before onboarding writes.
+Do not claim installation or sign-in succeeded just because a ZIP was downloaded.
+
+For a large local collection, Obsidian, Notion or a custom scripted import, offer the separate
+Brain CLI and its help page from the reference. Have code move the original content directly;
+do not read a whole vault into the conversation. Confirm the selection and audience, preview a
+small batch, then import only with authorization. Plugin installation does not authenticate the CLI.
+
 ## How `configure` works
 
 - With no arguments it returns the current configuration, and `proposals`: configuration the
@@ -345,13 +359,14 @@ buys and the words to say:
 5. **How the firm works**, if not done: "Teach Alludium Brain how we run <a recurring process the
    firm named>" or "Make our <document> a skill" (the `playbook` skill): "so everyone's assistant
    drafts in the firm's format".
-6. **The team**: a short message the partner can send colleagues: in Claude, install the Alludium Brain
-   plugin (Customize → Plugins → Add → Add marketplace → `alludium/brain-plugin`, unless the
-   firm already installed it for everyone), connect its connector on the plugin's Connectors tab
-   and sign in with their work email, then say "onboard me to Alludium Brain"; other assistants use
-   the setup prompt on Alludium Brain's Connect page. On a Team or Enterprise plan, a Claude Owner adds
-   the connector for the firm first (Organization settings → Connectors). List who has not
-   connected yet (the report's `team`). Alludium Brain sends no invitations itself.
+6. **The team**: draft a short message the partner can send colleagues, using the matching steps
+   in `references/install.md`: Claude's marketplace or Codex desktop's downloadable plugin ZIP,
+   then work-account sign-in and "Onboard me to Alludium Brain". For a mixed team, give both
+   routes. Keep the Claude Owner step for Team or Enterprise. List who has not connected yet
+   (the report's `team`). Alludium Brain sends no invitations itself.
+7. **Existing collections**, if the firm has a vault, Notion pages or another source to script:
+   offer the Brain CLI guide and access to the private import starter. Begin with a reviewed
+   selection; do not import a whole account or assume source permissions become Brain sharing.
 
 Reply with what was saved (the sections, in plain words; no source ID or link: the user does not
 need one for a configuration save) and the list. Then offer one thing to try: "Ask me what we
