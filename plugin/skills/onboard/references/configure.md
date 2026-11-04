@@ -33,6 +33,11 @@
   and names who would be dropped. To drop someone, name them (name or email) in `remove`, only
   after the partner has said to. `remove` on its own drops those people and keeps the rest of
   the team as stored. A dropped member loses the firm-member role; the person stays.
+- **Someone who left the firm** ("Tomas has left"): `deactivate` with their name or email, after
+  the partner confirms. They can no longer use Alludium Brain, everything they filed stays under
+  their name, and they stay on the team marked as left. `remove` of someone who has signed in does
+  the same; only someone who never signed in is dropped outright. `reactivate` lets them back in.
+  Both need a firm admin, and nobody can deactivate themselves.
 - **Firm admins.** Removing members, `groups`, `permissions`, `email_scope`, `meeting_scope`,
   `connectors` and `origination`'s sharing and caps
   change who sees or approves what, so once the
