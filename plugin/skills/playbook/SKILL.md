@@ -24,7 +24,10 @@ Two halves. **How the firm works** is firm configuration everyone's assistant re
     thresholds that flag a company (`{"key": "runway_months", "below": 9}`, `{"key": "arr",
     "change_pct_below": 0}`). From past reports: one data block per table they show, with the
     keys its columns hold. `search(view="portfolio", template=<key>)` then returns every block's
-    figures for the period, computed by the server.
+    figures for the period, computed by the server. A pipeline or deal-flow report's block is
+    `{"view": "pipeline", "keys": [...], "stale_days": 30}`: `keys` are the fields or tag
+    vocabularies its deal flow is broken down by (a region field, `sector`), `list` a pipeline's
+    key when the firm runs several; `search(view="pipeline", template=<key>)` returns its counts.
 - **Routines**: `configure(routines=[…])`, the whole list: `key` (`ic_meeting`,
   `portfolio_review`, `lp_reporting`, `sourcing`), `name`, `when`, `owners` (members' emails),
   `attendees`, `steps`, the `templates` it produces and the firm `skills` that do its work.

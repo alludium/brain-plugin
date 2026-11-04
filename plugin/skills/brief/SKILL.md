@@ -127,6 +127,16 @@ then label it as not from the brain.
      or an LP update), pass `template` with `as_of` instead of `keys` and `compare_to`: one call
      returns each of its sections' figures for the period, with companies past its thresholds
      under "Needs attention".
+   - **The pipeline over a period** ("how did the pipeline do last quarter?", "deal flow by source
+     this year", "what did we pass on in Q3?", "which deals have gone quiet?"): one `search` with
+     `view: "pipeline"`, `as_of` (the period's end) and `compare_to` (its start), `list` for one of
+     several pipelines, `keys` for the fields or tag vocabularies to break new deals down by
+     (`region`, `sector`) and `within_days` for when an open deal counts as stale (default 30).
+     The server counts everything: stages on both dates, new entries by origin and by those
+     fields, moves, decisions with reasons, conversion and stale entries, each count with its
+     companies. Quote the counts as given; never add or estimate one, and never infer a field the
+     firm did not record (a founder's gender or background). A firm template with pipeline
+     figures (`pipeline_report`) works as above, with `view: "pipeline"` and `template`.
    - **LPs** ("who are our LPs?", "who's in Fund III?", "how is the Fund III raise going?"): one
      `search` with `view: "lps"` and an empty `query` (`fund` for one fund, `type` organization or
      person): each LP with its funds and commitment. A fund's `entity_brief` gives its `lps` and
