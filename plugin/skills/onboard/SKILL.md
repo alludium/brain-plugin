@@ -121,6 +121,10 @@ starts from the stored configuration and proposes changes to it.
   The `ic-prep` skill drafts under these; `[]` goes back to its default headings.
   `house_style` is a short note on how the firm writes memos (spelling, units, length, tone);
   `""` clears it. Both are a list and a note, not a template: no formatting, fields or logic.
+- `extraction_guidance` is a short paragraph (600 characters at most), in the firm's words, on
+  what matters to it in documents ("net revenue retention by cohort; customer concentration").
+  The brain reads it when it structures uploaded documents, to look harder for those things. It
+  never replaces fields: a figure the firm wants tracked is a custom field. `""` clears it.
 - `templates` and `routines` are the rest of how the firm works (its other document formats and
   recurring processes); the `playbook` skill captures them. `templates` with key `ic_memo` is the
   same as `memo_headings` and `house_style`: set one or the other.

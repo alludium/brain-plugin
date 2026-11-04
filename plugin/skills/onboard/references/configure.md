@@ -77,6 +77,10 @@
   The `ic-prep` skill drafts under these; `[]` goes back to its default headings.
   `house_style` is a short note on how the firm writes memos (spelling, units, length, tone);
   `""` clears it. Both are a list and a note, not a template: no formatting, fields or logic.
+- `extraction_guidance` is a short paragraph (600 characters at most), in the firm's words, on
+  what matters to it in documents ("net revenue retention by cohort; customer concentration").
+  The brain reads it when it structures uploaded documents, to look harder for those things. It
+  never replaces fields: a figure the firm wants tracked is a custom field. `""` clears it.
 - `me` is a member's private profile, not firm configuration: never pass it here. A member's own
   preferences ("I like short briefs") go to the `profile` skill; the team entry (role, focus
   areas) stays here and shows in their profile.
