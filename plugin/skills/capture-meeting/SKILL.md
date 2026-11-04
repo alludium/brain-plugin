@@ -78,8 +78,8 @@ it states.
    `refs` and `occurred_at`. The UID identifies a meeting only together with its start: a
    recurring meeting shares one UID. Leave `scope` out: Alludium Brain files the meeting for the
    colleagues on the invite (the user alone when nobody else from the firm was there), and the
-   firm's meeting rule may share it with the whole firm once it has checked it for sensitive
-   content. Pass `scope: "private"` only if the user asks to keep it to themselves, and
+   user's own meetings setting (else the firm's rule) may share it with the whole firm once it has
+   checked it for sensitive content. Pass `scope: "private"` only if the user asks to keep it to themselves, and
    `scope: "firm"` if they ask to share it with the firm.
    The user's own notes from step 2 go in a second `capture` with `kind: "note"`,
    `scope: "private"`, `title: "My notes: <meeting title>"`, the notes word for word as `text`, the

@@ -24,7 +24,7 @@ run's summary and stop.
   `people` as "(you and the colleagues on it)".
 - **Email and meetings not shared with the firm.** A change that ends "kept private (…): share?",
   "kept to the people on it (…): share?", "… looks like <a kind of mail the firm keeps, such as
-  deal flow>: share?" or "…, about a company in the pipeline: share with the firm?" is one of the
+  deal flow>: share?" or "…, about a company on a list: share?" is one of the
   user's own emails or meetings that Alludium Brain did not share with the whole firm. List these
   together under **Not shared with the firm**, one line each with the reason, and ask once whether
   to share any. Share only the ones the user names, with `share` and `scope: "firm"`; never share

@@ -164,15 +164,18 @@ starts from the stored configuration and proposes changes to it.
   `added_via` built in, plus any `fields` the firm adds. Decisions take entries out (hold,
   pass, advance into a pipeline), and the entries stay, marked. A person's sourcing list is
   private; a team's is `firm`.
-- `email_scope` and `meeting_scope` are who sees email and meetings filed without a scope. Each
-  always reaches the firm members on it (an email's sender and recipients, a meeting's invitees).
-  `pipeline` (the email default) also shares it with the firm when it involves a company or person
-  in the pipeline or portfolio; `firm` shares all of it; `recipients` (email) and `attendees` (the
-  meeting default) go no further. Anything Alludium Brain finds sensitive stays with the people on
-  it under any rule, and each person can choose their own email rule when they set up the nightly
-  task. Under `attendees`, colleagues who were not at a meeting do not see it, or who met whom,
-  until someone shares it; a firm that wants every pipeline meeting firm-wide sets
-  `meeting_scope: "pipeline"`. Change either only when a partner asks.
+- `email_scope` and `meeting_scope` are the firm's defaults for email and meetings filed without
+  a scope. Each always reaches the firm members on it (an email's sender and recipients, a
+  meeting's invitees). `people_on_it` goes no further (the meeting default); `lists` (the email
+  default) also shares it with whoever can see the lists its companies and people are on: the firm
+  for a firm-wide list or pipeline, the group for a restricted one, and only that group when any of
+  its lists is restricted; lists only one person or specific people can see never count. `firm`
+  shares all of it. Old names are still read: `recipients`, `private` and `attendees` are
+  `people_on_it`, `pipeline` is `lists`. Anything Alludium Brain finds sensitive stays with the
+  people on it under any rule. Each person may set their own for what they file with `my_scope`
+  (`{"email": …, "meetings": …}`, `firm_default` to follow the firm's again), in the nightly setup
+  or in Settings → Connections and sharing. `my_scope` is not gated: anyone sets their own, the
+  firm sees it, and it never changes anyone else's. Change the firm's only when a partner asks.
 - `mail_rules` changes which mail the nightly run files. Every read lists the firm's rule under
   **Mail the nightly run files**: its packs' kinds of mail to keep and to skip, each with a key
   and a line. `{"add": [{"key": "board_packs", "description": "board packs from portfolio
