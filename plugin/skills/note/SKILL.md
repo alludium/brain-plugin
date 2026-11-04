@@ -164,3 +164,19 @@ there to everyone who can see it, in Alludium Brain's viewer too. Use `capture` 
   `capture` each. Say who will see them before adding any.
 - Comments follow the document to its new versions; one whose passage was removed is listed
   against the version it was made on.
+
+## Review an imported source's matching
+
+When asked to review an import's company or person match, read `configure` with
+`source_review: {"source_id":"<src_…>"}`. Explain the candidate names, quoted identity properties
+or heading, and why the match is pending. Ask the user to choose unless their instruction already
+names the decision. Send the returned proposal `id` and `version` in `decision`, with `action`
+`approve`, `reject`, `defer` or `undo`; `approve` also needs the chosen `entity_id`. Refresh after
+any stale-version refusal. Never treat a model confidence score as approval or teach an alias from
+one review. Confirming a match changes an association, not the source's audience.
+
+For a structured document not yet imported, `capture` with `dry_run: true` previews matching
+without storing sources, groups, links or reviews. It requires the same document payload,
+`matching`, explicit sharing and `preserve_audience: true`; check the live schema first. Prefer
+the import starter CLI/UI for collections, keeping source text out of chat. A preview is not
+permission to import, and matches can change as the firm's knowledge or sharing changes.

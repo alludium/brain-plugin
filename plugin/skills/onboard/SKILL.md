@@ -28,7 +28,13 @@ Do not claim installation or sign-in succeeded just because a ZIP was downloaded
 For a large local collection, Obsidian, Notion or a custom scripted import, offer the separate
 Brain CLI and its help page from the reference. Have code move the original content directly;
 do not read a whole vault into the conversation. Confirm the selection and audience, preview a
-small batch, then import only with authorization. Plugin installation does not authenticate the CLI.
+small batch, then import only with authorization. For Obsidian, offer the starter's local UI:
+`brain-import ui` selects vault/folders, property mappings and sharing. Its dry run uses
+`capture` with `dry_run: true`, `matching` and `preserve_audience: true`, after verifying that
+`brain tools` advertises dry_run. Do not strip safeguards on older servers. Explain that this
+preview sends the snapshot to Brain but stores no sources or matches; `plan`/`inspect` and
+`brain upload --dry-run` remain local-only. Keep uncertain matches for Sources review.
+Plugin installation does not authenticate the CLI.
 
 ## How `configure` works
 
