@@ -32,8 +32,8 @@ then label it as not from the brain.
 - **Outside sources, offered once.** When the brief has the line "Outside sources: on for the
   firm" and the company or person has no description, was never looked up, or was last looked up
   more than six months ago, offer once in one line: "Look up <name> in outside sources (its
-  website and the search providers the firm has on, such as Exa search)? Only its name and domain
-  are sent." On a yes, call `entity_brief` with
+  website, the search providers the firm has on, such as Exa search, or the firm's data
+  provider)? Only its name and domain are sent." On a yes, call `entity_brief` with
   `enrich: true` for that one entity, answer from what the brain has now, and say the outside
   sources arrive on its page within a minute or two. Never without a yes, never for a list, and
   never when the line is absent (the firm has it off). Its result says what was asked and, when
