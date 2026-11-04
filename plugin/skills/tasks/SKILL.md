@@ -1,6 +1,6 @@
 ---
 name: tasks
-description: 'Ask a colleague at the firm to do something through Alludium Brain, collate what everyone at the firm knows about a company, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "collate what everyone knows about Acme AI before IC", "ask whoever covers security to look at Acme", "ask everyone for their Q4 travel", "work on Alludium Brain task T-42" (or any "T-" number from Alludium Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for" or "decline T-42, I never met them".'
+description: 'Ask a colleague at the firm to do something through Alludium Brain, collate what everyone at the firm knows about a company, work on a task someone asked of you, and see what you asked for. Use when the user says "ask Priya to call Acme''s references before Thursday", "get Tomas to send the DPA", "collate what everyone knows about Acme AI before IC", "ask whoever covers security to look at Acme", "ask everyone for their Q4 travel", "work on Alludium Brain task T-42" (or any "T-" number from Alludium Brain), "what''s on my plate?", "what have people asked me for?", "what did I ask Tomas for?", "I''ve done T-42", "cancel what I asked Jonah for", "decline T-42, I never met them", "ask Tomas for access to that meeting" or "share it with Clara" (an access request).'
 ---
 
 # Tasks
@@ -43,6 +43,29 @@ Alludium Brain, and their answer goes back to the person who asked. Use the Allu
 3. Reply with the ref(s) the tool gives and any warning, in one or two lines. When `to` was
    everyone or a responsibility, name who it went to: if someone was not meant to be asked, offer to
    cancel their task.
+
+## Ask for access to a meeting or email
+
+A brief, the network or meeting prep may say a colleague met someone in a meeting or email that
+is not shared with the user ("not shared with you", with its ids). Only who, which company, when
+and which kind show; never guess what it said.
+
+1. Confirm: "Ask whoever filed it to share it with you? They decide, and you're told either way."
+2. On a yes, call `follow_ups` with `ask: {kind: "access", access: ["src_…"], why: "…"}` (the
+   user's words, optional). Leave out `to` and `action`: each item's author gets the task.
+3. Reply with who was asked and the ref. Something already asked for is not asked again (the
+   tool says so). Once shared, the user can open it like any other source.
+
+## Answer an access request
+
+When the task loaded with `follow_ups` is an access request (`request.kind: "access"`), a colleague
+asked to see meetings or emails the user filed. The task lists them; the user can open each.
+
+1. Tell the user who asked, which meetings or emails (kind, date, who was on them) and why.
+2. It is the user's call. Share: `follow_ups(update=[{id: "T-42", status: "done"}])`, which lets
+   the colleague open them as the user can (and the other records of the same meeting the user
+   filed). Decline: `status: "dismissed"`, with a `reason` only if the user gives one.
+3. Never share without the user's yes.
 
 ## Collate what the firm knows
 
