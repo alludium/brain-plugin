@@ -180,3 +180,12 @@ without storing sources, groups, links or reviews. It requires the same document
 `matching`, explicit sharing and `preserve_audience: true`; check the live schema first. Prefer
 the import starter CLI/UI for collections, keeping source text out of chat. A preview is not
 permission to import, and matches can change as the firm's knowledge or sharing changes.
+
+The import wizard also resolves uncertain subjects before filing. `matching_search` on a dry run
+returns existing identities visible to the chosen audience. Explicit human choices use
+`import_review: {snapshot, choices: [{fingerprint, action, entity_id?}]}`; actions are approve,
+reject (leave unlinked), or defer. Approval requires an existing entity of the subject's type.
+Use the snapshot/fingerprint from the preview, never invent them. This remains read-only with
+`dry_run: true`; the same reviewed capture without dry_run stores each note and its choices
+atomically. A stale snapshot is refused. Keep collection text out of chat by using the importer;
+never label an agent's inference as a human confirmation. Existing settled decisions use Sources.

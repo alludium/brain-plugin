@@ -33,7 +33,10 @@ small batch, then import only with authorization. For Obsidian, offer the starte
 `capture` with `dry_run: true`, `matching` and `preserve_audience: true`, after verifying that
 `brain tools` advertises dry_run. Do not strip safeguards on older servers. Explain that this
 preview sends the snapshot to Brain but stores no sources or matches; `plan`/`inspect` and
-`brain upload --dry-run` remain local-only. Keep uncertain matches for Sources review.
+`brain upload --dry-run` remain local-only. The wizard can save explicit human choices before import: confirm a candidate, search another
+existing identity of the same type and audience, leave unlinked, or defer to Sources. These use
+`capture.import_review` bound to the preview snapshot and `matching_search` on a dry run. Never
+invent a human choice or derive it from a note. Stale choices require a fresh dry run.
 Plugin installation does not authenticate the CLI.
 
 ## How `configure` works

@@ -8,19 +8,19 @@ In Codex, run `codex plugin marketplace add alludium/brain-plugin`, then install
 **Alludium Brain** from that marketplace in the plugin browser and start a new chat.
 Marketplace approval is not required for this private distribution route.
 
-## CLI 0.29.107
+## CLI 0.29.108
 
-Download [alludium_brain_cli-0.29.107-py3-none-any.whl](downloads/alludium_brain_cli-0.29.107-py3-none-any.whl), then run:
+Download [alludium_brain_cli-0.29.108-py3-none-any.whl](downloads/alludium_brain_cli-0.29.108-py3-none-any.whl), then run:
 
 ```sh
-uv tool install ./alludium_brain_cli-0.29.107-py3-none-any.whl
+uv tool install ./alludium_brain_cli-0.29.108-py3-none-any.whl
 brain login
 brain tools
 ```
 
 Python 3.12+ and an OS keyring are required; uv can install Python. Upgrade by downloading the
 new wheel and running the same command with `--upgrade`.
-[CLI source and usage guide](downloads/alludium_brain_cli-0.29.107.tar.gz) · [SHA-256 checksums](downloads/SHA256SUMS)
+[CLI source and usage guide](downloads/alludium_brain_cli-0.29.108.tar.gz) · [SHA-256 checksums](downloads/SHA256SUMS)
 
 The CLI calls the same MCP tools as your AI, without a model in the transfer path. Folder uploads
 are private by default and additive: changed files become additional snapshots, not replacements.
