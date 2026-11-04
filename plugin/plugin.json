@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "brain",
-  "version": "0.29.106",
+  "version": "0.29.107",
   "description": "The firm's shared memory in Claude: onboard the firm by interview or from its own documents (process, strategy, LPA, PPM), import from the CRM (Affinity, Attio, HubSpot), capture notes, meetings, decks, spreadsheets (cited by cell), fund documents (typed and routed on arrival) and deal email (shared by the firm's email scope rule), tag companies by sector, theme and geography, log decisions and move deals through the firm's process, track follow-ups, ask colleagues for tasks and work on the ones asked of you, check a company against the firm's thesis, draft IC memos, ask what the firm knows and how it is connected to a company, check sourcing lists, prepare for meetings and see what changed, with cited answers; teach it names, link fixes and field names so it does not repeat a mistake.",
   "author": {
     "name": "Alludium"

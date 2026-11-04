@@ -214,6 +214,9 @@ Plugin installation does not authenticate the CLI.
   given change; every read shows all four. Sharing and the caps are firm admins only, once the
   firm has one. Nothing acts on `pipeline` sharing or on routing yet: say so if asked. Change it
   only when a partner asks.
+- Origination's Searches and theses (nightly source feeds, research hunts, curated verticals, thesis
+  generation) are set up with the firm skill `set-up-search` (`configure(skill="set-up-search")`),
+  not here: load it when a partner asks for one.
 - The configuration applies to the whole firm, so everyone at the firm sees it.
 
 ## Rules
