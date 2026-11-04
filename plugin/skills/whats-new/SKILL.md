@@ -56,7 +56,8 @@ run's summary and stop.
    lookalikes apart as the `brief` skill does, and pass its ID as `entity`.
 3. Call `whats_changed` with `since`, `entity`, and `limit: 200`. For a morning digest across the
    firm, add `mine: true`: `upcoming` then lists the user's own next meetings (soonest first);
-   open the digest with them, one line each, before the changes.
+   open the digest with them, one line each, before the changes. `reports_due` lists the reports
+   the user's routines owe soon or late; put them right after the meetings.
 4. **Group.** Every change lists the entities it is about. Group by the company, fund or deal
    each one is about. The firm's own members and the firm's own organization are not groups; a
    change about only people goes under the company they work for if the change says so, else
@@ -101,6 +102,12 @@ run's summary and stop.
      cancelled, one line each with who, the outcome text in their words (or the reason for a
      decline) and the ref; cite each shared note or document in `outcomes` by its link. Leave out
      either section when it is empty.
+   - **Reports due**, from `reports_due` (with `mine`), after the meetings: one line each, as the
+     result gives it: the report and its period, the due date and whether it is late, how many
+     companies have reported, the sections asked of colleagues and how many are back, and last
+     period's report as a link ("Q3 LP update due Sat 14 Nov: 2 of 12 companies have reported; 3
+     sections asked, 1 back; last quarter's"). Offer to draft one: load the firm skill the routine
+     names (`configure` lists routines with their `skills`) with `configure(skill=…)` and follow it.
    - **Your follow-ups** last, from `follow_ups` in the result (the user's own, open): overdue
      ones first with how late they are, then those due soonest, at most eight lines, each with a
      link to its source (keep the `fu_…` ID for `update`; the user needs no ID). Say "(waiting on …)" for `waiting_on`. Leave the
