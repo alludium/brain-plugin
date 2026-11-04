@@ -137,8 +137,10 @@ deal summary), it is the author's document, not a note. File it only on their sa
 - `kind: "document"`, a title naming what it is, and `text`: the draft exactly as the author last
   saw it, markdown included, with no reply text around it;
 - `scope: "private"` unless they say to share it, and `entities` linked by `id`;
-- `system: "claude"` and `external_id` `<doc-type>/<entity id>/<author email>` (for example
-  `lp-update/fund_…/clara@northwind.vc`), always; an artifact's link goes in `url`;
+- `system: "claude"` and `external_id`, always: for a report under one of the firm's templates,
+  `<template key>[@<period>]/<subject id>` (for example `lp_update@2026-Q3/fund_…`), one report per
+  template, subject and period, whoever files it; for any other draft,
+  `<doc-type>/<entity id>/<author email>`. An artifact's link goes in `url`;
 - no `facts`: its figures are already in the brain under their own sources.
 
 Filing an edited draft again with the same `system` and `external_id` stores a new version of it,
