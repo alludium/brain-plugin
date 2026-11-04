@@ -63,8 +63,8 @@ starts from the stored configuration and proposes changes to it.
   the same; only someone who never signed in is dropped outright. `reactivate` lets them back in.
   Both need a firm admin, and nobody can deactivate themselves.
 - **Firm admins.** Removing members, `groups`, `permissions`, `email_scope`,
-  `meeting_scope`, `connectors` and `origination`'s sharing and caps change who sees or approves
-  what, so once the
+  `meeting_scope`, `connectors` and `origination`'s sharing, caps, models and scoring rubric change
+  who sees, approves or pays for what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
   caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
