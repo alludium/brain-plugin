@@ -19,8 +19,8 @@ starts from the stored configuration and proposes changes to it.
 ## Connection and scripted-import guidance
 
 For installation help or a message to colleagues, read `references/install.md`. Match the
-person's host: Claude app, Claude Code, Codex desktop (the plugin ZIP), or Codex CLI/IDE
-(MCP tools without bundled skills). Use the host context when known; ask only when unclear.
+person's host: Claude app, Claude Code, ChatGPT (workspace GitHub import or permitted ZIP,
+respecting Desktop only labels), Codex desktop or CLI (plugins), or the IDE extension (tools only). Use the host context when known; ask only when unclear.
 If the connector is unavailable, help connect it before calling tools. Once connected, use
 `configure` with `account: {}` to check the signed-in person and firm before onboarding writes.
 Do not claim installation or sign-in succeeded just because a ZIP was downloaded.
@@ -360,8 +360,8 @@ buys and the words to say:
    firm named>" or "Make our <document> a skill" (the `playbook` skill): "so everyone's assistant
    drafts in the firm's format".
 6. **The team**: draft a short message the partner can send colleagues, using the matching steps
-   in `references/install.md`: Claude's marketplace or Codex desktop's downloadable plugin ZIP,
-   then work-account sign-in and "Onboard me to Alludium Brain". For a mixed team, give both
+   in `references/install.md` for their exact host and workspace role,
+   then work-account sign-in and "Onboard me to Alludium Brain". For a mixed team, give the relevant
    routes. Keep the Claude Owner step for Team or Enterprise. List who has not connected yet
    (the report's `team`). Alludium Brain sends no invitations itself.
 7. **Existing collections**, if the firm has a vault, Notion pages or another source to script:

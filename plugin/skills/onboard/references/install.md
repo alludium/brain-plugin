@@ -26,17 +26,49 @@ https://github.com/alludium/brain-plugin/raw/refs/heads/main/downloads/brain.zip
 
 Ask the person to download it without unpacking, open Plugins in Codex desktop and select the
 ZIP through the manual installation option. Do not invent a precise button label if their app
-uses different wording. If the option is missing, ask them to contact hello@alludium.ai with
-their app version. Connect the plugin's MCP server, complete browser sign-in, and start a new
+uses different wording. If the option is missing, offer `codex plugin marketplace add
+alludium/brain-plugin`, then installation from that marketplace in the plugin browser. ZIP is
+not the only Codex route. If neither works, contact hello@alludium.ai with the app version. Connect the plugin's MCP server, complete browser sign-in, and start a new
 chat. The ZIP brings both skills and tools. Do not route a desktop user through standalone
 `codex mcp add` as though it installs the plugin, or tell them marketplace approval is needed
 to use the ZIP. For updates, use the latest ZIP with the app's update or replacement flow.
 
-## Codex CLI or IDE without the desktop plugin
+## Codex CLI
 
+Codex CLI supports plugins: `codex plugin marketplace add alludium/brain-plugin`, then enter
+`/plugins`, install Alludium Brain from that marketplace, connect and sign in. Start a new
+session to load its skills and tools. Local marketplace setup does not import a ChatGPT workspace
+plugin or establish web availability.
+
+## Codex IDE extension or tools-only fallback
+
+The IDE extension does not support plugins.
 `codex mcp add alludium-brain --url https://app.brain.alludium.ai/mcp`, then
 `codex mcp login alludium-brain`, connects the tools. It does not install the plugin skills.
 Skip this if the plugin already supplies the connection. Start a new session after connecting.
+
+## ChatGPT web and desktop
+
+Use an existing workspace plugin first. A ChatGPT workspace admin can import GitHub marketplaces:
+Admin → Plugins → Add → Import marketplace, Source https://github.com/alludium/brain-plugin,
+Path empty, default branch for updates. Authorize GitHub access, review results and make Brain
+available to the intended roles. Members install from the workspace's Plugins tab and connect
+their own accounts. New marketplaces sync daily. Give non-admins the steps to send to their admin.
+
+Also give the direct ZIP link: https://github.com/alludium/brain-plugin/raw/refs/heads/main/downloads/brain.zip.
+Where plugin upload is available, upload as a plugin, install, then connect and sign in. Do not
+attach the ZIP to a conversation or send users to the developer submission portal. Workspace
+admins may need to allow Upload plugins and Upload plugins with custom MCP servers.
+
+For either import route, respect a Desktop only label: imported MCP packages can be desktop-only
+even with HTTPS servers. Import success is not web compatibility. Work or Codex in the desktop
+app also supports local marketplaces: `codex plugin marketplace add alludium/brain-plugin`, then
+restart and install from that marketplace. This does not import a workspace plugin or establish
+availability in regular Chat or on the web.
+
+For an unsupported surface or unavailable installation, offer a custom MCP connection to the
+Brain URL with OAuth, explaining that it provides tools without bundled skills. Keep one connection.
+Customer steps: https://app.brain.alludium.ai/help/start/chatgpt-plugin.md.
 
 ## Check sign-in, then onboard
 
