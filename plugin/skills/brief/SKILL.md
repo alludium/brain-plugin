@@ -9,6 +9,14 @@ Answer from Alludium Brain only, through the connector's `search` and `entity_br
 knowledge of a company is not the firm's memory; leave it out unless the user asks for it, and
 then label it as not from the brain.
 
+For the firm’s own funds, use `search(view="funds")`. Ordinary `search(type="fund")` also
+finds funds mentioned in sources that other firms manage; a mention is not ownership.
+For a directory rather than a company brief, use `search(view="list", type="organization")` or
+`view="people"`. `query` filters names, aliases and identity domains; `status`, `tags`, `kind`
+(people) and `relationship` narrow it. `sort`, `direction` and `group_by` apply to the complete
+visible result before `limit`/`offset`; use returned totals, never count only the current page.
+A tag can classify a person or company only where its cited evidence is visible.
+
 ## Rules
 
 - **Cite everything.** Each fact, quote and claim ends with a link to the source it came from,
