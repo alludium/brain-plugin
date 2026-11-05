@@ -88,6 +88,11 @@ run's summary and stop.
      ("3 pitches came in: triage now?"). On a yes, load the firm's `triage-inbound` skill
      (`configure(skill="triage-inbound")`) and follow it; if the firm has none, read `search` with
      `view: "inbound"`, which gives each one's fit and whether anyone has decided on it since.
+   - **From your watch lists** next, when the result has `watch`: each move in `watch.inbox` (tier
+     A or B, so in the Inbox) on one line with the person, the move, why they are watched
+     (`group_label`) and the tier, cited; then `below_tier` as one count line ("6 people you
+     watch changed jobs"); then `unwatched_met` as one line offering to add them to a watch list
+     with `set-up-search`.
    - **Decisions and status changes** next, across all companies, one line each.
    - Then one short section per company, most recent change first, at most five lines each.
      Name a company's status when the change list gives it.
