@@ -9,6 +9,8 @@ The profile is the user's own memory in Alludium Brain: their preferences, remem
 writing style. Only they can see it; it is never searched, summarised or shared with the firm, and
 it follows them to any host connected to the brain (Claude, ChatGPT, the nightly run). Use the
 connector's `configure` tool with `me`, always on its own (no firm sections in the same call).
+The connector lists `me` by name and one line; if a change below needs a field this skill does not
+show, `configure(describe=["me"])` returns every field and allowed value before you write.
 
 ## Rules
 

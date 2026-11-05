@@ -1,5 +1,11 @@
 # How `configure` works
 
+- The connector lists each section by name and one line only. `describe` (alone) with the
+  sections you are about to write, e.g. `{"describe": ["fit", "funds", "members"]}`, returns each
+  one's fields, allowed values, examples and rules, who may change it and whether you can, and
+  its current value with `config_version`. Call it once before the first write of those sections
+  in a conversation, and again for a section a refusal names: a refused update lists each wrong
+  value (`process.stages[1].kind: …`) and changes nothing.
 - A read (no arguments) gives the whole configuration with its `config_version`, and the latest
   changes, skill versions, lessons and suggested tags with their totals; `full` (e.g.
   `["history"]`) gives one of them in full. It leaves out the theme's logo (`logo_bytes` says it
@@ -52,7 +58,8 @@
   change who sees or approves what, so once the
   firm has a firm admin (the admin role in its WorkOS organization), only admins can
   change them; `configure` names the admins and says whether the
-  caller is one. If a non-admin asks, say who can do it rather than trying. While the firm has
+  caller is one, and `describe` says for each section whether you can (`Who:`). If a non-admin
+  asks, say who can do it rather than trying. While the firm has
   none, anyone can, and onboarding asks to have one made. Everything else stays open to every
   member.
 - `groups` are the firm's managed groups: who a note or document can be shared with besides the

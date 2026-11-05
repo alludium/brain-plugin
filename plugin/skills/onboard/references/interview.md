@@ -70,7 +70,9 @@ re-run to change what is configured. The rules in SKILL.md apply.
 3. **Confirm.** Show what will be saved, section by section. On a re-run show only the sections
    that change, as before and after, and name any member who would be dropped. Ask
    "Save this?" and wait for a clear yes. Apply any corrections and confirm again.
-4. Call `configure` with only the changed sections. For `process`, pass every stage, with
+4. If you have not described them in this conversation, call `configure` with `describe` and the
+   changed sections; if `Who:` says you cannot change one, tell the partner who can and leave it
+   out. Then call `configure` with only the changed sections. For `process`, pass every stage, with
    its stored `key`, kind, description, checklist and documents, including stages that are not
    changing. For `members`, pass the full team,
    including people who are not changing, with their stored emails, roles and focus areas,

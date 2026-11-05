@@ -8,7 +8,10 @@ description: Onboard a firm or a person to Alludium Brain, research first. For t
 Ask the brain first, then public sources, then the person. Never ask what either already knows.
 Everything goes through the Alludium Brain connector's `configure` and `capture` tools. How
 `configure` works (each section, `systems`, `connections`, `cites`, tags) is in
-`references/configure.md`; read it before the first write.
+`references/configure.md`; read it before the first write. The connector lists each section only
+by name and one line: before the first write of a section in a conversation, call `configure`
+with `describe` and every section you will write (`describe: ["fit", "process", "members"]`), and
+follow the fields, allowed values and rules it returns.
 
 Interview a partner or lead about what the firm does and who is on the team, confirm what you
 heard, then save it with the Alludium Brain connector's `configure` tool. What the firm's setup
@@ -41,6 +44,11 @@ Plugin installation does not authenticate the CLI.
 
 ## How `configure` works
 
+- `describe: ["<section>", …]`, alone, returns each section's fields with their allowed values,
+  its rules, who may change it (`Who:`; "not you" means ask the person it names, never try) and
+  its current value, with `config_version`. Describe a section before you first write it in a
+  conversation. A refused update names each wrong value and the sections to describe: describe
+  them, correct the values and call again; never drop a section to get past a refusal.
 - With no arguments it returns the current configuration, and `proposals`: configuration the
   brain proposed from the firm's own documents, waiting for a decision. Each has an `id`, a
   `section` (`process`, `thesis` or `funds`), the proposed `value`, the `quotes` it rests on, and
@@ -105,16 +113,17 @@ Plugin installation does not authenticate the CLI.
   everyone by default), `approve_policy` (adopt a learning-run insight as the firm's rule),
   `final_decider` (who decides passes, investments and losses; advisory: `log_decision` notes a
   decider outside it and never refuses; everyone by default), `manage_billing` (the firm's
-  billing: spend caps in `settings` today, the plan, boosters and invoices later; adding packs
-  stays with admins) and `run_firm_reports`, each a list of managed group names or `"everyone"`;
+  money: firm Searches today, the plan, boosters and invoices later; adding packs stays with
+  admins) and `run_firm_reports`, each a list of managed group names or `"everyone"`;
   `[]` leaves it with the admins. Only the permissions named change. Firm admins only. The read
   lists who holds each and `You can:` says what the caller can do. Removing a group drops its
   grants and the result says who holds each now. Once the firm has a Partners group (and more
   than about five people), offer once: "Let Partners approve skills and insights as policy, and
   be the deciders of record?"; never change a grant nobody asked for.
-- `settings` changes named limits, only those given: `learning_run_usd` (a learning run's model
-  budget, default 0.50; holders of `manage_billing`) and `learning_min_cases` (supporting cases an
-  insight needs, default 5).
+- `settings` changes named limits, only those given: `learning_min_cases` (supporting cases an
+  insight needs, default 5; holders of `approve_policy`). How many learning runs the firm may run
+  a month is its plan's (`plan_usage`); Alludium sets what a run may spend, never in dollars to
+  the firm.
 - `process` is the deal process. `{"template": "seed_to_series_a"}` alone sets up a template's
   stages (`seed_to_series_a`, the default; `multi_stage`; `growth`; `blank`). `{"stages": [...]}`
   replaces the stages, in order. Each stage has a `name`, a `kind` Alludium Brain understands
@@ -323,7 +332,7 @@ them" (the `drop` skill, then `references/interview.md` step 1a for the proposal
    `status:…` section, its confirmed organisations go on their page's capture, each with one of
    the section's statuses as the page says (`status:portfolio|exited`: `"portfolio"` or
    `"exited"`).
-2. `configure` with the section and `cites`: one per item that came from a source, with the
+2. `configure` with the section (described first, as above) and `cites`: one per item that came from a source, with the
    `source_id` the capture returned and the exact quote. Items the partner gave need no cite.
    A refused cite means the quote is not in the captured text: fix the quote, never drop the
    check.

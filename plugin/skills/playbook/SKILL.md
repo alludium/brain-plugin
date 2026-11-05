@@ -7,7 +7,10 @@ description: Capture how the firm works in Alludium Brain and manage the firm's 
 
 Two halves. **How the firm works** is firm configuration everyone's assistant reads: `templates`
 (its document formats), `routines` (its recurring processes) and each member's `responsibilities`.
-**Firm skills** are instructions that use it. Use the connector's `configure` tool throughout.
+**Firm skills** are instructions that use it. Use the connector's `configure` tool throughout. The
+connector lists each section by name and one line: before first writing `templates`, `routines`,
+`theme` or `skills` in a conversation, call `configure(describe=[…])` with them for their fields,
+allowed values, rules and who may change them.
 
 ## How the firm works
 
