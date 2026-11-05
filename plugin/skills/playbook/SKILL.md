@@ -33,7 +33,8 @@ Two halves. **How the firm works** is firm configuration everyone's assistant re
   `attendees`, `steps`, the `templates` it produces and the firm `skills` that do its work.
 - **Who owns what**: `responsibilities` on each member in `members` (pass the whole team, as
   `onboard` does). It shows on their person page ("At the firm: responsible for IC prep").
-- **How drafts look**: `configure(theme={…})`, the whole theme (it replaces; `{}` clears it).
+- **How drafts look**: `configure(theme={…})`, the whole theme (it replaces; `{}` clears it, except
+  the logo, which stays unless you pass `logo`, and `""` removes it).
   Drafts Claude files under these templates show in Alludium Brain, and in cards, as documents in it,
   and print from the browser to PDF: `accent` and `ink` (`#rrggbb`, dark enough to read on white
   paper; the server refuses light ones), `heading_font` and `body_font` (family names, never

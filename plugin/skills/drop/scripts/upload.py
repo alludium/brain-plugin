@@ -31,6 +31,10 @@ DEFAULT_DIRS = ["/mnt/user-data/uploads", "uploads", "."]
 SKIP_NAMES = {".DS_Store", "desktop.ini", "Thumbs.db"}
 # The types request_upload accepts (server/src/vcbrain/extract.py).
 ACCEPTED = {
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".webp": "image/webp",
     ".pdf": "application/pdf",
     ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",

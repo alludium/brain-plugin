@@ -1,5 +1,14 @@
 # How `configure` works
 
+- A read (no arguments) gives the whole configuration with its `config_version`, and the latest
+  changes, skill versions, lessons and suggested tags with their totals; `full` (e.g.
+  `["history"]`) gives one of them in full. It leaves out the theme's logo (`logo_bytes` says it
+  is there; `full: ["logo"]` reads it).
+- An update returns only what it changed: those sections as they now are, under `config`, and the
+  new `config_version`. Read again (no arguments) when you need the rest. Pass the
+  `config_version` you read with an update: if someone changed a section you are replacing since
+  you read it, `configure` refuses and changes nothing, so read again, apply the user's change to
+  what is there now and save that.
 - With no arguments it returns the current configuration, and `proposals`: configuration the
   brain proposed from the firm's own documents, waiting for a decision. Each has an `id`, a
   `section` (`process`, `thesis` or `funds`), the proposed `value`, the `quotes` it rests on, and

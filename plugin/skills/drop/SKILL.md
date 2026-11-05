@@ -55,7 +55,8 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    python3 "${CLAUDE_SKILL_DIR}/scripts/upload.py" --prepare <file or directory> ...
    ```
 
-   Tell the user about any `SKIP` lines (unsupported types such as images).
+   Still PNG, JPEG and WebP images are supported (up to 20 megapixels); animated images are not.
+   Tell the user about any `SKIP` lines (unsupported types such as zip files or legacy Office files).
 3. Call the Alludium Brain connector's `request_upload` once, with `files`: one entry per file,
    with `filename`, `content_type` and `sha256` copied exactly from its line (up to 50 files a
    call). Add `entities` to an entry if the user said who that file is about. Resolve all the
