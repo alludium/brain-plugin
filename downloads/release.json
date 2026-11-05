@@ -1,9 +1,9 @@
 {
-  "version": "0.29.112",
-  "source_commit": "8cdcfdc417d5eb84af9b13b1d02aaa23a805b108",
+  "version": "0.29.113",
+  "source_commit": "7efbed93166bdd3224ce52ff19c39ded2a7695a1",
   "files": {
-    "alludium_brain_cli-0.29.112-py3-none-any.whl": "190344d4970090f15544704b4e58983f5caa772be6126851ef2430966b8bc976",
-    "alludium_brain_cli-0.29.112.tar.gz": "3094f5471d5745119482fc3126bc341ddf5c889c15a9ee7503cedb6db346f36e",
-    "brain.zip": "5a946b176f6c3956a5bce50604822af8b245a4e8aa3149ed8d6b0e6519d3ab2d"
+    "alludium_brain_cli-0.29.113-py3-none-any.whl": "d996697d3a80f4028410a682111e6b5f5d672959ac3e6c5d36a1d66d1022efea",
+    "alludium_brain_cli-0.29.113.tar.gz": "06c7357c4a5d6dfa8746f94bf9631511a5a4bcbbdde7e6e912a706336bcde42f",
+    "brain.zip": "12417ada4245d90da12746b6175de0024756480a82fd83c0c56ed24866d7f156"
   }
 }

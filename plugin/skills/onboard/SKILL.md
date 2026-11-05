@@ -455,8 +455,9 @@ companies?", "what has changed since the new fund?". This is a **learning run**.
 2. Define and start a run with `configure`: `learning_runs: [{"name": "Consumer passes",
    "kind": "decision_reasons", "outcome": "pass", "cohort": {"tags": ["sector:Consumer"]},
    "run": true}]`. A cohort can also take `decided_from` and `decided_to` (for example since a
-   mandate change). `scope: "me"` reads only what the partner can see and keeps the results theirs;
-   the default reads what the whole firm can see. Runs cost a little (a few cents; the firm's
+   mandate change). `scope: "private"` reads only what the partner can see and keeps the results theirs,
+   `scope: "group"` with `group` reads as that group sees and keeps them the group's; the default
+   reads what the whole firm can see. Runs cost a little (a few cents; the firm's
    per-run budget) and take a minute or two; `configure` shows each run's status. If the partner
    wants it kept current, add `"after_decisions": 10` (or their number): the run then starts on its
    own once that many new decisions in its cohort have come in (looked at daily). Or, or as well,
