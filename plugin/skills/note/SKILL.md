@@ -165,6 +165,18 @@ there to everyone who can see it, in Alludium Brain's viewer too. Use `capture` 
 - Comments follow the document to its new versions; one whose passage was removed is listed
   against the version it was made on.
 
+## Roles and investor classifications
+
+A person may be both founder and investor. When the user states a role or investor type, capture
+it as a sourced tag on that person or company: `entity_role:founder`, `entity_role:investor`,
+`investor_type:venture_capital`, `investor_type:angel`, `investor_type:private_equity`,
+`investor_type:corporate_venture` or `investor_type:family_office`. Use only the classifications
+the firm's tools offer. Founder and angel describe people; the other investor types describe
+organisations. Never infer VC status from a name, employer, shareholder list or fund vehicle.
+Classifications keep the note's audience and may be removed with a later sourced tag prefixed
+with `-`. They do not make a fund ours or assert that we co-invested. An actual co-investment is
+a cited `co_investor_with` relation to our firm or one of its configured managed funds.
+
 ## Review an imported source's matching
 
 When asked to review an import's company or person match, read `configure` with
