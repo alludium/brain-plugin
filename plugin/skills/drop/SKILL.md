@@ -74,7 +74,9 @@ The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not f
    A Word file's own comments (and replies, and done) come in as comments on it, under their Word
    authors' names; say so in your report when the user mentions them.
    Add `scope: "private"` (for the whole call) if the user asked, or if you offered the drop
-   yourself; then offer to share the files in your report (`share` with each source ID). Without
+   yourself; then offer to share the files in your report (`share` with each source ID and the
+   scope the user chooses). When the user names who should see them, pass `scope: "people"` with
+   `people`, or `scope: "group"` with `group`. Without
    a scope, fund documents (LPA, side letter, subscription booklet, administrator's statement)
    stay private to the user, and every file is private until the brain has read what it is; tell
    them, and that `share` shows one to the firm. Each upload in the

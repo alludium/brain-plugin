@@ -112,8 +112,9 @@ decision about anything, with its reasons, deciders, date and sources, and moves
    ```
 
    If a source is private, say colleagues will see the decision but not that source. Use
-   `scope: "private"` only if the user asks; a private decision does not change the firm's
-   stage or status. Wait for a clear yes, and apply any corrections before writing. Leave out
+   `scope: "private"` only if the user asks, or `scope: "group"` with `group`, or
+   `scope: "people"` with `people`, when they name who should see it; only a firm decision
+   changes the firm's stage or status. Wait for a clear yes, and apply any corrections before writing. Leave out
    a suggested tick the user does not say yes to.
 6. Call `log_decision` with `entity` (the ID), `stage` and/or `outcome`, `reasons`,
    `deciders`, `decided_on`, `source_ids`, `scope`, `supersedes` when it replaces an earlier
