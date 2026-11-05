@@ -90,6 +90,14 @@ A tag can classify a person or company only where its cited evidence is visible.
      source's words, the date and its source), `later` any later ones ("came back in October,
      introduced by …"), and `latest_inbound` the latest pitch or introduction email (kind, ask,
      date). Report them as they are, cited; never infer an origin the brain does not give.
+   - **As a lead.** `lead`, when present, says the company or founder is an Origination lead:
+     who found it (`found_by`: the Search, its thesis, the date), where it is (`list`,
+     `position`, `mark`), its stored `score` (total, tier, and each component's weight, value and
+     reason with the sources it cites), the thesis behind it and the outreach draft, if one was
+     written. Give the score as the scorer's, component by component with its reason, cited;
+     never rescore it. Show a draft as written and say the user sends it from their own email.
+     `next_step` is what to offer: triage with `log-decision` only on the user's word. For the
+     whole Inbox, `search` with `view: "inbox"` (and `tab`) lists the leads.
    - **Past cases like this.** `insights` lists what the firm's learning runs found in past
      decisions on companies with the same tags: each with its counts, its cases and the ones that
      went the other way. Give them as the firm's past decisions, cited, marked reviewed or not;
@@ -238,6 +246,9 @@ A tag can classify a person or company only where its cited evidence is visible.
      say an item is done because you think it is.
    - **How we found them**, when the brief has `origin`: one line for the first origin and one
      per later one, then the latest inbound email's ask and date. [src]
+   - **As a lead**, when the brief has `lead`: the Search that found it, the score and tier with
+     each component's reason [src], the outreach draft's subject if there is one, and the next
+     step.
    - **Known as**: when the brief has `lessons`, the names the firm taught for it and those not
      to confuse it with, each with who taught it, in one line.
    - **Key facts**: value, as-of date and whose figure it is; a corrected or newer figure in a

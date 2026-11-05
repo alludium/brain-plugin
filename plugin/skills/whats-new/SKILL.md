@@ -93,6 +93,15 @@ run's summary and stop.
      (`group_label`) and the tier, cited; then `below_tier` as one count line ("6 people you
      watch changed jobs"); then `unwatched_met` as one line offering to add them to a watch list
      with `set-up-search`.
+   - **Your Origination inbox** next, for a morning digest across the firm: call `search` with
+     `view: "inbox"` and `limit: 10` (To review). If it lists leads, give the top ones on one line
+     each, as the result words them: the name, score and tier, why, and who found it; then the
+     tab counts in one line ("3 drafts ready, 1 resurfaced"), and offer once to go through them.
+     On a yes, take each lead in turn: `entity_brief` on its id for the score's reasons, sources
+     and any outreach draft, then record only what the user decides with `log_decision` (hold
+     parks it, with `revisit_on` when they say when; pass with their reason; advance pushes it to
+     the pipeline), following the `log-decision` skill. Leave the section out when the Inbox is
+     empty.
    - **Decisions and status changes** next, across all companies, one line each.
    - Then one short section per company, most recent change first, at most five lines each.
      Name a company's status when the change list gives it.

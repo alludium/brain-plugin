@@ -34,8 +34,11 @@ decision about anything, with its reasons, deciders, date and sources, and moves
   when the user says when to look again ("park Lumenfold until March"); pass passes it; advance
   takes it into the pipeline the user names (`list`, a pipeline; never the leads list itself),
   else the firm's process, at that pipeline's first stage. The entry stays on the leads list,
-  marked. A firm decision on a company only on the user's private leads list makes it visible
-  to the firm: say so and ask before you record it.
+  marked. A hold or pass left firm-wide is recorded where the user sees the lead (theirs alone
+  when it is only on their private lists): pass on the result's note. An advance is the firm's:
+  on a company only on the user's private leads list it makes it visible to the firm, so say so
+  and ask before you record it. `search` with `view: "inbox"` lists the leads waiting, each with
+  its id.
 - **The right entity.** Resolve the name with `search` and pass the entity's ID (`org_…` or
   `deal_…`), never a short or shared name. A lookalike with a similar name is a different
   company.
