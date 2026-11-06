@@ -35,6 +35,12 @@ Alludium Brain extracts and indexes them afterwards, so you never need their con
   Never pass `google_drive` or `sharepoint`: those belong to drives the firm connects to the brain
   and are refused. Files attached to this chat or on local disk have none; leave them out. Never
   invent them.
+- **Original dates.** When the source system provides the file's date, pass it as `occurred_at`
+  on that file (an ISO timestamp with its timezone). For Affinity, use the entity file's
+  `created_at`: when it was added to Affinity, not a date guessed from its name or contents.
+  Leave it out when unknown; never use the download time or local file modification time.
+  The brain keeps its import time separately. A repeated upload keeps the stored date and warns
+  if the supplied date differs; report that warning rather than claiming the date was corrected.
 - Do not print upload URLs back to the user.
 
 The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not filled in, it is
@@ -143,14 +149,16 @@ This sandbox cannot reach Alludium Brain's storage, so the files never left. Off
    The user signs in to the same firm, selects the original file and explicitly chooses its
    audience. It supports one ordinary document at a time, up to 25 MiB. Follow the browser's
    receipt/source afterwards, not the earlier job that never received bytes. This page does
-   not preserve task-outcome links, external-system provenance or reference-document settings;
+   not preserve original dates, task-outcome links, external-system provenance or reference-document settings;
    do not substitute it for those operations. Never describe the file as uploaded until the
    browser confirms receipt, or as indexed until processing finishes.
 2. **Email them in.** Call `configure` with no arguments. If it gives an email-in address, tell
    the user they can send or forward the files as attachments from their own firm address to
    it (to file them under a deal, the `+<deal-name>` form it shows). Say that anything sent
    there is shared with the whole firm, so it is not a way to file something privately. If
-   `configure` gives no address, say the firm has none set up yet and go to 3.
+   `configure` gives no address, say the firm has none set up yet and go to 3. Skip this option
+   for imports carrying original dates or external-system provenance: email-in cannot preserve
+   that metadata. Resolve the transfer restriction and retry the original upload instead.
 3. **Allow the upload host, where supported.** On Team/Enterprise an org owner can allow the host from the `EGRESS FAIL` or `FAIL`
    line under Organization settings → Capabilities → Code execution → network egress. Then run
    the drop again. The personal-plan package-manager toggle alone does not promise access to this host.

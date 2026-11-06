@@ -6,7 +6,21 @@ For Affinity's hosted connector (tools such as `get_current_user`, `get_lists`,
 30 October 2026. The import itself has not run yet.
 
 `system: "affinity"`. Source ID prefixes: `company:`, `person:`, `opportunity:`, `note:`,
-`meeting:`. An opportunity is the deal record (`deal` entity type, `opportunity:<id>`).
+`meeting:`, `file:`. An opportunity is the deal record (`deal` entity type, `opportunity:<id>`).
+
+## Documents included in an approved import
+
+Server backfill covers notes, meetings and people, not document attachments. When the user
+includes documents, list their metadata with `get_entity_files`; `search_files` results alone
+do not include dates, so hydrate those with `get_entity_file_metadata` first. Transfer originals
+with the drop skill, without reading their contents into the conversation.
+
+Pass `system: "affinity"`, `external_id: "file:<id>"`, the parent record's page as `url`, and
+the file metadata's `created_at` as `occurred_at` on each `request_upload` file entry. Preserve
+the timestamp's timezone. This is when the file was added to Affinity, not when it was authored.
+If the connector returns only `createdAt`, use that equivalent field. If neither is available,
+leave the date out and report it as unavailable; do not substitute today or infer it from a filename.
+An already-stored file keeps its existing date; report any date warning for a separate correction.
 
 ## Links and IDs
 
