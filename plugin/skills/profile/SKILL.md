@@ -23,7 +23,9 @@ show, `configure(describe=["me"])` returns every field and allowed value before 
 - **Nothing learned is used until the user approves it.** A writing style is saved pending; the
   server uses it only after `approve_style`, which you call only on the user's yes.
 - **The profile never changes who can see what.** An instruction such as "share my notes on
-  portfolio companies" makes skills offer to share; they never share without a yes at the time.
+  portfolio companies" can inform a note audience recommendation, but is not consent. The note
+  skill asks before filing unless explicit authorization during this conversation already covers
+  the note and audience, including an earlier turn.
 - **Never store secrets.** No passwords, keys, personal data about others beyond a name, or
   anything the user asks you not to keep.
 - **Role and focus come from the team.** The profile shows the user's role and focus areas from

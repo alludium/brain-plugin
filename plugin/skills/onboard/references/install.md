@@ -70,6 +70,28 @@ For an unsupported surface or unavailable installation, offer a custom MCP conne
 Brain URL with OAuth, explaining that it provides tools without bundled skills. Keep one connection.
 Customer steps: https://app.brain.alludium.ai/help/start/chatgpt-plugin.md.
 
+## Hermes and other MCP assistants
+
+Hermes supports portable Agent Plugins v1 in current releases. Install the package subdirectory
+with `hermes plugins install alludium/brain-plugin/plugin --no-enable`, then
+`hermes plugins enable brain`. Use the same active profile for installation, OAuth and the Discord
+gateway (`hermes -p <profile> ...` for a named profile). Review any scanner block; never
+force installation or disable scanning. If the release lacks portable plugin support, install each
+published core skill with `hermes skills install alludium/brain-plugin/plugin/skills/<name>`, preserving
+its references and scripts. MCP alone does not install these core skills; firm skills loaded through
+`configure(skill=...)` are separate.
+
+Set `url` and `auth: oauth` on the same `alludium-brain` entry in that profile's `mcp_servers`,
+then `hermes mcp login alludium-brain`. A same-named explicit entry overrides the plugin connection;
+never create a second name for the same server. Start a fresh session and restart the gateway after
+plugin changes. Verify skills, tools and `configure` with `account: {}` separately. Device-code MCP
+login is only available when the authorization server advertises it. Keep tokens out of Discord.
+
+Use a private server or DM for a single-user trial and allow only that user's Discord ID. Channel
+readers can see replies regardless of the bot's command allowlist. Existing Obsidian notes require
+an explicit import request; no automatic migration. Missing calendar/mail/meeting connectors must
+be reported. Other assistants use their own documented remote MCP and skill setup, not Hermes commands.
+
 ## Check sign-in, then onboard
 
 The person signs in with their work account and chooses the intended firm. Once the tools are

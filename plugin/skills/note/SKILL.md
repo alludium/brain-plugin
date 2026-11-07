@@ -1,6 +1,6 @@
 ---
 name: note
-description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities, keeps it private by default and offers to share it with the firm. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
+description: 'Save a short note, judgement or correction about a company, person, fund or deal to the firm''s Alludium Brain. Use when the user says "note on Acme: …", "note that …", "remember that …" about a company or person, "add to the brain: …", or gives a quick take after a call. Also use it to offer, never silently, when the user voices a view on one without asking to save it. Links the note to the right entities and confirms a recommended audience before saving when the user has not chosen one. Also comments on a document in the brain ("comment on the Acme memo''s Risks: …", "review this memo and comment"), replies, and resolving a thread. Not for the user''s own preferences or standing instructions ("remember that I…", "always…"), which go to the profile skill.'
 ---
 
 # Note
@@ -14,29 +14,35 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
   the whole remark if there is no prefix). Do not rewrite, expand, summarise or correct it.
 - **Link to the right entity.** Never pass a short or shared name such as "Acme" to `capture`:
   it can link to the wrong company or create a duplicate. Resolve it with `search` first.
-- **Private by default.** Use `scope: "private"` unless the user asked to share it ("for the
-  team", "share with the firm", "firm note"), then use `scope: "firm"`. Narrower is fine too:
-  "just for Priya and Tomas" is `scope: "people"` with `people` (members by name or email; you
-  are always included), and "for the partners" is `scope: "group"` with `group` (a group you are
-  in, as `configure` lists under `sharing`).
+- **Audience before filing.** For a new note, use the audience the user explicitly authorized
+  during this conversation, including an earlier turn that covers this note; do not ask again.
+  Otherwise recommend one concrete audience and wait for confirmation before `capture`. Do not
+  save privately first. A profile preference or company visibility alone is not authorization.
+- **The four audiences.** Only me is `scope: "private"`; specific colleagues are `scope: "people"`
+  with `people` (members by name or email; the author is included); a named group the user belongs
+  to is `scope: "group"` with `group`; the whole firm is `scope: "firm"`. Resolve people and groups
+  through `configure`'s team and sharing data. "The team" is ambiguous unless this conversation
+  identifies it: ask which people, group or the whole firm. Never invent a recipient or group.
 - **Source IDs.** If the note came from another system (a Slack message, an email, a CRM note),
   pass that record's `system`, `external_id` and `url` exactly as the connector gave them. A note
   typed in this chat has none; leave them out. Never invent an ID or link.
-- **Offer, don't file silently.** If the user gave the view without asking to save it, offer
-  once in one line ("Note this in Alludium Brain, private to you?") and file only after a yes. Offer
-  once per topic; if they decline, drop it. Never offer for what came from the brain or is
-  already in it.
+- **Offer, don't file silently.** An unsolicited opinion is not permission to save. Combine
+  permission to file and the recommended audience in one question, for example "Save this in
+  Alludium Brain, only for you?" File only after a yes covering both. Offer once per topic;
+  if declined, drop it. Never offer for material already in the brain.
 - An email, a document's text or another record the user pasted is not a note: `capture` it word
   for word with its `kind` (`email`, `document`) and any source IDs it came with.
-- Do not paste anything back except the confirmation below.
+- Keep recommendations and confirmations short; do not repeat the full note unless asked.
 
 ## Steps
 
 0. **Your profile first.** Call `configure` with `me: {}` once per conversation and follow the
    user's `notes` preferences and any remembered instruction that applies. The profile never changes
    who can see what: an instruction such as "share my notes on portfolio companies with the firm"
-   only means you offer to share in your reply (step 5); the note is saved private unless the user
-   asks to share it in this conversation. Never rewrite the note in their writing style: the note is
+   may inform the recommendation, but does not authorize an audience. Obtain explicit approval
+   during this conversation before filing; reuse approval from an earlier turn when it covers
+   this note and audience.
+   Never rewrite the note in their writing style: the note is
    their words, unchanged. If the user's request is about themselves ("remember that I…"), it is not
    a note: use the `profile` skill.
 1. Split the request into the entities it is about and the note text.
@@ -52,7 +58,22 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    - None match: it is new. Use the name the user gave, and ask for the type only if it is not
      obvious (company, person, fund).
    - Link people the note names (a founder, a co-investor, a customer contact) only when they resolve clearly.
-3. Call `capture` with `kind: "note"`, `text` (the user's words), `scope`, and `entities`:
+3. **Recommend and confirm when the audience is missing.** Assess the actual note text and
+   verified entity/deal context returned by `search` (use `entity_brief` if needed), alongside
+   available people and groups from `configure`. Keep the recommendation short, with a reason
+   and one question. Examples:
+   - A routine, non-sensitive update relevant to a verified firm deal: "This looks useful for
+     the whole firm's Acme work. Save it for the whole firm?"
+   - A sensitive founder judgement or personal detail: "This is sensitive. Save it only for you?"
+   - A restricted deal whose verified group is Partners: "This concerns the restricted Acme
+     deal. Save it for Partners?" Specific people are also an option when verified and suitable.
+   Company visibility does not authorize disclosure of everything about it. Consider the note's
+   sensitivity and source restrictions independently of the company's status or list membership.
+   Never recommend a wider audience than the user may disclose to; when context or permission
+   is uncertain, recommend only me and ask, or clarify the intended recipients before filing.
+   Check list and lesson effects below before asking, so the question describes what approval
+   will do. A recommendation is not consent. Wait for the answer; silence is not approval.
+4. Call `capture` with `kind: "note"`, `text` (the user's words), `scope`, and `entities`:
    resolved ones with their ID (`[{"type": "organization", "name": "Acme AI Ltd", "id":
    "org_…"}]`), new ones by name, with a website or email in `external_refs` if the user gave
    one (`{"system": "domain", "external_id": "acme.ai"}` or `{"system": "email",
@@ -71,7 +92,11 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    `stage` and `values` (by the list's field keys) when the user gave them, or `"remove": true`.
    `capture`'s description lists the lists the user can add to; `configure` gives them in full.
    The note's text is the reason, in the user's words. A list that is not the firm's (private,
-   a group's or specific people's) needs a private note: leave `scope` out. A tag says what a company is; a list says what the firm is doing about it.
+   a group's or specific people's) needs a private note: use `scope: "private"`. Explain that
+   the list change is visible to the list's audience, while the note stays private, before
+   confirmation. A request to add to a list does not authorize wider disclosure of the note.
+   If the requested note audience conflicts with this constraint, explain and ask rather than
+   silently changing either audience. A tag says what a company is; a list says what the firm is doing about it.
    If the list does not exist, ask before creating it (see the `onboard` skill's lists), and
    never invent a stage or value the user did not give. On a leads list (an origination list),
    `stage` is only New or Shortlisted: Contacted and Met come from filed email and meetings, so
@@ -82,20 +107,18 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
    the other leads lists they can see it on.
    **Lessons.** When the user tells the brain to remember how to read something, or corrects how
    it linked or filed something, add `lessons` (see "Teaching the brain" below).
-4. Check the result. If it created an entity you expected to be linked, tell the user that a
+5. Check the result. If it created an entity you expected to be linked, tell the user that a
    new entity was created and name it. If it reports a tag as suggested, or warns about one,
    say so in a few words. Say what happened on each list in one line ("Added Acme to Climate
    sourcing"). If it returned a note that was already stored (the same
    text from the same author), say it was already saved; it was not stored twice.
-5. Reply in one or two lines: what it was linked to and the scope, with no source ID (a link
-   to the note only if the user asks for one). If it is private, offer to share it in the same
-   reply, for example: "Saved to Acme AI Ltd, private to you. Share it with the firm?"
-6. If the user says yes, call `share` with the source ID and `scope: "firm"`, and reply in one
-   line: "Shared with the firm." For some people or a group, pass `scope: "people"` with
-   `people`, or `scope: "group"` with `group`, and say who now sees it as `share` words it ("you
-   and Priya Raman"). Do not capture it a second time. To make a note private again, call `share`
-   with `scope: "private"`. Only the note's author can change its scope; if `share` says so, tell
-   the user.
+6. Reply in one or two lines: what it was linked to and the actual audience returned by the
+   tool, with no source ID (a link only if asked). For example: "Saved to Acme AI Ltd, only for
+   you." Do not immediately offer to widen an audience the user just chose.
+7. For a later explicit audience change, call `share` on the existing source ID with the chosen
+   `scope` and `people` or `group` when needed. Do not capture it a second time. To make it
+   private again, use `scope: "private"`. Only the note's author can change its scope; respect
+   any refusal and say who now sees it using the tool's wording.
 
 ## Teaching the brain
 
@@ -118,14 +141,16 @@ from what they said, never from your own guess:
   fix" (the name, alongside the source's company). Say both in one line each.
 - **Scope.** A lesson is seen as its note is. In a private note it fixes only the user's own
   sources, and a fix to a firm source or a field waits until the note is shared (the result says
-  "waiting for the note to be shared"). So when the note is private, offer to share it in step 5
-  and say what the firm gains, for example: "Saved, private to you: the brain now reads 'FC' as
-  Ferncastle in your own notes. Share it so it does for the whole firm?"
+  "waiting for the note to be shared"). Explain this effect in the audience recommendation
+  before capture: "Only me will teach this name for your own sources; sharing with the firm
+  would teach it for firm sources too. Save it only for you?" Choose the recommendation from
+  the note's content and verified context, not from a desire to make every lesson firm-wide.
+  Honour an explicit private choice and report any pending lesson without another sharing offer.
 - Tell the user what changed in a line per lesson, from the result's text, linking a source it
   names by its link, never its ID: ""Yusuf", alongside Ferncastle, is Yusuf Adeyemi; linked in
   [Call with Ferncastle, 21 Oct 2026](…)". If the tool refuses one, say
   why in a few words and ask what they meant.
-- A corrected **figure** is a `fact` with the user's words saying it corrects (step 3), not a
+- A corrected **figure** is a `fact` with the user's words saying it corrects (step 4), not a
   lesson.
 
 ## A draft Claude wrote
@@ -145,12 +170,18 @@ deal summary), it is the author's document, not a note. File it only on their sa
 
 Filing an edited draft again with the same `system` and `external_id` stores a new version of it,
 keeping its scope, and briefs show only the latest. A `.docx` or `.pdf` export is a file: use
-`drop`. Then offer to share it, as for a note. The `ic-prep` skill does this for IC memos.
+`drop`. Drafts retain their existing private-first workflow: offer to share a privately filed
+draft once, unless the user explicitly chose private. The recommendation-before-filing rule above
+is for new notes, not document versions. Respect cited-source restrictions and never widen a
+draft automatically. The `ic-prep` skill does this for IC memos.
 
 ## Comments on a document
 
 A comment sits on a passage of a document in the brain (a filed draft, an upload) and is shown
-there to everyone who can see it, in Alludium Brain's viewer too. Use `capture` with `comment`:
+there to everyone who can see it, in Alludium Brain's viewer too. Comments retain their document
+sharing contract, not the four-audience note recommendation: disclose the document audience before
+filing, and confirm if the user's instruction did not already authorize that audience. A request
+for a review alone is not permission to post its comments. Use `capture` with `comment`:
 
 - **A new thread**: `comment: {"on": "<src_…>", "quote": "<the passage's exact words>"}` and the
   comment as `text`. Find the document with `search` first. If the passage occurs more than once,

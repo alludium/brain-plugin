@@ -65,7 +65,8 @@ Look the whole list up in Alludium Brain with one batch `search`, then give each
    climate sourcing list have we met?"), read it with `search` and `list`, then go on from
    step 3 with its entries. When the user asks to save the new ones to a list, capture one
    short note naming them, with `lists` on each (`note` skill), and a private note for a private
-   list.
+   list. Follow the note skill's audience recommendation and confirmation before filing; list
+   membership alone does not authorize wider disclosure of the note.
 8. **Tags**: a match's `tags` (sector, theme, geography from the firm's vocabularies) go in a
    Tags column, shortest form (`sector: Climate > Carbon removal`). Leave the column out when no
    match has any. For a `new` company the only tags are the row's `list_tags`, which the brain
