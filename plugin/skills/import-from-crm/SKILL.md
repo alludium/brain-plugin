@@ -1,6 +1,6 @@
 ---
 name: import-from-crm
-description: Fill the firm's Alludium Brain from its CRM (Affinity, Attio or HubSpot) - the companies, people and deals on a chosen list, saved view, pipeline or set of named companies, with their notes and recent meetings - through the CRM's hosted connector. Always dry-runs first, works in batches with progress, is safe to re-run (changed records are updated) and stops at a size limit. Also backfills one company the brain knows only from its CRM record, when brief, prepare-meeting or seen-before offer it. Use when the user says "import our Affinity pipeline", "import from Affinity", "load our deal list from the CRM into the brain", "backfill the brain from HubSpot", "import our Attio deals" or "dry-run a CRM import". Not for checking a sourcing list against the brain (use seen-before) or filing one meeting (use capture-meeting).
+description: Fill the firm's Alludium Brain from its CRM (Affinity, Ahoy, Attio or HubSpot) - the companies, people and deals on a chosen list, saved view, pipeline or set of named companies, with their notes and recent meetings - through the CRM's hosted connector. Always dry-runs first, works in batches with progress, is safe to re-run (changed records are updated) and stops at a size limit. Also backfills one company the brain knows only from its CRM record, when brief, prepare-meeting or seen-before offer it. Use when the user says "import our Affinity pipeline", "import from Affinity", "load our deal list from the CRM into the brain", "backfill the brain from HubSpot", "import our Attio deals", "dry-run our Ahoy sales pipeline" or "dry-run a CRM import". Not for checking a sourcing list against the brain (use seen-before) or filing one meeting (use capture-meeting).
 ---
 
 # Import from a CRM
@@ -22,6 +22,7 @@ Look at the tools you have and match them to a reference:
 | CRM | Its connector's tools include | Read | `system` |
 |---|---|---|---|
 | Affinity | `get_current_user`, `get_lists`, `get_saved_views`, `get_notes_for_entity`, `get_meetings_for_entity` | `references/affinity.md` | `affinity` |
+| Ahoy (trial; live import not yet accepted) | `get_crm_schema`, `query_crm_objects`, `get_crm_object`, `get_associations`, `get_timeline_events` | `references/ahoy.md` | `ahoy` |
 | Attio (untested) | `whoami`, `list-lists`, `list-records-in-list`, `search-notes-by-metadata`, `search-meetings` | `references/attio.md` | `attio` |
 | HubSpot (untested) | `get_user_details`, `search_crm_objects`, `get_crm_objects`, `search_owners` | `references/hubspot.md` | `hubspot` |
 
@@ -33,7 +34,9 @@ CRM, say it is not supported yet and stop; do not improvise an import.
 
 For Attio and HubSpot, say once at the start that this skill has not been tested against that
 CRM yet, and treat any tool name or field that does not match the reference as a reason to
-stop and report it rather than guess.
+stop and report it rather than guess. For Ahoy, read its reference before the common steps: it replaces
+the VC stage mapping, privacy defaults, meeting imports and date handling below. Ahoy is a bounded
+conversational trial; do not offer automatic backfill or claim live import acceptance yet.
 
 ## Server backfill or this conversation
 

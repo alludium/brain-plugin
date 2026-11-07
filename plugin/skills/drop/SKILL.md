@@ -36,8 +36,8 @@ Alludium Brain extracts and indexes them afterwards, so you never need their con
   and are refused. Files attached to this chat or on local disk have none; leave them out. Never
   invent them.
 - **Original dates.** When the source system provides the file's date, pass it as `occurred_at`
-  on that file (an ISO timestamp with its timezone). For Affinity, use the entity file's
-  `created_at`: when it was added to Affinity, not a date guessed from its name or contents.
+  on that file (an ISO timestamp with its timezone). Use the provider's documented original-file
+  timestamp; the CRM import reference gives its field mapping. Never guess from names or contents.
   Leave it out when unknown; never use the download time or local file modification time.
   The brain keeps its import time separately. A repeated upload keeps the stored date and warns
   if the supplied date differs; report that warning rather than claiming the date was corrected.
