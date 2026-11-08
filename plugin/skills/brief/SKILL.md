@@ -9,6 +9,10 @@ Answer from Alludium Brain only, through the connector's `search` and `entity_br
 knowledge of a company is not the firm's memory; leave it out unless the user asks for it, and
 then label it as not from the brain.
 
+For a company brief, the required `entity_brief` arguments include `fit_check: true` and
+`insights: true`, even when the user wants only a short summary. Gather those checks before
+deciding what fits in the answer; the tool's meeting/screening examples do not limit this workflow.
+
 For the firm’s own funds, use `search(view="funds")`. Ordinary `search(type="fund")` also
 finds funds mentioned in sources that other firms manage; a mention is not ownership.
 For a directory rather than a company brief, use `search(view="list", type="organization")` or
