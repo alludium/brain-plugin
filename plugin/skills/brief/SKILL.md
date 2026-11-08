@@ -212,8 +212,9 @@ A tag can classify a person or company only where its cited evidence is visible.
    question is about older material or needs a cut note's full text, call `search` with the
    entity's name and the topic (and `limit: 20`) rather than saying the brain has nothing.
    To read one source in full (a cut note, an email you cite), call `search` with its
-   `source_id` (and the citation's `span_id` to get the quoted passage). In MCP App hosts, this
-   also opens the shared source card: Original and Extracted text, with read-only spreadsheet,
+   `source_id` (and the citation's `span_id` to get the quoted passage). Fresh searches and source reads
+   return useful text and structured data without opening another card. Existing cards can still
+   open a source through their citations: Original and Extracted text, with read-only spreadsheet,
    Word and PDF previews. Office PDF layout needs the private converter to be enabled.
    `source_preview` is an app-only byte transport used by that card, not a model tool to call or
    a way to put binary files into the conversation. Never claim a native host rendered the card
