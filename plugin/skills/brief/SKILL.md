@@ -57,8 +57,11 @@ A tag can classify a person or company only where its cited evidence is visible.
 
 ## Steps
 
-0. **Your profile first.** Call `configure` with `me: {}` once per conversation (reuse what it
-   returned after that). Follow the user's `briefs` preferences, their `never` and `general` items
+0. **Current guidance for this task.** Call `configure` with `me: {"task": {"topic": "briefs"}}`
+   at the start of every new task, even in the same conversation; do not reuse an earlier profile.
+   If an older server rejects `task`, read `me: {}` instead. Some older servers return the whole
+   profile: apply only active relevant items, never pending styles or another task's preferences.
+   Follow the user's `briefs` preferences, their `never` and `general` items
    and any remembered instruction for this kind of task; preferences filed under another topic are
    for other tasks. They set length, order, emphasis and voice, and win over the default shape
    below: a length limit counts everything you write, so drop the closing Sources list before

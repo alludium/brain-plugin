@@ -36,8 +36,10 @@ about. Use the Alludium Brain connector's `search` and `capture` tools.
 
 ## Steps
 
-0. **Your profile first.** Call `configure` with `me: {}` once per conversation and follow the
-   user's `notes` preferences and any remembered instruction that applies. The profile never changes
+0. **Current guidance for this task.** Call `configure` with `me: {"task": {"topic": "notes"}}`
+   at the start of every new note task, even in the same conversation. If an older server rejects
+   `task`, read `me: {}` instead. Even if it returns the whole profile, follow only active `notes`,
+   `never` and `general` guidance; never pending styles or another task's preferences. The profile never changes
    who can see what: an instruction such as "share my notes on portfolio companies with the firm"
    may inform the recommendation, but does not authorize an audience. Obtain explicit approval
    during this conversation before filing; reuse approval from an earlier turn when it covers

@@ -1,6 +1,6 @@
 ---
 name: profile
-description: 'Keep the user''s own private profile in Alludium Brain: how they like their briefs, meeting prep and digests, standing instructions, and their writing style. Use when the user talks about themselves rather than a company, for example "remember that I…", "I prefer…", "always cc Priya on portfolio updates", "never…", "I don''t do intros for crypto", "learn my writing style from these emails", "what do you know about me?", "show my profile", "forget that", "change my brief preference". Not for notes about companies or people (use note) or for firm conventions such as memo headings and deal stages (use onboard).'
+description: 'Save and manage the user''s own private memory in Alludium Brain. Use for requests to remember how the assistant should respond to or address the user (recurring format, language or tone), even without a named Brain task. Use for explicit remembering ("Remember: start every brief with risks", "remember that I…"), clearly stated ongoing preferences ("I like my briefs short", "I prefer…", "from now on…", "always…", "never…"), corrections, "forget that", "show my profile", or learning a writing style. Capture ongoing preferences even when mentioned during another task; do not merely promise to follow them in this chat. One-off requests and inferred preferences are not authorization to save. Not for company/person facts (use note) or firm-wide conventions (use onboard).'
 ---
 
 # Your profile
@@ -17,11 +17,20 @@ show, `configure(describe=["me"])` returns every field and allowed value before 
 - **About the user, not about others.** "Remember that I sit on Ferrolith's board" goes here.
   "Remember that Acme's CFO left" is a note about a company: use `note`. A firm-wide rule ("our
   memos use these headings", "deal stages are…") is firm configuration: use `onboard`.
-- **Only what the user said or approved.** Never infer a preference from their behaviour and save
-  it without asking. If they correct you mid-task ("shorter, please"), you may offer once: "Shall
-  I remember that you like shorter briefs?"
-- **Nothing learned is used until the user approves it.** A writing style is saved pending; the
-  server uses it only after `approve_style`, which you call only on the user's yes.
+- **Save clear ongoing preferences now.** An explicit "remember" request authorizes saving; do
+  not ask again. Also save a clearly stated ongoing preference ("I like my briefs short") without
+  requiring the word "remember", including when the user mentions it during another task. This is
+  their private profile, not consent to file or share company material. A clear request to remember
+  how you should respond requires a profile write before your final answer; applying it only in
+  this chat is not completion. General response preferences (language, tone, forms of address or
+  recurring format) belong to `general`, even when no Brain task is named. Tell them what you saved.
+- **Do not turn a one-off request into memory.** "Shorten this answer" or "for this brief only"
+  applies to the current task. Never infer and save a preference from behaviour or repeated edits
+  without asking. You may offer once: "Shall I remember that you like shorter briefs?" Quoted
+  examples, another person's preferences and hypothetical statements are not the user's preference.
+- **Inferred writing styles need approval.** A writing style is saved pending; the server uses it
+  only after `approve_style`, which you call only on the user's yes. This separate style approval
+  does not apply to preferences the user directly stated.
 - **The profile never changes who can see what.** An instruction such as "share my notes on
   portfolio companies" can inform a note audience recommendation, but is not consent. The note
   skill asks before filing unless explicit authorization during this conversation already covers
@@ -35,7 +44,13 @@ show, `configure(describe=["me"])` returns every field and allowed value before 
 
 ## Remember something
 
-1. Turn what the user said into one or more items, each short and in the second person:
+1. Read the current profile with `configure(me={})`. For an explicit correction, edit the matching
+   item rather than leaving contradictory old and new items. If the same preference already exists
+   for the same topic, keep it once; the same wording for different topics is separate guidance.
+   If a save cannot be verified, say so; do not claim it was remembered.
+2. Turn what the user said into one or more faithful, concise items. Preserve exact requested
+   headings, limits, exceptions and scope; do not invent a broader rule or save conversational filler.
+   Keep their exact original words in `said` when rephrasing:
    - `preference`: how they like work done, with a `topic`: `briefs`, `meeting_prep`, `digest`
      (what's new), `notes`, `writing`, `never` (what never to do) or `general`. For example
      "Briefs: lead with the decision needed, then the numbers; at most 10 lines."
@@ -48,10 +63,15 @@ show, `configure(describe=["me"])` returns every field and allowed value before 
      skill's name as `configure`'s description lists it. If they want the procedure itself to
      differ, not just a line of guidance, offer their own version of the skill (the `playbook`
      skill).
-2. Call `configure` with `me: {"add": [{"kind": …, "topic": …, "text": …, "said": "<their words>"}]}`.
-   Put their exact words in `said` when you rephrased them.
-3. Reply in one line with what was saved and its ID, for example "Remembered: always cc Priya on
-   portfolio updates [prf_…]. Only you can see this."
+3. Call `configure` with `me: {"add": [{"kind": …, "topic": …, "text": …, "said": "<their words>"}]}`,
+   or `edit` for a matching correction. Use the returned saved item and its ID to verify the result.
+   If the tool fails, do not promise future recall: explain that saving failed. A conversational
+   acknowledgement by itself is not a save.
+4. After success, briefly say what was saved, for example "Remembered: always cc Priya on portfolio
+   updates [prf_…]. Only you can see this." When also producing requested work, lead with that work,
+   not the save acknowledgement. Put the concise confirmation after the work when it fits, or keep
+   it clearly separate from the deliverable. Never let administrative confirmation displace the
+   requested opening or ending, or exceed an applicable length limit.
 
 ## Show, change or forget
 
@@ -59,7 +79,8 @@ show, `configure(describe=["me"])` returns every field and allowed value before 
   ID, where it came from and when. Do not add anything of your own.
 - **Change**: `me: {"edit": [{"id": "prf_…", "text": "…", "topic": "…"}]}`.
 - **Forget**: `me: {"forget": ["prf_…"]}`; forgetting the writing style's ID also removes its
-  examples. "Forget everything about me" is `me: {"forget": ["all"]}`: confirm once first.
+  examples. "Forget everything about me" is `me: {"forget": ["all"]}`: confirm once first,
+  wait for the user's yes, then delete. Permission to save a preference does not waive this check.
 - When the user names an item by its words rather than its ID, read the profile first and pick
   the item; if two could match, ask which.
 
@@ -125,8 +146,12 @@ back only after five more of their emails of that purpose.
 
 ## How other skills use it
 
-`brief`, `prepare-meeting`, `whats-new` and `note` read the profile first (`configure` with `me:
-{}`) and follow it: it changes length, order, emphasis and voice, never citations, what is cited, or
+`brief`, `prepare-meeting`, `whats-new` and `note` read fresh task guidance at the start of each
+new task using `configure(me={"task":{"topic":"briefs"}})` (choose its topic; add `skill` for a
+firm workflow). For drafts in the user's name, use topic `writing` and the writing `purpose` when
+known. `me: {}` still reads the complete profile for showing, editing or forgetting items.
+If an older server returns the whole profile, select only active task/general/never and matching
+skill guidance, never pending styles or unrelated topics. Follow it: it changes length, order, emphasis and voice, never citations, what is cited, or
 who can see what. Only approved styles are used, never a pending one. For a draft of one purpose
 (a cold email, an intro request, a decline), use that purpose's style from `styles` for voice, else
 the general `style`. The firm's template for that kind of message, if it has one, still decides
