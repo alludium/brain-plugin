@@ -107,8 +107,9 @@ https://app.brain.alludium.ai/help/feed/import-existing-data.md.
 
 The separate Brain CLI calls the same tools from code, keeping bulk source text out of chat.
 Installation and preview steps: https://app.brain.alludium.ai/help/feed/cli.md.
-Download its wheel from https://github.com/alludium/brain-plugin/tree/main/downloads,
-install with `uv tool install ./alludium_brain_cli-<version>-py3-none-any.whl`, and run `brain login`.
+The published CLI wheel works with any Brain environment through the `--server` flag.
+Download the wheel from https://github.com/alludium/brain-plugin/tree/main/downloads,
+install with `uv tool install ./alludium_brain_cli-<version>-py3-none-any.whl`, and run `brain --server https://app.brain.alludium.ai/mcp login`. Use `--server https://app.brain.alludium.ai/mcp` for subsequent CLI commands too.
 It needs Python 3.12+ and an OS keyring. CLI sign-in is separate from the assistant's plugin.
 
 For an Obsidian folder, begin with `brain upload /path/to/vault --namespace research-vault --dry-run`.
@@ -117,3 +118,5 @@ replacement or deletion sync. A success receipt isn't proof processing finished:
 For Notion or a tailored integration, hello@alludium.ai can arrange access to the private starter
 repository. Do not present it as a public download. Confirm source selection and audience before
 writing; never copy another host's OAuth credentials or put original source contents in chat.
+
+Use the package source and endpoint above for this environment. Never substitute the public package for a local or staging connection. If they no longer match the active Brain connection, obtain a fresh setup prompt from that workspace before installing.
