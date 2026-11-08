@@ -380,11 +380,12 @@ buys and the words to say:
 5. **How the firm works**, if not done: "Teach Alludium Brain how we run <a recurring process the
    firm named>" or "Make our <document> a skill" (the `playbook` skill): "so everyone's assistant
    drafts in the firm's format".
-6. **The team**: draft a short message the partner can send colleagues, using the matching steps
-   in `references/install.md` for their exact host and workspace role,
-   then work-account sign-in and "Onboard me to Alludium Brain". For a mixed team, give the relevant
-   routes. Keep the Claude Owner step for Team or Enterprise. List who has not connected yet
-   (the report's `team`). Alludium Brain sends no invitations itself.
+6. **The team**: list who has not connected yet (the report's `team`) and offer to invite
+   colleagues. When the user asks, use `invite_colleague` with each confirmed work email and
+   name; never guess addresses or send automatically from research. Any member can invite.
+   It grants ordinary member access and sends an email with app sign-in and AI setup links.
+   Report each result honestly: access may exist even when email sending failed. Existing
+   roles are preserved, and deactivated people need a firm admin to restore them.
 7. **Existing collections**, if the firm has a vault, Notion pages or another source to script:
    offer the Brain CLI guide and access to the private import starter. Begin with a reviewed
    selection; do not import a whole account or assume source permissions become Brain sharing.
