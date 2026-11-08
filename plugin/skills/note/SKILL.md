@@ -221,10 +221,11 @@ one review. Confirming a match changes an association, not the source's audience
 For a structured document not yet imported, `capture` with `dry_run: true` previews matching
 without storing sources, groups, links or reviews. It requires the same document payload,
 `matching`, explicit sharing and `preserve_audience: true`; check the live schema first. Prefer
-the import starter CLI/UI for collections, keeping source text out of chat. A preview is not
-permission to import, and matches can change as the firm's knowledge or sharing changes.
+the import starter for collections, keeping source text out of chat. Read
+`search(source_id="help:feed/import-obsidian")` for the current starter setup and Obsidian wizard.
+A preview is not permission to import, and matches can change as the firm's knowledge or sharing changes.
 
-The import wizard also resolves uncertain subjects before filing. `matching_search` on a dry run
+The current Obsidian import wizard can resolve uncertain subjects before filing. `matching_search` on a dry run
 returns existing identities visible to the chosen audience. Explicit human choices use
 `import_review: {snapshot, choices: [{fingerprint, action, entity_id?}]}`; actions are approve,
 reject (leave unlinked), or defer. Approval requires an existing entity of the subject's type.

@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Onboard a firm or person to Alludium Brain, research first. For a new firm, use public sources and connected tools to propose cited setup, then confirm gaps, systems, CRM import, nightly filing and team. For later users, set up their profile, connections and nightly run, and show what Brain knows. Also update firm configuration including fit/thesis/ICP and criteria, deal stages and checklists, funds, fields, tags, members and focus, memo headings and house style, and mail filing rules. Use for "onboard us", "onboard me", "set up our firm", fund documents, or changes to those settings. Not for company notes (use note), deal decisions (use log-decision), or personal preferences (use profile).
+description: Host-provided Brain onboarding plugin skill: load it through the AI host; configure(skill=...) reads the firm's custom skills, not this plugin skill. Use when the user explicitly requests the Brain onboarding skill, including advice-only import questions. Otherwise, onboard a firm or person to Alludium Brain, research first. For a new firm, use public sources and connected tools to propose cited setup, then confirm gaps, systems, CRM import, nightly filing and team. For later users, set up their profile, connections and nightly run, and show what Brain knows. Also update firm configuration including fit/thesis/ICP and criteria, deal stages and checklists, funds, fields, tags, members and focus, memo headings and house style, and mail filing rules. Use for "onboard us", "onboard me", "set up our firm", fund documents, or changes to those settings. Not for company notes (use note), deal decisions (use log-decision), or personal preferences (use profile).
 ---
 
 # Onboard
@@ -28,19 +28,12 @@ If the connector is unavailable, help connect it before calling tools. Once conn
 `configure` with `account: {}` to check the signed-in person and firm before onboarding writes.
 Do not claim installation or sign-in succeeded just because a ZIP was downloaded.
 
-For a large local collection, Obsidian, Notion or a custom scripted import, offer the separate
-Brain CLI and its help page from the reference. Have code move the original content directly;
-do not read a whole vault into the conversation. Confirm the selection and audience, preview a
-small batch, then import only with authorization. For Obsidian, offer the starter's local UI:
-`brain-import ui` selects vault/folders, property mappings and sharing. Its dry run uses
-`capture` with `dry_run: true`, `matching` and `preserve_audience: true`, after verifying that
-`brain tools` advertises dry_run. Do not strip safeguards on older servers. Explain that this
-preview sends the snapshot to Brain but stores no sources or matches; `plan`/`inspect` and
-`brain upload --dry-run` remain local-only. The wizard can save explicit human choices before import: confirm a candidate, search another
-existing identity of the same type and audience, leave unlinked, or defer to Sources. These use
-`capture.import_review` bound to the preview snapshot and `matching_search` on a dry run. Never
-invent a human choice or derive it from a note. Stale choices require a fresh dry run.
-Plugin installation does not authenticate the CLI.
+For questions about bringing existing data in, use the **import-data** skill for advice before
+setup. It chooses among direct connections, assistant filing, uploads and CLI/custom readers.
+If that skill is unavailable, read `search(source_id="help:feed/import-existing-data")` and the
+linked guide for the relevant route. An import-options question is not permission for a full
+onboarding interview, configuration changes or imports. Reuse the user's stated source and
+one-off/recurring preference. Do not ask them to paste a collection into chat.
 
 ## How `configure` works
 
@@ -372,9 +365,10 @@ buys and the words to say:
    first): "your pipeline and its history, so briefs know every company you've seen". If the
    CRM is not connected here, say how to connect it; where you have a tool that suggests
    connectors, use it.
-2. **Nightly run**: "Set up the nightly Alludium Brain filing task" (the `whats-new` skill): "your
-   meetings and the email the firm keeps filed every night, so colleagues see who met whom".
-   Claude and Cowork only today.
+2. **Ongoing filing**: first offer direct Brain connections for supported mail, calendar and
+   meeting-notes accounts where enabled. For what remains, offer "Set up the nightly Alludium
+   Brain filing task" (the `whats-new` skill). Check the host's scheduler and explain when it runs;
+   use manual filing when scheduling is unavailable. Never duplicate sources already synced.
 3. **Drives**: "Ask Alludium to connect your Google Drive" (hello@alludium.ai).
 4. **Email-in**: the firm's address from `configure`, if it has one.
 5. **How the firm works**, if not done: "Teach Alludium Brain how we run <a recurring process the
@@ -406,8 +400,9 @@ Ten minutes. In order, skipping what the report already has:
 3. **Your connections.** Match your tools as in 2e, say the visibility line, save
    `connections`. Then name what the firm uses that they have not connected
    (`your_missing_connections`) and what it buys.
-4. **Your nightly run** (`your_nightly`): offer to set it up now (the `whats-new` skill), with
-   their own email scope choice.
+4. **Your ongoing filing**: offer supported direct connections first, then a nightly task
+   (`your_nightly`, the `whats-new` skill) for remaining sources if their host can schedule it,
+   with their own email scope choice.
 5. **The tour.** Call `whats_changed` with `mine: true` and `since` 30 days ago, and show:
    - the firm in three lines, from the report's **The firm**;
    - the firm's own skills, if it has any (the "Firm skills" in `configure`), one line each;

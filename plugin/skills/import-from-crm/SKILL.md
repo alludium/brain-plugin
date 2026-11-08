@@ -5,6 +5,17 @@ description: Fill the firm's Alludium Brain from its CRM (Affinity, Ahoy, Attio 
 
 # Import from a CRM
 
+## Advice before action
+
+For “how should we bring our pipeline in?” or other advice-only questions, read
+`search(source_id="help:feed/crm-import")` and explain the supported route: select a list or view,
+preview the records and stage mapping, review scope/limit/sharing, then confirm the import.
+Use `help:feed/import-existing-data` to compare other routes. Do not start the workflow below,
+inspect configuration, invent account blockers or require a full onboarding interview just to
+answer how it works. Check the actual connection and required setup when the user asks to start
+or diagnose an import. An empty pipeline is not an import blocker. The assistant filing task is
+for email, meetings and selected Slack threads; do not suggest it as a CRM sync mechanism.
+
 You copy CRM records from the user's CRM connector into Alludium Brain with the connector's `capture`
 tool. Each CRM record becomes one source with its CRM ID, so a re-run finds it already stored:
 an unchanged record comes back "Already captured", and a record or note whose text changed in

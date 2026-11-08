@@ -101,6 +101,10 @@ installing, signing in and confirming the account are separate steps; report onl
 
 ## Existing files and custom integrations
 
+Start with `search(source_id="help:feed/import-existing-data")` to compare direct connections,
+assistant filing, uploads and custom scripts. Customer guide:
+https://app.brain.alludium.ai/help/feed/import-existing-data.md.
+
 The separate Brain CLI calls the same tools from code, keeping bulk source text out of chat.
 Installation and preview steps: https://app.brain.alludium.ai/help/feed/cli.md.
 Download its wheel from https://github.com/alludium/brain-plugin/tree/main/downloads,

@@ -157,6 +157,10 @@ run's summary and stop.
 
 ## Set up the nightly task
 
+For advice about ongoing ingestion, first read `search(source_id="help:feed/import-existing-data")`.
+Prefer enabled direct Brain connections; the assistant task covers remaining sources and depends
+on this host's scheduling capabilities. Explain that distinction before offering a schedule.
+
 Do this when the user accepts the offer or asks for the nightly task. Load the firm's
 `file-my-day` skill with `configure(skill="file-my-day")` and follow its **Set up** section: it
 checks the connectors, asks who should see the user's email and meetings, and creates the daily
