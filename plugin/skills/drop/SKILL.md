@@ -45,6 +45,13 @@ Alludium Brain extracts and indexes them afterwards, so you never need their con
 
 The script is at `${CLAUDE_SKILL_DIR}/scripts/upload.py`. If that path was not filled in, it is
 `scripts/upload.py` next to this SKILL.md. It uses only the Python standard library.
+When this skill is loaded through MCP without an installed plugin, the tool result includes the
+same helper source as `scripts/upload.py`. If this host can run Python, save that exact source to a
+temporary file and use its absolute path in the commands below; do not guess an installed skill path.
+If this host cannot run Python, use the Add Source card or browser link for ordinary uploads.
+For operations the picker cannot preserve (original dates, provenance, task outcomes, revisions,
+entity links or a Word reference document), explain the missing transfer capability and offer a
+host with Python or the Brain CLI. Do not silently discard that context to make an upload succeed.
 
 ## Steps
 

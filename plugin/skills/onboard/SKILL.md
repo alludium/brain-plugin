@@ -1,11 +1,11 @@
 ---
 name: onboard
-description: Host-provided Brain onboarding plugin skill: load it through the AI host; configure(skill=...) reads the firm's custom skills, not this plugin skill. Use when the user explicitly requests the Brain onboarding skill, including advice-only import questions. Otherwise, onboard a firm or person to Alludium Brain, research first. For a new firm, use public sources and connected tools to propose cited setup, then confirm gaps, systems, CRM import, nightly filing and team. For later users, set up their profile, connections and nightly run, and show what Brain knows. Also update firm configuration including fit/thesis/ICP and criteria, deal stages and checklists, funds, fields, tags, members and focus, memo headings and house style, and mail filing rules. Use for "onboard us", "onboard me", "set up our firm", fund documents, or changes to those settings. Not for company notes (use note), deal decisions (use log-decision), or personal preferences (use profile).
+description: Alludium-owned Brain onboarding skill, available through the plugin or configure(skill="core:onboard") over MCP; its references are included when loaded through MCP. Use when the user explicitly requests the Brain onboarding skill, including advice-only import questions. Otherwise, onboard every member to Alludium Brain person first, including the first member of a new firm. For a new firm, use public sources and connected tools to propose cited setup, then confirm gaps, systems, CRM import, nightly filing and team. For later users, set up their profile, connections and nightly run, and show what Brain knows. Also update firm configuration including fit/thesis/ICP and criteria, deal stages and checklists, funds, fields, tags, members and focus, memo headings and house style, and mail filing rules. Use for "onboard us", "onboard me", "set up our firm", fund documents, or changes to those settings. Not for company notes (use note), deal decisions (use log-decision), or personal preferences (use profile).
 ---
 
 # Onboard
 
-Ask the brain first, then public sources, then the person. Never ask what either already knows.
+Start with what Brain already knows about the person, for every member including the first. Read the cited public research and confirmed private profile before opening; offer a tentative understanding and useful suggestions, then ask only about gaps. Make it easy to correct you or start a task.
 Everything goes through the Alludium Brain connector's `configure` and `capture` tools. How
 `configure` works (each section, `systems`, `connections`, `cites`, tags) is in
 `references/configure.md`; read it before the first write. The connector lists each section only
@@ -13,8 +13,8 @@ by name and one line: before the first write of a section in a conversation, cal
 with `describe` and every section you will write (`describe: ["fit", "process", "members"]`), and
 follow the fields, allowed values and rules it returns.
 
-Interview a partner or lead about what the firm does and who is on the team, confirm what you
-heard, then save it with the Alludium Brain connector's `configure` tool. What the firm's setup
+After the personal introduction, use known evidence to propose what the firm does and who is on
+the team. Ask a partner or lead only about gaps, confirm the proposal, then save it with the Alludium Brain connector's `configure` tool. What the firm's setup
 asks comes from the server: the firm's packs, set by Alludium when it created the organisation,
 each name the sections they need, as questions in their own words. It is safe to run again: it always
 starts from the stored configuration and proposes changes to it.
@@ -233,10 +233,8 @@ one-off/recurring preference. Do not ask them to paste a collection into chat.
   record with a short quote, "you told me", or "from your documents". Nothing the model
   inferred is presented as known; a guess is a question ("Do you also invest in climate?").
 - **Public and connected only.** Research reads open public pages without signing in, and the
-  data connectors the user already has. Never the user's email, CRM records, files or notes for
-  research. Say "from public sources" when you propose.
-- **The firm first.** Confirm which firm it is (name, website domain, city) before researching
-  it; names collide.
+  data connectors the user already has. Firm public research does not authorize reading private mail, CRM records, files or notes. The optional personal sent-mail review below requires its own bounded permission. Say "from public sources" only for public evidence.
+- **Person first; verify the firm before firm research.** Start with the personal introduction below. Before researching the firm, confirm its name, website domain and city; names collide.
 - **The partner's words win.** A correction replaces the page, and that item then needs no cite.
   Do not add sectors, numbers or criteria nobody stated; mark a criterion `must` or `nice` only
   when the partner says so.
@@ -252,11 +250,11 @@ one-off/recurring preference. Do not ask them to paste a collection into chat.
 
 ## 1. Read the report
 
-Call `configure` with `onboarding: true`, then go by `phase`:
+Call `configure` with `onboarding: true`, then `configure(me={})` separately. Complete the personal introduction below in **every phase**, before routing the remaining firm work by `phase`:
 
 | Phase | Flow |
 |---|---|
-| `new` | The firm setup (section 2). Suggest a partner does it; anyone may |
+| `new` | Personal introduction first, then the firm setup (section 2). Suggest a partner answers firm questions; anyone may |
 | `setup_incomplete` | Say what is missing in one line, from the report's **Setup** and gaps ("The thesis and team are set; there's no deal process yet") and ask: "Finish the firm's setup now, or just set yourself up?" Then section 2 for the gaps only, or section 3 |
 | `in_use` | The personal setup (section 3). Change firm configuration only if they ask (`references/interview.md`, "Already configured") |
 
@@ -269,6 +267,122 @@ to change them. If they look wrong, say so once and suggest a firm admin asks Al
 
 A request to change one thing ("add Priya, her email is priya@northwind.vc", "change our deal
 stages") skips onboarding: read `configure` and follow `references/interview.md`.
+
+## Personal introduction — every member
+
+Read the profile and report before asking. Brain starts shared public-person research at verified
+sign-in and when teammates are added. If `you.person_id` is present, read `entity_brief` for that
+person before the opening; use `you.public_research` to distinguish queued, found, empty or
+unavailable work. Start with a short, cited understanding of their professional background and
+one useful suggestion, then invite corrections: “Your public bio says you lead portfolio support.
+I could help turn board updates into a weekly brief. Would that be useful?” Treat the suggested
+need as a hypothesis, not a fact. If research is still queued, say so briefly and use existing
+knowledge; do not block the conversation or repeatedly enqueue it. If evidence is missing or
+ambiguous, ask only the gap needed to help. Do not present the absence of evidence as a blank
+questionnaire. Reuse confirmed role, responsibilities, focus, preferences
+and approved style; do not treat a profile-item count as proof that you know their work. Summarise
+what is known in one or two lines and let them correct it. Ask one natural question at a time,
+usually two or three short turns, not a checklist. For example: “What takes most of your time,
+and what would you most like help with?” If their role is missing, start there. Follow their answer
+to learn responsibilities, work they enjoy and work they would like to automate. Skip what they
+already covered, and let them skip the introduction or get straight to a task.
+
+Explain once that useful personal context can be remembered privately. For role, responsibilities,
+enjoyment and goals, offer a concise summary to remember and save it only when they agree, using
+`me.add` with `kind: "about"` and their words in `said`. Directly stated ongoing preferences and
+explicit remember requests use the profile skill's existing save rules without another approval.
+Read first, edit corrections, avoid duplicates, and verify every save. Never copy private profile
+answers into the firm's member roster. Changes to the public role/team entry need separate consent.
+
+Inspect the tools actually available in this host and read `configure()` for Brain's connection
+readiness. Host connector access and Brain background connections are separate: name the provider,
+account where known, route and current status. Recorded host connections may be stale; tool presence
+does not prove account access or scope. Use an available read-only account/status operation, without
+reading message content. If account identity cannot be established, say so. Never turn a paused,
+failing or unknown connection into automatic fallback ingestion. Reuse existing preferences/style;
+no need to ask someone to teach their writing style again.
+
+### Optional, bounded sent-mail review
+
+Only offer this when a usable sent-mail route exists. A connection is not permission to read mail.
+Offer a choice in plain language: “I can learn a little from up to 20 emails you sent in the last
+30 days in [confirmed account], or we can just talk. The review stays in this conversation; I’ll
+ask before saving inferred context. Would you like that?” They may narrow the scope or decline.
+Do not fetch content until they choose. Use the named account's sent folder/author filter, at most
+20 messages and 30 days (or their narrower choice); no inbox sweep, attachments, quoted replies,
+forwarded text, extra accounts or automatic filing. If the available tool cannot enforce the
+bounds or confirm authorship, explain that and continue the conversation. A direct Brain connection
+alone does not expose its mailbox through the host: use only supported tools and authorized,
+already-filed sources, or say this review is unavailable here.
+
+Offer two or three tentative observations about work topics, correspondence and role context,
+with message links/IDs and dates. Distinguish “this sample suggests” from “you told me”; do not infer
+personality, sensitive traits or performance. Frequency is a bounded collaboration signal, not proof
+of relationship strength; describe actual counts and shared work instead. Keep third-party
+content out of personal memory. Ask the user to correct/confirm useful observations before saving
+an `about` item in their own words. Unconfirmed observations remain in the conversation, never
+active profile facts. Mail analysis permission is not permission to import or share those messages.
+
+Writing-style learning is optional and separate: use the profile skill's existing sourced,
+pending-style flow only if requested, then show it and obtain approval before `approve_style`.
+Do not save an inferred style as an ordinary preference to bypass that approval.
+
+### People, enrichment and invitations
+
+A researched Person, a team roster entry, workspace access and an invitation email are different.
+Use the report's `you.person_id` or a verified person match; never match on name alone. When a user
+asks to look up themselves or a colleague, or accepts your offer, call the shared
+`entity_brief(entity=<person id>, enrich=true)`. Do not create a second enrichment engine or turn
+on providers to make onboarding work. Explain that shared public person facts may be visible to the
+firm for an already firm-visible person; this is separate from their private profile and sent mail.
+The response contains the existing brief and `enrichment.requested`, not finished new research.
+Report refusals, unavailable sources and queued work honestly. Later read `entity_brief` without
+`enrich` and `configure()`'s recent enrichment lookups to distinguish pending, failed, empty and
+completed work; cite newly visible sources before claiming facts were learned. Do not repeatedly
+request refreshes or promise photos or successful research before it completes.
+
+For every member, offer up to two or three likely collaborators to invite when evidence supports
+it; one good candidate is enough. Prefer discovery to another question. Use only the already
+permitted sent-mail sample, authorized meeting/calendar or already-filed sources, and confirmed
+team identities. Do not expand the account, time window or source access just to rank colleagues.
+For mail, count distinct sampled messages to each verified colleague and, when available, distinct
+threads; state the sample size and dates. Deduplicate messages/aliases only when identity is known;
+exclude the user, automated senders, mailing lists and external people. Combine frequency with
+specific shared work where supported, rather than treating a bulk-recipient count as closeness.
+For meetings, recurring shared work can support a suggestion without reading private notes unless
+authorized. Public enrichment can establish a teammate's role, not who the user works closest with.
+
+Check the current roster and recorded invitation history with `configure()`, and sign-in state
+in the onboarding report, before suggesting them. These are not proof of current identity-provider
+membership: unknown access remains unknown; the invitation service checks actual membership and
+deactivation when an authorized invite runs. A shared email suffix or frequent correspondence alone
+is not proof of employment; personal domains, external advisers and ambiguous identities need
+confirmation. Never invent addresses or recommend someone already participating as a new invite.
+Do not resend merely because a person has not signed in, or reactivate a deactivated member.
+
+Keep it light: “From the 20 sent messages you let me review, Priya appeared in 8 across 3 threads
+about IC preparation. She looks like a useful first teammate to invite. Would you like me to invite
+her?” Give one short sourced reason per candidate, tailored to the user's work; label uncertainty.
+If no usable collaboration evidence exists, ask once who they work most closely with, then suggest
+that person. Do not pretend public research establishes closeness. If they decline, move on.
+Suggesting or saving a person is not an invitation: only an explicit yes naming the recipients
+allows `invite_colleague`. Inviting queues ordinary public person research before their first
+sign-in, including an existing roster person, subject to the same policy, caps and deduplication.
+Reuse the invitation skill and report each outcome. Explain when relevant
+that joining does not automatically import either person's emails: each person must connect and
+authorize their sources, with the Brain's normal audience rules.
+
+End the introduction with one useful next step tied to what they want help with, then continue
+firm setup if needed. Adapt to the person, rather than inferring technical ability from a title.
+For someone who wants a recurring way of working, offer to create or refine a Brain skill using
+`playbook`; reuse existing firm skills first. Discuss sharing it only when useful, with an explicit
+audience choice. For someone comfortable with scripts or working through large collections,
+offer the CLI/import route and a small reviewed example. For someone who just wants help, do the
+useful task in ordinary language. Do not turn skills, sharing or CLI adoption into onboarding gates,
+and never create a schedule, change a shared skill or publish private context without authorization.
+Private mail and meeting-note access can deepen understanding later, under explicit source/account,
+content and audience choices; permission for the bounded sent-mail review does not cover meetings. A later fresh conversation reads the saved private profile/task guidance;
+do not repeat the interview. Free-text context is guidance, not an enforced product setting.
 
 ## 2. The firm setup
 
@@ -390,13 +504,12 @@ know about <an organisation the firm works with>."
 
 ## 3. The personal setup
 
-Ten minutes. In order, skipping what the report already has:
+Continue after the personal introduction (already done in every phase). Skip everything already known or completed:
 
 1. **Who you are.** "You're on the team as Priya Raman, Principal, focus: security (set by
    Clara on 1 Nov)." Ask what to change. Not on the team (`not_on_team`): offer to add them
    with their name, role and focus (email from their sign-in, confirmed); pass the whole team.
-2. **How you like to work** (two questions at most): how they like briefs and digests, and any
-   standing instruction. Save with the `profile` skill's rules (private to them).
+2. **How you like to work**: reuse the personal introduction and saved private profile. Ask only a useful remaining question; never restart the interview.
 3. **Your connections.** Match your tools as in 2e, say the visibility line, save
    `connections`. Then name what the firm uses that they have not connected
    (`your_missing_connections`) and what it buys.

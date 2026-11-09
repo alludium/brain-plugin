@@ -1,6 +1,6 @@
 ---
 name: import-data
-description: Host-provided plugin skill; load it through the AI host, not configure(skill=...), which reads firm custom skills. Explain how to bring existing data into Alludium Brain and choose an import route, including local folders, Obsidian, Notion, unsupported systems, custom readers and recurring exports. Use for "how do I get my existing data in?" or "can my coding assistant connect our system?". If the user explicitly requests the Brain onboarding skill, load onboard first, including for import-only advice. For an agreed CRM import, use import-from-crm; for firm or personal setup, use onboard.
+description: Alludium-owned import guidance, available through the plugin or configure(skill="core:import-data") over MCP. Explain how to bring existing data into Alludium Brain and choose an import route, including local folders, Obsidian, Notion, unsupported systems, custom readers and recurring exports. Use for "how do I get my existing data in?" or "can my coding assistant connect our system?". If the user explicitly requests the Brain onboarding skill, load onboard first, including for import-only advice. For an agreed CRM import, use import-from-crm; for firm or personal setup, use onboard.
 ---
 
 # Choose an import route
