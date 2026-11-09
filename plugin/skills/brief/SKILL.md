@@ -3,6 +3,10 @@ name: brief
 description: Answer "what do we know about X?" and "who has met them?" from the firm's Alludium Brain, with every claim cited to its source. Use for any question about a company, founder, investor, LP, fund, customer or deal the firm may have touched, for example "what do we know about Acme", "who's met Maya Lindqvist", "have we talked to Kestrel", "what's our history with Copperbeck". Offers, never silently, to file new information the user adds.
 ---
 
+Search returns data without opening a card. Use its results to answer or resolve the entity, then
+call `entity_brief` when a company/person brief is useful; do not create an extra search card.
+
+
 # Brief: what the firm knows
 
 Answer from Alludium Brain only, through the connector's `search` and `entity_brief` tools. Your own
